@@ -6,16 +6,12 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
-// git 테스트 12345
-
 @Entity
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Item {
-
-    // git 테스트
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
