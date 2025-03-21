@@ -13,8 +13,6 @@ import java.util.List;
 @Builder
 public class Item {
 
-    // 테스트
-
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
     private Long id;
