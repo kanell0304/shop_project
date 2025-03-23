@@ -21,6 +21,7 @@ public class Item {
     private int price;
     private int stockQty;
 
+    // DB text 자료형으로 저장
     @Lob
     private String description;
 
@@ -35,7 +36,7 @@ public class Item {
     private List<ItemOption> options = new ArrayList<>();
 
     // 아이템 이미지
-    // 저장, 병합(수장), 삭제,
+    // 저장, 병합(수장), 삭제
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "item_id")
     @Builder.Default
@@ -90,17 +91,19 @@ public class Item {
         this.images.clear();
     }
 
-
     // 변경 메서드
     public void changeName(String name) {
         this.name = name;
     }
+
     public void changePrice(int price) {
         this.price = price;
     }
+
     public void changeStockQty(int stockQty) {
         this.stockQty = stockQty;
     }
+
     public void changeDelFlag(boolean delFlag) {
         this.delFlag = delFlag;
     }
