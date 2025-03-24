@@ -27,6 +27,8 @@ public class Item {
 
     private float totalScore;
 
+    private int discountRate;
+
     private boolean delFlag;
 
     // 아이템 옵션

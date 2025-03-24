@@ -1,5 +1,10 @@
 package com.shop.shop.domain.Member;
 
 public enum MemberShip {
-    BRONZE, SILVER, GOLD, PLATINUM, EMERALD, ADMIN;
+    BRONZE,     // 브론즈
+    SILVER,     // 실버
+    GOLD,       // 골드
+    PLATINUM,   // 플래티넘
+    EMERALD,    // 에메랄드
+    ADMIN;      // 관리자
 }

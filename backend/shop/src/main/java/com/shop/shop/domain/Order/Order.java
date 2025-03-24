@@ -1,31 +1,31 @@
-package com.shop.shop.domain;
+package com.shop.shop.domain.Order;
 
-import com.shop.shop.domain.Item.Item;
 import com.shop.shop.domain.Member.Member;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Wish_List")
-public class WishList {
+@Table(name = "Orders")
+public class Order {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "wish_list_id")
+    @Column(name = "Order_id")
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "item_id")
-    private Item item;
+    @OneToOne
 
-    private boolean del_flag;
+    private LocalDateTime orderDate;
+    private OrderStatus status;
 
 }

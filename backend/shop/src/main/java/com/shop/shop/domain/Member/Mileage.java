@@ -1,5 +1,6 @@
 package com.shop.shop.domain.Member;
 
+import com.shop.shop.domain.Order.Order;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,8 +26,8 @@ public class Mileage {
     @JoinColumn(name = "member_id")
     private Member member;
 
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "orders_id")
-//    private Orders orders;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private Order order;
 
 }
