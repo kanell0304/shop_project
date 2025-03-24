@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Getter
 @NoArgsConstructor
@@ -23,8 +25,8 @@ public class Cart {
     private int qty;
     private int orderPrice;
 
-    @OneToMany(mappedBy = "item_id")
-    private Item item;
+    @OneToMany(mappedBy = "item")
+    private List<Item> itemList;
 
     private boolean delFlag;
 
