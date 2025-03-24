@@ -28,7 +28,21 @@ public class OrderItem {
     @JoinColumn(name = "order_id")
     private Order order;
 
+    // 주문상품 생성
     public static OrderItem createdOrderItem(int orderPrice, int qty, Item item, Order order) {
+        OrderItem orderItem = new OrderItem();
+
+        orderItem.changeOrderPrice(orderPrice);
+        orderItem.changeQty(qty);
+        orderItem.changeItem(item);
+        orderItem.changeOrder(order);
+
+        item.removeStock(qty);
+        return orderItem;
+    }
+
+    // 카트에서 상품 정보를 가져와 생성
+    public static OrderItem cartToOrderItem(int orderPrice, int qty, Item item, Order order) {
         OrderItem orderItem = new OrderItem();
 
         orderItem.changeOrderPrice(orderPrice);
