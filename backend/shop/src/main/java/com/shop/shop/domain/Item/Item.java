@@ -1,5 +1,6 @@
 package com.shop.shop.domain.Item;
 
+import com.shop.shop.domain.exception.NotEnoughStockException;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -56,10 +57,10 @@ public class Item {
     }
 
     // 재고 삭제
-    public void removeStock(int qty) throws Exception {
+    public void removeStock(int qty) {
         int remainingStock = this.stockQty - qty;
         if(remainingStock < 0){
-            throw new Exception("need more stock");
+            throw new NotEnoughStockException("need more stock");
         }
         this.stockQty = remainingStock;
     }

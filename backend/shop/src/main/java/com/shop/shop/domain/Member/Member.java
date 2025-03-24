@@ -19,11 +19,14 @@ public class Member {
 
     private String email;
     private String password;
-    private String member_name;
-    private String phone_number;
-    private int stock_mileage;
-    private LocalDateTime join_date;
-    private boolean wtr_sns;
-    private boolean del_flag;
+    private String memberName;
+    private String phoneNumber;
+    private int stockMileage;
+    private LocalDateTime joinDate;
+    private boolean wtrSns;
+    private boolean delFlag;
+
+    @Enumerated(EnumType.STRING)
+    private MemberShip memberShip;
 
 }

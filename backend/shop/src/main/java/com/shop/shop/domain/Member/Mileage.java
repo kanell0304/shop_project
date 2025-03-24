@@ -19,8 +19,10 @@ public class Mileage {
     private Long id;
 
     private int amount;
-    private LocalDateTime mileage_date;
-    private boolean mileage_status;
+    private LocalDateTime mileageDate;
+
+    @Enumerated(EnumType.STRING)
+    private MileageStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")

@@ -26,6 +26,6 @@ public class WishList {
     @JoinColumn(name = "item_id")
     private Item item;
 
-    private boolean del_flag;
+    private boolean delFlag;
 
 }

@@ -1,5 +1,6 @@
 package com.shop.shop.domain.Order;
 
+import com.shop.shop.domain.Delivery.Delivery;
 import com.shop.shop.domain.Member.Member;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,9 +24,13 @@ public class Order {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "delivery_id")
+    private Delivery delivery;
 
     private LocalDateTime orderDate;
+
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
 }
