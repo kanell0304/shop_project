@@ -1,6 +1,6 @@
 package com.shop.shop.domain.Item;
 
-import com.shop.shop.domain.exception.NotEnoughStockException;
+import com.shop.shop.exception.NotEnoughStockException;
 import jakarta.persistence.*;
 import lombok.*;
 

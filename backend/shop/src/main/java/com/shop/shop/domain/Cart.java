@@ -11,19 +11,19 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Wish_List")
-public class WishList {
+public class Cart {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "wish_list_id")
+    @Column(name = "cart_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "item_id")
+    private int qty;
+    private int orderPrice;
+
+    @OneToMany(mappedBy = "item_id")
     private Item item;
 
     private boolean delFlag;

@@ -1,4 +1,4 @@
-package com.shop.shop.domain.exception;
+package com.shop.shop.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

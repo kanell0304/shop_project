@@ -1,4 +1,4 @@
-package com.shop.shop.domain.exception;
+package com.shop.shop.exception;
 
 // RuntimeException : 실행 중(Runtime)에서 발생하는 예외를 나타냄.
 public class NotEnoughStockException extends RuntimeException{
