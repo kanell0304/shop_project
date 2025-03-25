@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="com.shop.shop" target="17" />
+      <module name="com.shop.shop.main" target="17" />
+      <module name="com.shop.shop.test" target="17" />
+      <module name="shop" target="17" />
+      <module name="shop.main" target="17" />
+      <module name="shop.test" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
