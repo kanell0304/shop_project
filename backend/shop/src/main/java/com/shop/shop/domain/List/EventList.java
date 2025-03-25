@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class EventList {
     
-    // 테스트
+    // 테스트 1
     
 }
