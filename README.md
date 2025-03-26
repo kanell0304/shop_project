@@ -3,14 +3,19 @@
 
 ## 🙍🏻‍♂️ 프로젝트 참여인원
 
-+ 강지석 :  사이트 정책 및 Frontend, backend
++ @ 강지석 :  사이트 정책 및 Frontend, backend
 
 + 이경준 :  DB 설계 Frontend, backend
 
 + 최흥수 :  프로젝트 관리 Frontend, backend
 
-## <strong style="color:red">! 항상 pull 먼저 해주세용!</strong>
+## Git
+
+> [!CAUTION]
+>! 항상 pull 먼저 해주세용!
+
 **작업 Branch**
+
 
 ```
 git brach develop
