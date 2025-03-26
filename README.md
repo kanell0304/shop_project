@@ -6,7 +6,7 @@
 
 !항상 pull 부터!
 
-- git
+git
 
 동기화!
 git pull
