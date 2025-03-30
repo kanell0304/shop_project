@@ -25,7 +25,7 @@ public class Cart {
     private int qty;
     private int orderPrice;
 
-    @OneToMany(mappedBy = "item")
+    @OneToMany(mappedBy = "id")
     private List<Item> itemList;
 
     private boolean delFlag;
