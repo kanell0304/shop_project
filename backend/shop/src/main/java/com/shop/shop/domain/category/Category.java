@@ -18,7 +18,7 @@ public class Category {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
     private Long id;
-    private String name; // 카테고리 이름
+    private String categoryName; // 카테고리 이름
 
     // 해당 카테고리에 소속될 상품들
     @OneToMany(mappedBy = "category")
@@ -42,6 +42,10 @@ public class Category {
     // parent 값 변경
     public void changeParent(Category parent) {
         this.parent = parent;
+    }
+
+    public void changeCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
 }

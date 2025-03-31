@@ -28,9 +28,9 @@ public class MemberDTO {
 
     private List<String> memberShip = new ArrayList<>();
 
-    private MemberDTO (String email, String password, String ) {
-
-    }
+//    private MemberDTO (String email, String password, String ) {
+//
+//    }
 
     public Map<String, Object> getClaims() {
 

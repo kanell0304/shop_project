@@ -20,7 +20,6 @@ public class Item {
 
     private String name;
     private int price;
-    private int stockQty;
 
     // DB text 자료형으로 저장
     @Lob
@@ -50,20 +49,6 @@ public class Item {
     @CollectionTable(name = "item_info", joinColumns = @JoinColumn(name = "item_id"))
     @Builder.Default
     private List<ItemInfo> info = new ArrayList<>();
-
-    // 재고 증가
-    public void addStock(int qty){
-        this.stockQty += qty;
-    }
-
-    // 재고 삭제
-    public void removeStock(int qty) {
-        int remainingStock = this.stockQty - qty;
-        if(remainingStock < 0){
-            throw new NotEnoughStockException("need more stock");
-        }
-        this.stockQty = remainingStock;
-    }
 
     // 이미지 추가
     public void addImage(ItemImage image) {
@@ -101,10 +86,6 @@ public class Item {
 
     public void changePrice(int price) {
         this.price = price;
-    }
-
-    public void changeStockQty(int stockQty) {
-        this.stockQty = stockQty;
     }
 
     public void changeDelFlag(boolean delFlag) {

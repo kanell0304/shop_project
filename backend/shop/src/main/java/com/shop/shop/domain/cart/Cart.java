@@ -20,14 +20,24 @@ public class Cart {
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+//    @Column(nullable = false)
     private Member member;
 
     private int qty;
-    private int orderPrice;
 
     @OneToMany(mappedBy = "id")
+//    @Column(nullable = false)
     private List<Item> itemList;
 
-    private boolean delFlag;
+    // 수량 변경
+    public void changeQty(int qty) {
+        this.qty = qty;
+    }
+
+    // 아이템 목록 전부 제거
+    public void removeItemList() {
+        itemList.clear();
+    }
+
 
 }

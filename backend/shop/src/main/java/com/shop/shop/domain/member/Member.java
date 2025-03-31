@@ -25,14 +25,16 @@ public class Member {
     private String password;
     private String memberName;
     private String phoneNumber;
+
+    @Embedded
+    private Address address;
+
     private int stockMileage;
     private LocalDateTime joinDate;
     private boolean wtrSns;
     private boolean delFlag;
-//    private boolean social;
+    private boolean social;
 
-    @Embedded
-    private Address address;
 
     @Enumerated(EnumType.STRING)
     private MemberShip memberShip;
@@ -70,8 +72,8 @@ public class Member {
         this.delFlag = delFlag;
     }
 
-//    public void changeSocial(boolean social) {
-//        this.social = social;
-//    }
+    public void changeSocial(boolean social) {
+        this.social = social;
+    }
 
 }

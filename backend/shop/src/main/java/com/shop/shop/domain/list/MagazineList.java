@@ -57,4 +57,16 @@ public class MagazineList {
         this.images.clear();
     }
 
+    public void changeTitle (String title) {
+        this.title = title;
+    }
+
+    public void changeContent (String content) {
+        this.content = content;
+    }
+
+    public void changeViewCount (int viewCount) {
+        this.viewCount = viewCount;
+    }
+
 }

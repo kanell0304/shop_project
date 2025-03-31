@@ -1,6 +1,7 @@
 package com.shop.shop.domain.order;
 
 import com.shop.shop.domain.item.Item;
+import com.shop.shop.domain.item.ItemOption;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,11 +26,15 @@ public class OrderItem {
     private Item item;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "item_option_id")
+    private ItemOption itemOption;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
 
     // 주문상품 생성
-    public static OrderItem createdOrderItem(int orderPrice, int qty, Item item, Order order) {
+    public static OrderItem createdOrderItem(int orderPrice, int qty, Item item, Order order, ItemOption itemOption) {
         OrderItem orderItem = new OrderItem();
 
         orderItem.changeOrderPrice(orderPrice);
@@ -37,12 +42,12 @@ public class OrderItem {
         orderItem.changeItem(item);
         orderItem.changeOrder(order);
 
-        item.removeStock(qty);
+        itemOption.removeStock(qty);
         return orderItem;
     }
 
     // 카트에서 상품 정보를 가져와 생성
-    public static OrderItem cartToOrderItem(int orderPrice, int qty, Item item, Order order) {
+    public static OrderItem cartToOrderItem(int orderPrice, int qty, Item item, Order order, ItemOption itemOption) {
         OrderItem orderItem = new OrderItem();
 
         orderItem.changeOrderPrice(orderPrice);
@@ -50,13 +55,13 @@ public class OrderItem {
         orderItem.changeItem(item);
         orderItem.changeOrder(order);
 
-        item.removeStock(qty);
+        itemOption.removeStock(qty);
         return orderItem;
     }
 
     // 주문 취소 - 상품에 주문 취소된 수량만큼 재고 추가
     public void cancel() {
-        getItem().addStock(qty);
+        getItemOption().addStock(qty);
     }
 
     // 해당 상품의 총 결제 금액 - 상품 가격 * 주문 수량

@@ -22,4 +22,10 @@ public class Delivery {
     @Enumerated(EnumType.STRING)
     private DeliveryStatus status;
 
+    @Column(nullable = false)
+    private int transportNumber;
+
+    @Lob
+    private String deliveryRequest;
+
 }

@@ -1,5 +1,6 @@
 package com.shop.shop.domain.item;
 
+import com.shop.shop.exception.NotEnoughStockException;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,6 +20,8 @@ public class ItemOption {
     @Column(name="item_option_id")
     private Long id;
 
+    private int stockQty;
+
     @Column(name = "option_name")
     private String optionName;
 
@@ -31,5 +34,23 @@ public class ItemOption {
     public ItemOption(String optionName, String optionValue) {
         this.optionName = optionName;
         this.optionValue = optionValue;
+    }
+
+    // 재고 증가
+    public void addStock(int qty){
+        this.stockQty += qty;
+    }
+
+    // 재고 삭제
+    public void removeStock(int qty) {
+        int remainingStock = this.stockQty - qty;
+        if(remainingStock < 0){
+            throw new NotEnoughStockException("need more stock");
+        }
+        this.stockQty = remainingStock;
+    }
+
+    public void changeStockQty(int stockQty) {
+        this.stockQty = stockQty;
     }
 }
