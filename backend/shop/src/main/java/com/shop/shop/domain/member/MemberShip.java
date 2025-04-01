@@ -5,6 +5,5 @@ public enum MemberShip {
     SILVER,     // 실버
     GOLD,       // 골드
     PLATINUM,   // 플래티넘
-    EMERALD,    // 에메랄드
-    ADMIN;      // 관리자
+    EMERALD;    // 에메랄드
 }

@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-//@Builder
+@Builder
 public class Member {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,22 +35,21 @@ public class Member {
     private boolean delFlag;
     private boolean social;
 
-
     @Enumerated(EnumType.STRING)
     private MemberShip memberShip;
 
-//    @ElementCollection(fetch = FetchType.LAZY)
-//    @Builder.Default
-//    private List<MemberShip> memberShipList = new ArrayList<>();
-//
-//    public void addRole(MemberShip memberShip){
-//
-//        memberShipList.add(memberShip);
-//    }
+    @ElementCollection(fetch = FetchType.LAZY)
+    @Builder.Default
+    private List<MemberRole> memberRoleList = new ArrayList<>();
 
-//    public void clearRole(){
-//        memberShipList.clear();
-//    }
+    public void addRole(MemberRole memberRole){
+
+        memberRoleList.add(memberRole);
+    }
+
+    public void clearRole(){
+        memberRoleList.clear();
+    }
 
     public void changePassword(String password){
         this.password = password;

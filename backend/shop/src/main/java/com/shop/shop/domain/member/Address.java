@@ -12,9 +12,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Address {
 
-    private String default_address;
-
     private String zip_code;
+
+    private String default_address;
 
     private String detailed_address;
 

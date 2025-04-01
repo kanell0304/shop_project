@@ -1,21 +1,23 @@
 package com.shop.shop.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import com.shop.shop.domain.member.MemberShip;
+import lombok.*;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
-@NonNull
-@AllArgsConstructor
-public class MemberDTO {
+@ToString
+//@NoArgsConstructor
+//@AllArgsConstructor
+public class MemberDTO extends User {
 
     private String email;
     private String password;
@@ -24,13 +26,31 @@ public class MemberDTO {
     private int stockMileage;
     private LocalDateTime joinDate;
     private boolean wtrSns;
+    private boolean social;
     private boolean delFlag;
 
-    private List<String> memberShip = new ArrayList<>();
+    private MemberShip memberShip;
 
-//    private MemberDTO (String email, String password, String ) {
-//
-//    }
+    private List<String> roleNames = new ArrayList<>();
+
+    public MemberDTO(String email, String password, String memberName, String phoneNumber, int stockMileage, LocalDateTime joinDate, boolean wtrSns, boolean social, boolean delFlag, MemberShip memberShip, List<String> roleNames) {
+        super(
+                email,
+                password,
+                roleNames.stream().map(str -> new SimpleGrantedAuthority("ROLE_"+str)).collect(Collectors.toList()));
+
+        this.email = email;
+        this.password = password;
+        this.memberName = memberName;
+        this.phoneNumber = phoneNumber;
+        this.stockMileage = stockMileage;
+        this.joinDate = joinDate;
+        this.wtrSns = wtrSns;
+        this.delFlag = delFlag;
+        this.social = social;
+        this.memberShip = memberShip;
+        this.roleNames = roleNames;
+    }
 
     public Map<String, Object> getClaims() {
 
@@ -39,8 +59,8 @@ public class MemberDTO {
         dataMap.put("email", email);
         dataMap.put("password",password);
         dataMap.put("memberName", memberName);
-//        dataMap.put("social", social);
-        dataMap.put("memberShip", memberShip);
+        dataMap.put("social", social);
+        dataMap.put("roleNames", roleNames);
 
         return dataMap;
     }
