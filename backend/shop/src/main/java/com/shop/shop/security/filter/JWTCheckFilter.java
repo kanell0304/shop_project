@@ -45,6 +45,16 @@ public class JWTCheckFilter extends OncePerRequestFilter {
       return true;
     }
 
+    // 상품 경로는 체크하지 않는다.
+    if(path.startsWith("/api/items/**")) {
+      return true;
+    }
+
+//    //이미지 조회 경로는 체크하지 않는다
+//    if(path.startsWith("/api/products/view/")) {
+//      return true;
+//    }
+
     return false;
   }
 
@@ -55,6 +65,13 @@ public class JWTCheckFilter extends OncePerRequestFilter {
     log.info("------------------------JWTCheckFilter.......................");
 
     String authHeaderStr = request.getHeader("Authorization");
+
+    // Authorization 헤더가 없거나 "Bearer "로 시작하지 않으면 필터 건너뛰기
+    if (authHeaderStr == null || !authHeaderStr.startsWith("Bearer ")) {
+      log.warn("JWT Check Skipped: No Authorization header found or invalid format.");
+      filterChain.doFilter(request, response);
+      return;
+    }
 
     try {
       //Bearer accestoken...

@@ -40,27 +40,6 @@ public class CustomSecurityConfig {
     
     log.info("---------------------security config---------------------------");
 
-//    http.cors(httpSecurityCorsConfigurer -> {
-//      httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource());
-//    });
-//
-//    http.sessionManagement(sessionConfig ->  sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-//
-//    http.csrf(config -> config.disable());
-//
-//
-//    http.addFilterBefore(new JWTCheckFilter(), UsernamePasswordAuthenticationFilter.class); //JWT체크
-//
-//    http.exceptionHandling(config -> {
-//      config.accessDeniedHandler(new CustomAccessDeniedHandler());
-//    });
-//
-//    http.formLogin(config -> {
-//      config.loginPage("/api/member/login");
-//      config.successHandler(new APILoginSuccessHandler());
-//      config.failureHandler(new APILoginFailHandler());
-//    });
-
     http
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -69,7 +48,7 @@ public class CustomSecurityConfig {
                     .requestMatchers("/api/items/**").permitAll()
                     .requestMatchers("/api/orders/**").permitAll()
                     .requestMatchers("/api/public/**").permitAll()
-                    .requestMatchers("/api/deliveries/**").hasRole("USER")
+                    .requestMatchers("/api/deliveries/**").permitAll()
                     .requestMatchers("/api/admin/**").hasAnyRole("MANAGER","ADMIN") // 여러개
                     .anyRequest().authenticated()
             )

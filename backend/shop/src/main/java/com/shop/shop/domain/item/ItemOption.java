@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Getter
 @NoArgsConstructor
@@ -17,10 +19,14 @@ public class ItemOption {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="item_option_id")
+    @Column(name = "item_option_id")
     private Long id;
 
+    @Column(name = "stock_qty")
     private int stockQty;
+
+    @Column(name = "option_price")
+    private int optionPrice;
 
     @Column(name = "option_name")
     private String optionName;
@@ -52,5 +58,9 @@ public class ItemOption {
 
     public void changeStockQty(int stockQty) {
         this.stockQty = stockQty;
+    }
+
+    public void changeOptionPrice(int optionPrice) {
+        this.optionPrice = optionPrice;
     }
 }

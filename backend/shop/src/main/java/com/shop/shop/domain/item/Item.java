@@ -19,16 +19,14 @@ public class Item {
     private Long id;
 
     private String name;
-    private int price;
 
     // DB text 자료형으로 저장
     @Lob
     private String description;
 
     private float totalScore;
-
+    private int price;
     private int discountRate;
-
     private boolean delFlag;
 
     // 아이템 옵션
@@ -82,10 +80,6 @@ public class Item {
     // 변경 메서드
     public void changeName(String name) {
         this.name = name;
-    }
-
-    public void changePrice(int price) {
-        this.price = price;
     }
 
     public void changeDelFlag(boolean delFlag) {
