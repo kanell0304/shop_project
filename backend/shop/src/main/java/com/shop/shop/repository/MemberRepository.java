@@ -7,6 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+//@DataJpaTest
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
@@ -16,5 +19,9 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     @Query("select m from Member m where m.email = :email and m.delFlag = false")
     Member findByEmail(@Param("email") String email);
+
+    List<Member> findByMemberName(String memberName);
+
+    boolean existsByEmail(String email);
 
 }

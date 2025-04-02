@@ -1,6 +1,7 @@
 package com.shop.shop.security.filter;
 
 import com.google.gson.Gson;
+import com.shop.shop.domain.member.Address;
 import com.shop.shop.domain.member.MemberShip;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -25,7 +26,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
   @Override
   protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
 
-    // Preflight요청은 체크하지 않음
+    // Preflight 요청은 체크하지 않음
     if(request.getMethod().equals("OPTIONS")){
       return true;
     }
@@ -39,7 +40,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
       return true;
     }
 
-    //이미지 조회 경로는 체크하지 않는다면
+    //이미지 조회 경로는 체크하지 않는다
     if(path.startsWith("/api/products/view/")) {
       return true;
     }
@@ -69,6 +70,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
       String memberName = (String) claims.get("memberName");
       // 추가 {
       String phoneNumber = (String) claims.get("phoneNumber");
+      Address address = (Address) claims.get("address");
       int stockMileage = (int) claims.get("stockMileage");
       LocalDateTime joinDate = (LocalDateTime) claims.get("joinDate");
       Boolean wtrSns = (Boolean) claims.get("wtrSns");
@@ -79,7 +81,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
       List<String> roleNames = (List<String>) claims.get("roleNames");
 
 //      MemberDTO memberDTO = new MemberDTO(email, password, memberName, social.booleanValue(), roleNames);
-     MemberDTO memberDTO = new MemberDTO(email, password, memberName, phoneNumber, stockMileage, joinDate, wtrSns.booleanValue(), social.booleanValue(), delFlag.booleanValue(), memberShip, roleNames);
+     MemberDTO memberDTO = new MemberDTO(email, password, memberName, phoneNumber, address, stockMileage, joinDate, wtrSns.booleanValue(), social.booleanValue(), delFlag.booleanValue(), memberShip, roleNames);
 
       log.info("-----------------------------------");
       log.info(memberDTO);

@@ -3,6 +3,9 @@ package com.shop.shop.util;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.time.ZonedDateTime;
@@ -10,6 +13,7 @@ import java.util.Date;
 import java.util.Map;
 
 @Log4j2
+@Component
 public class JWTUtil {
 
   private static String key = "1234567890123456789012345678901234567890";

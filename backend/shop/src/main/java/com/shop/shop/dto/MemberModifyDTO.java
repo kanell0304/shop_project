@@ -12,5 +12,6 @@ public class MemberModifyDTO {
     private String zip_code;
     private String default_address;
     private String detailed_address;
+    private boolean delFlag;
 
 }

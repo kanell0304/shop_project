@@ -1,5 +1,6 @@
 package com.shop.shop.dto;
 
+import com.shop.shop.domain.member.Address;
 import com.shop.shop.domain.member.MemberShip;
 import lombok.*;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,6 +24,7 @@ public class MemberDTO extends User {
     private String password;
     private String memberName;
     private String phoneNumber;
+    private Address address;
     private int stockMileage;
     private LocalDateTime joinDate;
     private boolean wtrSns;
@@ -33,7 +35,7 @@ public class MemberDTO extends User {
 
     private List<String> roleNames = new ArrayList<>();
 
-    public MemberDTO(String email, String password, String memberName, String phoneNumber, int stockMileage, LocalDateTime joinDate, boolean wtrSns, boolean social, boolean delFlag, MemberShip memberShip, List<String> roleNames) {
+    public MemberDTO(String email, String password, String memberName, String phoneNumber, Address address, int stockMileage, LocalDateTime joinDate, boolean wtrSns, boolean social, boolean delFlag, MemberShip memberShip, List<String> roleNames) {
         super(
                 email,
                 password,
@@ -43,6 +45,7 @@ public class MemberDTO extends User {
         this.password = password;
         this.memberName = memberName;
         this.phoneNumber = phoneNumber;
+        this.address = address;
         this.stockMileage = stockMileage;
         this.joinDate = joinDate;
         this.wtrSns = wtrSns;

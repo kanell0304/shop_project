@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -33,37 +35,59 @@ public class CustomSecurityConfig {
   }
 
 
-@Bean
+  @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     
     log.info("---------------------security config---------------------------");
 
-    http.cors(httpSecurityCorsConfigurer -> {
-      httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource());
-    });
+//    http.cors(httpSecurityCorsConfigurer -> {
+//      httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource());
+//    });
+//
+//    http.sessionManagement(sessionConfig ->  sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+//
+//    http.csrf(config -> config.disable());
+//
+//
+//    http.addFilterBefore(new JWTCheckFilter(), UsernamePasswordAuthenticationFilter.class); //JWT체크
+//
+//    http.exceptionHandling(config -> {
+//      config.accessDeniedHandler(new CustomAccessDeniedHandler());
+//    });
+//
+//    http.formLogin(config -> {
+//      config.loginPage("/api/member/login");
+//      config.successHandler(new APILoginSuccessHandler());
+//      config.failureHandler(new APILoginFailHandler());
+//    });
 
-    http.sessionManagement(sessionConfig ->  sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+    http
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authorizeHttpRequests(auth -> auth
+                    .requestMatchers("/api/member/**").permitAll() // 로그인 요청 완전 허용
+                    .requestMatchers("/api/items/**").permitAll()
+                    .requestMatchers("/api/orders/**").permitAll()
+                    .requestMatchers("/api/public/**").permitAll()
+                    .requestMatchers("/api/deliveries/**").hasRole("USER")
+                    .requestMatchers("/api/admin/**").hasAnyRole("MANAGER","ADMIN") // 여러개
+                    .anyRequest().authenticated()
+            )
+            .addFilterBefore(new JWTCheckFilter(), UsernamePasswordAuthenticationFilter.class)
+            .anonymous(anonymous -> anonymous.disable())
+            .csrf(csrf -> csrf.disable())
+            .httpBasic(httpBasic -> httpBasic.disable())
+            .formLogin(form -> form.disable())
 
-    http.csrf(config -> config.disable());
-
-    http.formLogin(config -> {
-      config.loginPage("/api/member/login");
-      config.successHandler(new APILoginSuccessHandler());
-      config.failureHandler(new APILoginFailHandler());
-    });
-
-    http.addFilterBefore(new JWTCheckFilter(), UsernamePasswordAuthenticationFilter.class); //JWT체크
-
-    http.exceptionHandling(config -> {
-      config.accessDeniedHandler(new CustomAccessDeniedHandler());
-    });
-
+            .exceptionHandling(exception -> exception.accessDeniedHandler(new CustomAccessDeniedHandler()));
 
     return http.build();
   }
 
-
-
+  @Bean
+  public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    return authenticationConfiguration.getAuthenticationManager();
+  }
 
     @Bean
   public CorsConfigurationSource corsConfigurationSource() {

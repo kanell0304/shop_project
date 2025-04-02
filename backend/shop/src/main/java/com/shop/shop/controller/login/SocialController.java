@@ -1,4 +1,4 @@
-package com.shop.shop.controller;
+package com.shop.shop.controller.login;
 
 import com.shop.shop.dto.MemberDTO;
 import com.shop.shop.dto.MemberModifyDTO;
@@ -6,22 +6,20 @@ import com.shop.shop.service.MemberService;
 import com.shop.shop.util.JWTUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
 @Log4j2
+@RequestMapping("/api/member")
 public class SocialController {
 
     private final MemberService memberService;
 
-    // 문제
-    @GetMapping("/api/member/kakao")
+    // KakaoAPI 로그인
+    @GetMapping("/kakao")
     public Map<String, Object> getMemberFromKakao(String accessToken) {
         MemberDTO memberDTO = memberService.getKakaoMember(accessToken); // 회원 정보 조회 -> 반환 or 생성 -> 반환
         Map<String, Object> claims = memberDTO.getClaims(); // map 형식 변환
@@ -36,7 +34,8 @@ public class SocialController {
         return claims; // 사용자 정보 최종 반환 : 기본 정보 조회 + 토큰 생성해서 첨부
     }
 
-    @PutMapping("api/member/modify")
+    // 소셜회원가입 후 회원 정보 수정 페이지
+    @PutMapping("/modify")
     public Map<String, String> modify(@RequestBody MemberModifyDTO memberModifyDTO) {
         memberService.modifyMember(memberModifyDTO);
         return Map.of("result", "modified");

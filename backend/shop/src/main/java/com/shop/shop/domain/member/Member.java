@@ -39,11 +39,11 @@ public class Member {
     private MemberShip memberShip;
 
     @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "member_role_list", joinColumns = @JoinColumn(name = "member_id"))
     @Builder.Default
     private List<MemberRole> memberRoleList = new ArrayList<>();
 
     public void addRole(MemberRole memberRole){
-
         memberRoleList.add(memberRole);
     }
 
@@ -53,6 +53,10 @@ public class Member {
 
     public void changePassword(String password){
         this.password = password;
+    }
+
+    public void changeMemberShip(MemberShip memberShip) {
+        this.memberShip = memberShip;
     }
 
     public void changePhoneNumber (String phoneNumber) {
