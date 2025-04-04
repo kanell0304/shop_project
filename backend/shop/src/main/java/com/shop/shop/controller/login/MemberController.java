@@ -24,16 +24,6 @@ public class MemberController {
 
     @PostMapping("/register")
     public Map<String, String> registerMember(@RequestBody MemberDTO memberDTO) {
-//        memberService.makeMember(
-//                memberDTO.getEmail(),
-//                memberDTO.getPassword(),
-//                memberDTO.getMemberName(),
-//                memberDTO.getPhoneNumber(),
-//                memberDTO.getAddress().getZip_code(),
-//                memberDTO.getAddress().getDefault_address(),
-//                memberDTO.getAddress().getDetailed_address(),
-//                memberDTO.isWtrSns()
-//        );
         memberService.makeMember(memberDTO);
         return Map.of("result", "create");
     }
@@ -57,25 +47,11 @@ public class MemberController {
         return ResponseEntity.ok(memberService.getMemberByEmail(email));
     }
 
-    // 회원 등록
-//    @PostMapping
-//    public ResponseEntity<MemberDTO> createMember(@RequestBody MemberDTO memberDTO) {
-//        Long memberId = memberService.saveMember(memberDTO);
-//        return ResponseEntity.ok(memberDTO);
-//    }
-
     // 회원 삭제
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMember(@PathVariable Long id) {
         memberService.deleteMember(id);
         return ResponseEntity.noContent().build();
-    }
-
-    // 회원 정보 수정
-    @PutMapping("/{id}")
-    public ResponseEntity<MemberDTO> updateMember(@PathVariable Long id, @RequestBody MemberDTO memberDTO) {
-        memberService.updateMember(memberDTO);
-        return ResponseEntity.ok(memberService.getMemberById(id));
     }
 
     // 특정 이름으로 회원 검색

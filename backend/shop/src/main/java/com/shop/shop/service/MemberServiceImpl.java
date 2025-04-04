@@ -102,31 +102,6 @@ public class MemberServiceImpl implements MemberService{
         return buffer.toString();
     }
 
-//    // 일반 회원 생성
-//    @Override
-//    public void makeMember(String email, String password, String memberName, String phoneNumber, String zip_code, String default_address, String detailed_address, boolean wtrSns) {
-//        if (zip_code == null || default_address == null || detailed_address == null) {
-//            zip_code = "설정되지 않음";
-//            default_address = "설정되지 않음";
-//            detailed_address = "설정되지 않음";
-//        }
-//        Member member = Member.builder()
-//                .email(email)
-//                .password(password)
-//                .memberName(memberName)
-//                .phoneNumber(phoneNumber)
-//                .joinDate(LocalDateTime.now())
-//                .memberShip(MemberShip.BRONZE)
-//                .address(new Address(zip_code, default_address, detailed_address))
-//                .wtrSns(wtrSns)
-//                .social(false)
-//                .delFlag(false)
-//                .build();
-//        member.addRole(MemberRole.USER);
-//
-//        memberRepository.save(member);
-//    }
-
     // 일반 회원가입
     @Override
     public void makeMember(MemberDTO memberDTO) {
@@ -214,6 +189,7 @@ public class MemberServiceImpl implements MemberService{
         return member.getId();
     }
 
+    // 중복회원 여부 검사 메서드
     private void validateDuplicateMember(MemberDTO memberDTO) {
         boolean existsMember = memberRepository.existsByEmail(memberDTO.getEmail());
 //        List<Member> foundMember = (List<Member>) memberRepository.findByEmail(memberDTO.getEmail());
@@ -237,6 +213,7 @@ public class MemberServiceImpl implements MemberService{
         return modelMapper.map(member, MemberDTO.class);
     }
 
+    // 이메일로 회원 조회
     @Override
     public MemberDTO getMemberByEmail(String email) {
         if (existsByEmail(email)) {
