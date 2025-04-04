@@ -1,8 +1,18 @@
 package com.shop.shop.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.shop.shop.domain.cart.WishList;
+import com.shop.shop.domain.category.CategoryItem;
+import com.shop.shop.domain.item.Item;
+import com.shop.shop.dto.CategoryDTO;
+import com.shop.shop.dto.CategoryItemDTO;
 import com.shop.shop.dto.ItemDTO;
+import com.shop.shop.dto.WishListDTO;
+import com.shop.shop.repository.WishListRepository;
+import com.shop.shop.service.CategoryItemService;
+import com.shop.shop.service.CategoryService;
 import com.shop.shop.service.ItemService;
+import com.shop.shop.service.ItemServiceImpl;
 import com.shop.shop.util.CustomFileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -26,6 +36,8 @@ public class ItemController {
 
     private final CustomFileUtil fileUtil;
     private final ItemService itemService;
+    private final CategoryItemService categoryItemService;
+    private final ItemServiceImpl itemServiceImpl;
 
     // 페이징 목록 조회
     @GetMapping("/list")
@@ -52,7 +64,6 @@ public class ItemController {
         }
     }
 
-
     // 특정 아이템의 이미지 리스트 조회 API (별도 서비스 분리 X)
     @GetMapping("/view/{fileName}")
     public ResponseEntity<?> getItemImages(@PathVariable String fileName) {
@@ -69,33 +80,16 @@ public class ItemController {
 
     }
 
-
-//    // 아이템 등록
-//    @PostMapping("/add")
-//    public ResponseEntity<ItemDTO> register(
-//            ItemDTO itemDTO,
-//            @RequestPart(value = "files", required = false) List<MultipartFile> files
-//    ) {
-//        try {
-//            if (files != null && !files.isEmpty()) {
-//                List<String> uploadFileNames = fileUtil.saveFiles(files); // 저장하고 파일이름 추출
-//                itemDTO.setUploadFileNames(uploadFileNames);
-//            }
-//            ItemDTO createdItem = itemService.createItem(itemDTO, files);
-//
-//            // 201 Created + 생성된 아이템 반환
-//            return ResponseEntity.status(HttpStatus.CREATED).body(createdItem);
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-//        }
-//    }
-
+    // 아이템 등록
     @PostMapping("/add")
-    public ResponseEntity<ItemDTO> register(
+    public ResponseEntity<ItemDTO> registerItem(
             @RequestParam("itemDTO") String itemJson,  // JSON 데이터를 문자열로 받음
-            @RequestParam(value = "files", required = false) List<MultipartFile> files
+            @RequestParam(value = "files", required = false) List<MultipartFile> files,
+            @RequestParam("categoryId") Long categoryId
     ) {
         try {
+            System.out.println("카테고리1 id: " + categoryId);
+            System.out.println("categoryId의 자료형: " + categoryId.getClass().getSimpleName());
             // JSON 을 ItemDTO 로 변환
             ObjectMapper objectMapper = new ObjectMapper();
             ItemDTO itemDTO = objectMapper.readValue(itemJson, ItemDTO.class);
@@ -107,7 +101,10 @@ public class ItemController {
             }
 
             // 서비스 호출
-            ItemDTO createdItem = itemService.createItem(itemDTO, files);
+            ItemDTO createdItem = itemService.createItem(itemDTO, files); // 아이템 등록
+            System.out.println("카테고리2 id: " + categoryId);
+            Item item = itemServiceImpl.getSavedItem();
+            CategoryItemDTO categoryItemDTO = categoryItemService.registerCategoryItem(item, categoryId); // 카테고리에 해당 아이템 등록
 
             return ResponseEntity.status(HttpStatus.CREATED).body(createdItem);
         } catch (Exception e) {
@@ -115,7 +112,7 @@ public class ItemController {
         }
     }
 
-    // ✅ 아이템 수정
+    // 아이템 수정
     @PutMapping("/modify/{id}")
     public ResponseEntity<ItemDTO> updateItem(
             @PathVariable Long id,
@@ -125,7 +122,7 @@ public class ItemController {
         return ResponseEntity.ok(updatedItem);
     }
 
-    // ✅ 아이템 삭제 (논리 삭제)
+    // 아이템 삭제 (논리 삭제)
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, String>> deleteItem(@PathVariable Long id) {
         try {
@@ -136,5 +133,12 @@ public class ItemController {
             Map<String, String> response = Map.of("result", "fail", "error", e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
+    }
+
+    // 관심 등록
+    @PostMapping("/wish")
+    public ResponseEntity<WishListDTO> registerInterest(@RequestBody WishListDTO wishListDTO) {
+        WishListDTO savedWishList = itemService.registerInterest(wishListDTO);
+        return ResponseEntity.ok(savedWishList);
     }
 }

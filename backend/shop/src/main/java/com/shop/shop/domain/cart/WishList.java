@@ -26,6 +26,9 @@ public class WishList {
     @JoinColumn(name = "item_id")
     private Item item;
 
-    private boolean delFlag;
+    public void registerList(Member member, Item item) {
+        this.member = member;
+        this.item = item;
+    }
 
 }

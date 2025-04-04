@@ -2,6 +2,7 @@ package com.shop.shop.service;
 
 
 import com.shop.shop.dto.ItemDTO;
+import com.shop.shop.dto.WishListDTO;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,5 +19,6 @@ public interface ItemService {
     public ItemDTO getOne(Long id); // 특정 아이템 조회
     public ItemDTO updateItem(Long id, ItemDTO itemDTO); // 특정 아이템 수정
     public void deleteItem(Long id); // 특정 아이템 삭제
+    WishListDTO registerInterest(WishListDTO wishListDTO);
 
 }

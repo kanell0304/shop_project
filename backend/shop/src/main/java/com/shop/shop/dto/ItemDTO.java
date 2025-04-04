@@ -37,7 +37,6 @@ public class ItemDTO {
     @Builder.Default
     private Map<String, String> info = new HashMap<>();
 
-
 //    @JsonIgnore
 //    @Builder.Default
 //    private List<MultipartFile> files = new ArrayList<>();
@@ -66,7 +65,7 @@ public class ItemDTO {
         this.id = item.getId();
         this.name= item.getName();
         this.description = item.getDescription();
-        this.price = item.getPrice();
+//        this.price = item.getPrice();
         this.totalScore = item.getTotalScore();
         this.discountRate = item.getDiscountRate();
         this.delFlag = item.isDelFlag();
@@ -83,11 +82,11 @@ public class ItemDTO {
                 .toList()
                 : new ArrayList<>();
 
-//        // 대표 가격 설정 (가장 낮은 가격을 대표 가격으로 설정)
-//        this.price = options.stream()
-//                .mapToInt(ItemOption::getPrice)
-//                .min()
-//                .orElse(0); // 옵션이 없을 경우 기본값 0
+        // 대표 가격 설정 (가장 낮은 가격을 대표 가격으로 설정)
+        this.price = options.stream()
+                .mapToInt(ItemOption::getOptionPrice)
+                .min()
+                .orElse(0); // 옵션이 없을 경우 기본값 0
 
         // `infoList`가 null 이 아닐 때만 변환하여 `Map<String, String>` 형태로 저장
         this.info = (infoList != null && !infoList.isEmpty())

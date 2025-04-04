@@ -20,9 +20,9 @@ public class OrderHistory {
     @JoinColumn(name = "order_item_id")
     private OrderItem orderItem;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "pament_id")
-//    private Payment payment;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "payment_info_id")
+    private PaymentInfo paymentInfo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")

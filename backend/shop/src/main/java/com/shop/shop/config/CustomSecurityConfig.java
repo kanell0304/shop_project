@@ -46,6 +46,7 @@ public class CustomSecurityConfig {
             .authorizeHttpRequests(auth -> auth
                     .requestMatchers("/api/member/**").permitAll() // 로그인 요청 완전 허용
                     .requestMatchers("/api/items/**").permitAll()
+                    .requestMatchers("/api/category/**").permitAll()
                     .requestMatchers("/api/orders/**").permitAll()
                     .requestMatchers("/api/public/**").permitAll()
                     .requestMatchers("/api/deliveries/**").permitAll()

@@ -25,7 +25,10 @@ public class RecipientInfo {
     private Delivery delivery;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "payment_id")
+    @JoinColumn(name = "payment_info_id")
     private PaymentInfo paymentInfo;
+
+    @Embedded
+    private RecipientAddress recipientAddress;
 
 }

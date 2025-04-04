@@ -28,4 +28,20 @@ public class Delivery {
     @Lob
     private String deliveryRequest;
 
+    public void changeAddress(Address address) {
+        this.address = address;
+    }
+
+    public void changeStatus (DeliveryStatus status) {
+        this.status = status;
+    }
+
+    public void changeTransportNumber (int transportNumber) {
+        this.transportNumber = transportNumber;
+    }
+
+    public void changeDeliveryRequest (String deliveryRequest) {
+        this.deliveryRequest = deliveryRequest;
+    }
+
 }

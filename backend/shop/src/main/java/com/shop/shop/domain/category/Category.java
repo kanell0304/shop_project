@@ -27,12 +27,16 @@ public class Category {
     // 상위 카테고리 + 하위카테고리 : 양방향 관계 설정
     @JsonIgnore // 무한루프 방지 어노테이션
     @ManyToOne
-    @JoinColumn(name="parent_id")
+    @JoinColumn(name = "parent_id")
     private Category parent;
 
     // 하위 카테고리
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
     private List<Category> child = new ArrayList<>();
+
+    // 0이 기본값 숨기고 싶으면 1로 바꾸기
+    @Column(name = "view_status")
+    private boolean viewStatus;
 
     public void addChild(Category newChild){
         this.child.add(newChild); // 하위 카테고리 리스트에 새로운 자식 카테고리 추가
@@ -46,6 +50,10 @@ public class Category {
 
     public void changeCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public void changeViewStatus(boolean viewStatus) {
+        this.viewStatus = viewStatus;
     }
 
 }

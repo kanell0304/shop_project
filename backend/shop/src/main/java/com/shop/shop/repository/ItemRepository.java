@@ -17,13 +17,18 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     @Query("SELECT i FROM Item i WHERE i.delFlag = false") // 삭제 된거 제외
     Page<Item> findAllWithImages(Pageable pageable);
 
+    @EntityGraph(attributePaths = {"images", "options", "info"})
+    @Query("SELECT i FROM Item i WHERE i.delFlag = false")
+    Page<Item> findAllWithImagesAndOptionsAndInfo(Pageable pageable);
+
+    Item findByName(String name);
+
 
 }
 
 
 /*
-    Jpa에서 제공, 메서드 네이밍 규칙
-    - 쿼리를 작성하지 않아도 메서드 이름 기반으로 쿼리를 실행해줌.
+    쿼리 메서드 작성 법칙
 
     ~필드 기준으로 조회
     조회 : findBy ( readBy~,  getBy~,  queryBy~)
@@ -31,13 +36,10 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     존재여부 : existsBy~ (Boolean 반환값)
     삭제 : deleteBy~ (void)
 
-    List<User> findByName(String name);  // name으로 검색
+    List<User> findByName(String name);  // name 으로 검색
     boolean existsByEmail(String email); // email 존재 여부 확인
-    long countByAge(int age);            // 특정 age의 개수 조회
+    long countByAge(int age);            // 특정 age 의 개수 조회
     void deleteById(Long id);            // 특정 id 삭제
-
-
-
  */
 
 
