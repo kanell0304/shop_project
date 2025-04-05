@@ -29,7 +29,7 @@ public class MemberController {
     }
 
     // 모든 회원 조회
-    @GetMapping // 기본 주소로 동작 -> /api/members
+    @GetMapping("/list") // 기본 주소로 동작 -> /api/members
     public ResponseEntity<List<MemberDTO>> getAllMembers() {
         return ResponseEntity.ok(memberService.getAllMembers());
     }
@@ -42,6 +42,7 @@ public class MemberController {
         return ResponseEntity.ok(memberService.getMemberById(id));
     }
 
+    // 이메일로 조회
     @GetMapping("/get/{email}")
     public ResponseEntity<MemberDTO> getMemberByEmail(@PathVariable String email) {
         return ResponseEntity.ok(memberService.getMemberByEmail(email));

@@ -6,6 +6,9 @@ import com.shop.shop.repository.CategoryRepository;
 import com.shop.shop.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,10 +39,33 @@ public class CategoryController {
         return ResponseEntity.ok(category);
     }
 
+    // 카테고리 모두 조회(페이징)
+    @GetMapping("/listPage")
+    public ResponseEntity<Page<List<Category>>> getAllCategoryWithPage(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<List<Category>> category = categoryService.getAllCategory(pageable);
+        return ResponseEntity.ok(category);
+    }
+
     // 특정 카테고리 조회
     @GetMapping("/{id}")
     public ResponseEntity<Category> getCategory(@PathVariable Long id) {
         Category category = categoryRepository.findOneParentCategory(id);
+        return ResponseEntity.ok(category);
+    }
+
+    // 특정 카테고리 조회 (페이징)
+    @GetMapping("/page/{id}")
+    public ResponseEntity<Page<Category>> getCategoryWithPage(
+            @PathVariable Long id,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Category> category = categoryService.getAllItemsFromCategory(pageable, id);
         return ResponseEntity.ok(category);
     }
 

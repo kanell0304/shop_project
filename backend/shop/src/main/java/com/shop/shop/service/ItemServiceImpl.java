@@ -42,8 +42,9 @@ public class ItemServiceImpl implements ItemService {
     private Item savedItem;
 
     // 아이템 등록
-    @Transactional
-    public ItemDTO createItem(ItemDTO itemDTO, List<MultipartFile> files) {
+//    @Transactional
+    @Override
+    public ItemDTO createItem(ItemDTO itemDTO, List<MultipartFile> files, Long categoryId) {
         Item item = Item.builder()
                 .name(itemDTO.getName())
                 .description(itemDTO.getDescription())
@@ -51,6 +52,7 @@ public class ItemServiceImpl implements ItemService {
                 .price(itemDTO.getPrice())
                 .discountRate(itemDTO.getDiscountRate())
                 .delFlag(false)
+//                .categoryId(categoryId)
                 .build();
 
         // 아이템 저장
@@ -108,6 +110,20 @@ public class ItemServiceImpl implements ItemService {
         });
     }
 
+//    @Override
+//    public Page<ItemDTO> getItemsFromCategory(Pageable pageable ,Long categoryId) {
+//        Page<Item> itemPage = itemRepository.findAllWithImagesFromCategoryId(pageable, categoryId);
+//
+//        return itemPage.map(item -> {
+//            List<ItemImage> images = item.getImages();
+//            ItemImage representativeImage = (images != null && !images.isEmpty())
+//                    ? images.get(0)
+//                    : ItemImage.builder().fileName("default.png").build();
+//
+//            return new ItemDTO(item, List.of(representativeImage));
+//        });
+//    }
+
     // 1개 데이터 조회 - 아이템+이미지+인포+옵션
     @Override
     public ItemDTO getOne(Long id) {
@@ -140,6 +156,7 @@ public class ItemServiceImpl implements ItemService {
         }
 
         item.changeDelFlag(itemDTO.isDelFlag());
+//        item.changeCategoryId(itemDTO.getCategoryId());
 
         // 인포
         if (itemDTO.getInfo() != null) {

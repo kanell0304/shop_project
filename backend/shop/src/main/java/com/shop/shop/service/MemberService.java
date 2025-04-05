@@ -13,7 +13,6 @@ public interface MemberService {
 
     MemberDTO getKakaoMember(String accessToken);
     void modifyMember(MemberModifyDTO memberModifyDTO);
-//    void makeMember(String email, String password, String memberName, String phoneNumber, String zip_code, String default_address, String detailed_address, boolean wtrSns);
     void makeMember(MemberDTO memberDTO);
     // Member 엔티티를 MemberDTO 로 바꾸는 메서드
     default MemberDTO entityToDTO(Member member) {

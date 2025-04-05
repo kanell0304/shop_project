@@ -28,6 +28,7 @@ public class Item {
     private int price;
     private int discountRate;
     private boolean delFlag;
+//    private Long categoryId;
 
     // 아이템 옵션
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -77,13 +78,19 @@ public class Item {
         this.images.clear();
     }
 
-    // 변경 메서드
+    // 아이템 이름 변경
     public void changeName(String name) {
         this.name = name;
     }
 
+    // 삭제 여부 변경
     public void changeDelFlag(boolean delFlag) {
         this.delFlag = delFlag;
     }
+
+    // 카테고리 Id 변경
+//    public void changeCategoryId(Long categoryId) {
+//        this.categoryId = categoryId;
+//    }
 
 }

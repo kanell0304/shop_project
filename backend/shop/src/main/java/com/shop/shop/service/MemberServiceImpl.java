@@ -22,10 +22,7 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.LocalDateTime;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -201,16 +198,20 @@ public class MemberServiceImpl implements MemberService{
     // 모든 회원 조회
     @Override
     public List<MemberDTO> getAllMembers() {
-        return memberRepository.findAll().stream()
-                .map(member -> modelMapper.map(member, MemberDTO.class))
-                .collect(Collectors.toList());
+        List<Member> member = memberRepository.findAll();
+        List<MemberDTO> memberDTO = new ArrayList<>();
+        for (Member memberList : member) {
+            memberDTO.add(entityToDTO(memberList));
+        }
+        return memberDTO;
     }
 
     // 특정 회원 조회
     @Override
     public MemberDTO getMemberById(Long id) {
         Member member = memberRepository.findById(id).orElseThrow(() -> new RuntimeException("회원을 찾을 수 없습니다."));
-        return modelMapper.map(member, MemberDTO.class);
+
+        return entityToDTO(member);
     }
 
     // 이메일로 회원 조회
@@ -218,7 +219,7 @@ public class MemberServiceImpl implements MemberService{
     public MemberDTO getMemberByEmail(String email) {
         if (existsByEmail(email)) {
             Member member = memberRepository.findByEmail(email);
-            return modelMapper.map(member, MemberDTO.class);
+            return entityToDTO(member);
         } else {
             throw new RuntimeException("회원을 찾을 수 없습니다.");
         }

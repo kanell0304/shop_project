@@ -1,10 +1,17 @@
 package com.shop.shop.service;
 
 import com.shop.shop.domain.category.Category;
+import com.shop.shop.domain.category.CategoryItem;
+import com.shop.shop.domain.item.Item;
+import com.shop.shop.domain.item.ItemImage;
 import com.shop.shop.dto.CategoryDTO;
+import com.shop.shop.dto.ItemDTO;
 import com.shop.shop.repository.CategoryItemRepository;
 import com.shop.shop.repository.CategoryRepository;
+import com.shop.shop.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +23,7 @@ public class CategoryServiceImpl implements CategoryService{
 
     private final CategoryRepository categoryRepository;
     private final CategoryItemRepository categoryItemRepository;
+    private final ItemRepository itemRepository;
 
     // 카테고리 등록
     @Override
@@ -70,7 +78,37 @@ public class CategoryServiceImpl implements CategoryService{
                 child.changeParent(null);
             }
         }
+
+        // CategoryItem 에서 삭제하려는 Category 의 Id를 가지고 있는 데이터 모두 삭제
+        List<CategoryItem> categoryItem = categoryItemRepository.findAllByCategoryId(id);
+        if (!categoryItem.isEmpty()) {
+            for (CategoryItem categoryItems : categoryItem) {
+                categoryItemRepository.deleteById(categoryItems.getId());
+            }
+        }
+
+        // 아이템의 카테고리 id를 삭제하기 위한 과정
+//        Item item = itemRepository.findByCategoryId(id);
+//        if (item != null) { // 해당 카테고리 id 를 가지고 있는 아이템이 있다면
+//            item.changeCategoryId(null);
+//        }
         Category category = categoryRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 ID를 가진 카테고리가 존재하지 않습니다."));
         categoryRepository.delete(category);
+    }
+
+    // 모든 카테고리 페이징 조회 - 목록+이미지
+    @Override
+    public Page<List<Category>> getAllCategory(Pageable pageable) {
+        Page<List<Category>> categoryPage = categoryRepository.findAllParentCategoryWithPage(pageable);
+
+        return categoryPage;
+    }
+
+    // 특정 카테고리 페이징 조회 - 목록+이미지
+    @Override
+    public Page<Category> getAllItemsFromCategory(Pageable pageable, Long categoryId) {
+        Page<Category> categoryPage = categoryRepository.findOneParentCategory(pageable, categoryId);
+
+        return categoryPage;
     }
 }

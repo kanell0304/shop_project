@@ -1,5 +1,6 @@
 package com.shop.shop.domain.category;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shop.shop.domain.item.Item;
 import com.shop.shop.domain.member.Member;
 import jakarta.persistence.*;
@@ -14,6 +15,7 @@ public class CategoryItem {
     private Long id;
 
     @ManyToOne
+    @JsonIgnore  // 순환 참조 방지
     @JoinColumn(name = "category_id")
     private Category category;
 

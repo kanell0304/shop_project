@@ -101,7 +101,7 @@ public class ItemController {
             }
 
             // 서비스 호출
-            ItemDTO createdItem = itemService.createItem(itemDTO, files); // 아이템 등록
+            ItemDTO createdItem = itemService.createItem(itemDTO, files, categoryId); // 아이템 등록
             System.out.println("카테고리2 id: " + categoryId);
             Item item = itemServiceImpl.getSavedItem();
             CategoryItemDTO categoryItemDTO = categoryItemService.registerCategoryItem(item, categoryId); // 카테고리에 해당 아이템 등록

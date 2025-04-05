@@ -13,15 +13,19 @@ import java.util.List;
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
+    // 권한과 함께 회원 조회
     @EntityGraph(attributePaths = {"memberRoleList"})
     @Query("select m from Member m where m.email = :email")
     Member getWithRoles(@Param("email") String email);
-
-    @Query("select m from Member m where m.email = :email and m.delFlag = false")
+    
+    // 이메일로 조회
+    @Query("select m from Member m where m.email = :email AND m.delFlag = false")
     Member findByEmail(@Param("email") String email);
 
+    // 이름으로 회원 조회
     List<Member> findByMemberName(String memberName);
 
+    // 회원 여부 검사
     boolean existsByEmail(String email);
 
 }
