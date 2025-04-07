@@ -1,0 +1,64 @@
+/* 전체 공통 기본값 */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #121212;
+    background-color: #FAFAFA; 
+  }
+  
+  header {
+    width: 100%;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+    border-bottom: 1px solid #E0E0E0;
+  }
+  
+  header .logo {
+    font-weight: bold;
+    font-size: 20px;
+  }
+  
+  header nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #121212;
+    font-size: 14px;
+  }
+  
+  footer {
+    width: 100%;
+    background-color: #FFFFFF;
+    padding: 24px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: 12px;
+    color: #666666;
+    border-top: 1px solid #E0E0E0;
+    margin-top: 80px;
+  }
+  
+  /* 메인 콘텐츠 여백 */
+  main {
+    padding: 48px 32px;
+  }
+  
+  /* 버튼 스타일 */
+  button {
+    background-color: #121212;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  button:hover {
+    background-color: #282828;
+  }
+  
