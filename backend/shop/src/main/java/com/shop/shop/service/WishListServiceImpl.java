@@ -31,6 +31,7 @@ public class WishListServiceImpl implements WishListService {
         return new WishListDTO(wishList);
     }
 
+    // 관심 목록 MemberID를 기준으로 가져오기
     @Override
     public List<WishListDTO> getWishListByMemberId(Long memberId) {
         List<WishList> wishLists = wishListRepository.findWithItemImagesByMemberId(memberId);
