@@ -9,10 +9,7 @@ import com.shop.shop.dto.CategoryItemDTO;
 import com.shop.shop.dto.ItemDTO;
 import com.shop.shop.dto.WishListDTO;
 import com.shop.shop.repository.WishListRepository;
-import com.shop.shop.service.CategoryItemService;
-import com.shop.shop.service.CategoryService;
-import com.shop.shop.service.ItemService;
-import com.shop.shop.service.ItemServiceImpl;
+import com.shop.shop.service.*;
 import com.shop.shop.util.CustomFileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -38,6 +35,8 @@ public class ItemController {
     private final ItemService itemService;
     private final CategoryItemService categoryItemService;
     private final ItemServiceImpl itemServiceImpl;
+    private final WishListRepository wishListRepository;
+    private final WishListService wishListService;
 
     // 페이징 목록 조회
     @GetMapping("/list")
@@ -138,7 +137,24 @@ public class ItemController {
     // 관심 등록
     @PostMapping("/wish")
     public ResponseEntity<WishListDTO> registerInterest(@RequestBody WishListDTO wishListDTO) {
-        WishListDTO savedWishList = itemService.registerInterest(wishListDTO);
+        WishListDTO savedWishList = wishListService.registerInterest(wishListDTO);
         return ResponseEntity.ok(savedWishList);
+    }
+
+    // 특정 회원 관심 목록 조회
+//    @GetMapping("/wish/{memberId}")
+//    public ResponseEntity<List<WishListDTO>> getWishListByMemberId(@PathVariable Long memberId) {
+//        List<WishListDTO> wishList = itemService.getWishListByMemberId(memberId);
+//        if (wishList == null) {
+//            throw new IllegalArgumentException("해당 회원의 관심목록에 관심상품이 존재하지 않습니다.");
+//        }
+//        return ResponseEntity.ok(wishList);
+//    }
+
+    // 특정 회원 관심 목록 조회
+    @GetMapping("/wish/{memberId}")
+    public ResponseEntity<List<WishListDTO>> getWishListByMember(@PathVariable Long memberId) {
+        List<WishListDTO> wishList = wishListService.getWishListByMemberId(memberId);
+        return ResponseEntity.ok(wishList);
     }
 }

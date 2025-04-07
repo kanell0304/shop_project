@@ -19,25 +19,31 @@ public class Cart {
     @Column(name = "cart_id")
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-//    @Column(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
     private Member member;
 
-    private int qty;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "item_id")
+    private Item item;
 
-    @OneToMany(mappedBy = "id")
-//    @Column(nullable = false)
-    private List<Item> itemList;
+    private int qty;
 
     // 수량 변경
     public void changeQty(int qty) {
         this.qty = qty;
     }
 
-    // 아이템 목록 전부 제거
-    public void removeItemList() {
-        itemList.clear();
+    // 카트 등록
+    public void registerCart(Member member, Item item) {
+        this.member = member;
+        this.item = item;
     }
+
+//    // 아이템 목록 전부 제거
+//    public void removeItemList() {
+//        itemList.clear();
+//    }
 
 
 }

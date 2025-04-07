@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 //@Getter
@@ -110,20 +111,6 @@ public class ItemServiceImpl implements ItemService {
         });
     }
 
-//    @Override
-//    public Page<ItemDTO> getItemsFromCategory(Pageable pageable ,Long categoryId) {
-//        Page<Item> itemPage = itemRepository.findAllWithImagesFromCategoryId(pageable, categoryId);
-//
-//        return itemPage.map(item -> {
-//            List<ItemImage> images = item.getImages();
-//            ItemImage representativeImage = (images != null && !images.isEmpty())
-//                    ? images.get(0)
-//                    : ItemImage.builder().fileName("default.png").build();
-//
-//            return new ItemDTO(item, List.of(representativeImage));
-//        });
-//    }
-
     // 1개 데이터 조회 - 아이템+이미지+인포+옵션
     @Override
     public ItemDTO getOne(Long id) {
@@ -204,14 +191,17 @@ public class ItemServiceImpl implements ItemService {
         itemRepository.save(item);
     }
 
-    // 관심 등록
-    @Override
-    public WishListDTO registerInterest(WishListDTO wishListDTO) {
-        Member member = memberRepository.findById(wishListDTO.getMemberId()).orElseThrow(() -> new RuntimeException("해당 회원을 찾을 수 없습니다."));
-        Item item = itemRepository.findById(wishListDTO.getItemId()).orElseThrow(() -> new RuntimeException("해당 아이템을 찾을 수 없습니다."));
-        WishList wishList = new WishList();
-        wishList.registerList(member, item);
-        wishListRepository.save(wishList);
-        return new WishListDTO(wishList);
-    }
+//    // 특정 회원 관심 목록 조회
+//    @Override
+//    public List<WishListDTO> getWishListByMemberId(Long memberId) {
+//        boolean memberExists = memberRepository.existsById(memberId);
+//        if (!memberExists) {
+//            throw new RuntimeException("해당 회원 정보가 존재하지 않습니다.");
+//        }
+//
+//        List<WishList> wishList = wishListRepository.findAllByMemberId(memberId);
+//        return wishList.stream()
+//                .map(WishListDTO::new)
+//                .collect(Collectors.toList());
+//    }
 }
