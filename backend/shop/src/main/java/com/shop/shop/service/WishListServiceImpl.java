@@ -23,6 +23,10 @@ public class WishListServiceImpl implements WishListService {
     // 관심 등록
     @Override
     public WishListDTO registerInterest(WishListDTO wishListDTO) {
+        WishList existsWishList = wishListRepository.existsByItemIdAndMemberId(wishListDTO.getItemId(), wishListDTO.getMemberId());
+        if (existsWishList != null) {
+            throw new RuntimeException("이미 추가된 상품입니다.");
+        }
         Member member = memberRepository.findById(wishListDTO.getMemberId()).orElseThrow(() -> new RuntimeException("해당 회원을 찾을 수 없습니다."));
         Item item = itemRepository.findById(wishListDTO.getItemId()).orElseThrow(() -> new RuntimeException("해당 아이템을 찾을 수 없습니다."));
         WishList wishList = new WishList();
@@ -39,6 +43,16 @@ public class WishListServiceImpl implements WishListService {
         return wishLists.stream()
                 .map(WishListDTO::new)
                 .toList();
+    }
+
+    // 관심 목록에서 WishListID를 기준으로 삭제
+    @Override
+    public void deleteItemFromWishList(Long wishListId) {
+        WishList wishList = wishListRepository.findById(wishListId).orElseThrow(() -> new RuntimeException("해당 관심등록상품을 찾을 수 없습니다."));
+//        if (wishList == null) {
+//            throw new RuntimeException("해당 itemId를 가진 상품이 관심목록에 존재하지 않습니다.");
+//        }
+        wishListRepository.deleteById(wishList.getId());
     }
 
 }

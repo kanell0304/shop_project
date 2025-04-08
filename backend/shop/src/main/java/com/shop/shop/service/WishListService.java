@@ -10,4 +10,5 @@ public interface WishListService {
 
     public List<WishListDTO> getWishListByMemberId(Long memberId);
 
+    public void deleteItemFromWishList(Long wishListId);
 }

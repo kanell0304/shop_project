@@ -35,8 +35,6 @@ public class ItemController {
     private final ItemService itemService;
     private final CategoryItemService categoryItemService;
     private final ItemServiceImpl itemServiceImpl;
-    private final WishListRepository wishListRepository;
-    private final WishListService wishListService;
 
     // 페이징 목록 조회
     @GetMapping("/list")
@@ -134,27 +132,4 @@ public class ItemController {
         }
     }
 
-    // 관심 등록
-    @PostMapping("/wish")
-    public ResponseEntity<WishListDTO> registerInterest(@RequestBody WishListDTO wishListDTO) {
-        WishListDTO savedWishList = wishListService.registerInterest(wishListDTO);
-        return ResponseEntity.ok(savedWishList);
-    }
-
-    // 특정 회원 관심 목록 조회
-//    @GetMapping("/wish/{memberId}")
-//    public ResponseEntity<List<WishListDTO>> getWishListByMemberId(@PathVariable Long memberId) {
-//        List<WishListDTO> wishList = itemService.getWishListByMemberId(memberId);
-//        if (wishList == null) {
-//            throw new IllegalArgumentException("해당 회원의 관심목록에 관심상품이 존재하지 않습니다.");
-//        }
-//        return ResponseEntity.ok(wishList);
-//    }
-
-    // 특정 회원 관심 목록 조회
-    @GetMapping("/wish/{memberId}")
-    public ResponseEntity<List<WishListDTO>> getWishListByMember(@PathVariable Long memberId) {
-        List<WishListDTO> wishList = wishListService.getWishListByMemberId(memberId);
-        return ResponseEntity.ok(wishList);
-    }
 }

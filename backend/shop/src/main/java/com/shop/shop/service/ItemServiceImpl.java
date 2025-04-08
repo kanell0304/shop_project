@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -144,6 +145,7 @@ public class ItemServiceImpl implements ItemService {
 
         item.changeDelFlag(itemDTO.isDelFlag());
 //        item.changeCategoryId(itemDTO.getCategoryId());
+//        item.changeDate(LocalDateTime.now());
 
         // 인포
         if (itemDTO.getInfo() != null) {

@@ -1,8 +1,12 @@
 package com.shop.shop.controller;
 
 import com.shop.shop.domain.category.Category;
+import com.shop.shop.domain.item.Item;
 import com.shop.shop.dto.CategoryDTO;
+import com.shop.shop.dto.CategoryItemDTO;
 import com.shop.shop.repository.CategoryRepository;
+import com.shop.shop.repository.ItemRepository;
+import com.shop.shop.service.CategoryItemService;
 import com.shop.shop.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -24,6 +28,8 @@ public class CategoryController {
 
     private final CategoryRepository categoryRepository;
     private final CategoryService categoryService;
+    private final CategoryItemService categoryItemService;
+    private final ItemRepository itemRepository;
 
     // 카테고리 등록
     @PostMapping("/add")
@@ -81,6 +87,23 @@ public class CategoryController {
     public ResponseEntity<Map<String, String>> deleteCategory(@PathVariable Long id) {
         try {
             categoryService.deleteCategory(id);
+            Map<String, String> response = Map.of("result", "success");
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, String> response = Map.of("result", "fail", "error", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
+
+    // 특정 상품을 카테고리에 등록
+    @PostMapping("/addCategoryItem/{itemId}/{categoryId}")
+    public ResponseEntity<Map<String, String>> registerCategoryItem(
+            @PathVariable("itemId") Long itemId,
+            @PathVariable("categoryId") Long categoryId
+            ) {
+        try {
+            Item item = itemRepository.findById(itemId).orElseThrow(() -> new RuntimeException("해당 상품이 존재하지 않습니다."));
+            CategoryItemDTO categoryItemDTO = categoryItemService.registerCategoryItem(item, categoryId); // 카테고리에 해당 아이템 등록
             Map<String, String> response = Map.of("result", "success");
             return ResponseEntity.ok(response);
         } catch (Exception e) {

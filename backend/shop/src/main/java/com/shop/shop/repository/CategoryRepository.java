@@ -35,7 +35,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     Page<Category> findOneParentCategory(Pageable pageable, @Param("categoryId") Long categoryId);
 
     // 특정 부모 카테고리의 모든 자식 카테고리 조회
-    @Query("SELECT c FROM Category c WHERE c.parent.id = :parentId AND c.viewStatus = false")
+    @Query("SELECT DISTINCT c FROM Category c WHERE c.parent.id = :parentId AND c.viewStatus = false")
     List<Category> findAllChildCategories(@Param("parentId") Long parentId);
 
 }
