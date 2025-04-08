@@ -54,7 +54,8 @@ public class ItemServiceImpl implements ItemService {
                 .price(itemDTO.getPrice())
                 .discountRate(itemDTO.getDiscountRate())
                 .delFlag(false)
-//                .categoryId(categoryId)
+                .dueDate(LocalDateTime.now())
+                .salesVolume(0)
                 .build();
 
         // 아이템 저장
@@ -117,7 +118,7 @@ public class ItemServiceImpl implements ItemService {
     public ItemDTO getOne(Long id) {
         Item item = itemRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 상품이 존재하지 않습니다. ID: " + id));
 
-        // 개별적으로 연고나 데이털르 가져옴
+        // 개별적으로 연관 데이터를 가져옴
         List<ItemImage> images = itemImageRepository.findByItemId(id);
         List<ItemOption> options = itemOptionRepository.findByItemId(id);
         return new ItemDTO(item, images, options, item.getInfo());
@@ -133,19 +134,31 @@ public class ItemServiceImpl implements ItemService {
         return fileUtil.getFile(fileName);
     }
 
+    // 모든 상품 조회(상품 + 이미지 + 옵션)
+    @Override
+    public Page<ItemDTO> getAllItemsWithImageAndOptions(Pageable pageable) {
+        Page<Item> itemPage = itemRepository.findAllWithImagesAndOptions(pageable);
+
+        return itemPage.map(item -> {
+            List<ItemImage> images = item.getImages();
+            ItemImage representativeImage = (images != null && !images.isEmpty())
+                    ? images.get(0)
+                    : ItemImage.builder().fileName("default.png").build();
+            return new ItemDTO(item, List.of(representativeImage));
+        });
+    }
+
     // 아이템 정보 수정
     @Override
     public ItemDTO updateItem(Long id, ItemDTO itemDTO) {
         Item item = itemRepository.findById(id).orElseThrow();
-        ItemOption itemOption = itemOptionRepository.findById(id).orElseThrow();
+//        ItemOption itemOption = itemOptionRepository.findById(id).orElseThrow();
 
         if (itemDTO.getName() != null) {
             item.changeName(itemDTO.getName());
         }
 
         item.changeDelFlag(itemDTO.isDelFlag());
-//        item.changeCategoryId(itemDTO.getCategoryId());
-//        item.changeDate(LocalDateTime.now());
 
         // 인포
         if (itemDTO.getInfo() != null) {
@@ -193,17 +206,4 @@ public class ItemServiceImpl implements ItemService {
         itemRepository.save(item);
     }
 
-//    // 특정 회원 관심 목록 조회
-//    @Override
-//    public List<WishListDTO> getWishListByMemberId(Long memberId) {
-//        boolean memberExists = memberRepository.existsById(memberId);
-//        if (!memberExists) {
-//            throw new RuntimeException("해당 회원 정보가 존재하지 않습니다.");
-//        }
-//
-//        List<WishList> wishList = wishListRepository.findAllByMemberId(memberId);
-//        return wishList.stream()
-//                .map(WishListDTO::new)
-//                .collect(Collectors.toList());
-//    }
 }

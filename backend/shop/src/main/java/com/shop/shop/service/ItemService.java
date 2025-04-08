@@ -20,6 +20,6 @@ public interface ItemService {
     public ItemDTO updateItem(Long id, ItemDTO itemDTO); // 특정 아이템 수정
     public void deleteItem(Long id); // 특정 아이템 삭제
 
-//    List<WishListDTO> getWishListByMemberId(Long memberId);
+    public Page<ItemDTO> getAllItemsWithImageAndOptions(Pageable pageable);
 
 }

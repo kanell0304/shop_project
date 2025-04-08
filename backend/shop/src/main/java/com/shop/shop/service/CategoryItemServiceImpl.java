@@ -26,6 +26,7 @@ public class CategoryItemServiceImpl implements CategoryItemService {
     private final CategoryItemRepository categoryItemRepository;
     private final ItemRepository itemRepository;
 
+    // 상품과 카테고리를 연결해주는 메서드
     @Override
     public CategoryItemDTO registerCategoryItem(Item item, Long categoryId) {
         Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new RuntimeException("해당 카테고리를 찾을 수 없습니다."));

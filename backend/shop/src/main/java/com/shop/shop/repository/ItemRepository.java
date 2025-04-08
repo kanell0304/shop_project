@@ -18,6 +18,12 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     @Query("SELECT i FROM Item i WHERE i.delFlag = false") // 삭제 된거 제외
     Page<Item> findAllWithImages(Pageable pageable);
 
+    // 아이템 이미지, 옵션을 함께 불러오는 메서드
+    @EntityGraph(attributePaths = {"images", "options"})
+    @Query("SELECT i FROM Item i WHERE i.delFlag = false") // 삭제 된거 제외
+    Page<Item> findAllWithImagesAndOptions(Pageable pageable);
+
+    // 아이템 전체 정보를 모두 불러오는 메서드
     @EntityGraph(attributePaths = {"images", "options", "info"})
     @Query("SELECT i FROM Item i WHERE i.delFlag = false")
     Page<Item> findAllWithImagesAndOptionsAndInfo(Pageable pageable);

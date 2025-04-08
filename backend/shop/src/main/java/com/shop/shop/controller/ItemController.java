@@ -61,6 +61,16 @@ public class ItemController {
         }
     }
 
+    // 페이징 목록 조회(아이템 정보 + 썹네일 이미지 + 옵션)
+    @GetMapping("/listPage")
+    public ResponseEntity<Page<ItemDTO>> getAllItemsWithImageAndOptions(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ){
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(itemService.getAllItemsWithImageAndOptions(pageable));
+    }
+
     // 특정 아이템의 이미지 리스트 조회 API (별도 서비스 분리 X)
     @GetMapping("/view/{fileName}")
     public ResponseEntity<?> getItemImages(@PathVariable String fileName) {
@@ -85,8 +95,6 @@ public class ItemController {
             @RequestParam("categoryId") Long categoryId
     ) {
         try {
-            System.out.println("카테고리1 id: " + categoryId);
-            System.out.println("categoryId의 자료형: " + categoryId.getClass().getSimpleName());
             // JSON 을 ItemDTO 로 변환
             ObjectMapper objectMapper = new ObjectMapper();
             ItemDTO itemDTO = objectMapper.readValue(itemJson, ItemDTO.class);
@@ -99,7 +107,6 @@ public class ItemController {
 
             // 서비스 호출
             ItemDTO createdItem = itemService.createItem(itemDTO, files, categoryId); // 아이템 등록
-            System.out.println("카테고리2 id: " + categoryId);
             Item item = itemServiceImpl.getSavedItem();
             CategoryItemDTO categoryItemDTO = categoryItemService.registerCategoryItem(item, categoryId); // 카테고리에 해당 아이템 등록
 
@@ -119,7 +126,7 @@ public class ItemController {
         return ResponseEntity.ok(updatedItem);
     }
 
-    // 아이템 삭제 (논리 삭제)
+    // 아이템 삭제 (논리적 삭제)
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, String>> deleteItem(@PathVariable Long id) {
         try {

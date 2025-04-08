@@ -4,6 +4,7 @@ import com.shop.shop.exception.NotEnoughStockException;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,8 @@ public class Item {
     private int price;
     private int discountRate;
     private boolean delFlag;
-//    private Long categoryId;
+    private LocalDateTime dueDate;
+    private int salesVolume;
 
     // 아이템 옵션
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -88,9 +90,14 @@ public class Item {
         this.delFlag = delFlag;
     }
 
-    // 카테고리 Id 변경
-//    public void changeCategoryId(Long categoryId) {
-//        this.categoryId = categoryId;
-//    }
+    // 누적 판매량 증가
+    public void incrementSalesVolume(int qty) {
+        this.salesVolume += qty;
+    }
+
+    // 누적 판매량 감소
+    public void decrementSalesVolume(int qty) {
+        this.salesVolume -= qty;
+    }
 
 }

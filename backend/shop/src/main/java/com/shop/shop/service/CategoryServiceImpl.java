@@ -87,11 +87,6 @@ public class CategoryServiceImpl implements CategoryService{
             }
         }
 
-        // 아이템의 카테고리 id를 삭제하기 위한 과정
-//        Item item = itemRepository.findByCategoryId(id);
-//        if (item != null) { // 해당 카테고리 id 를 가지고 있는 아이템이 있다면
-//            item.changeCategoryId(null);
-//        }
         Category category = categoryRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 ID를 가진 카테고리가 존재하지 않습니다."));
         categoryRepository.delete(category);
     }

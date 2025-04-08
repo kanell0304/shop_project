@@ -11,6 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +31,8 @@ public class ItemDTO {
     private float totalScore;
     private int discountRate;
     private boolean delFlag;
-//    private Long categoryId;
+    private LocalDateTime dueDate;
+    private int salesVolume;
 
     @Builder.Default
     private List<ItemOptionDTO> options = new ArrayList<>();
@@ -54,12 +56,43 @@ public class ItemDTO {
         this.totalScore = item.getTotalScore();
         this.discountRate = item.getDiscountRate();
         this.delFlag = item.isDelFlag();
-//        this.categoryId = item.getCategoryId();
+        this.dueDate = item.getDueDate();
+        this.salesVolume = item.getSalesVolume();
 
         // 대표 이미지 설정
         this.uploadFileNames = (images != null && !images.isEmpty())
                 ? List.of(images.get(0).getFileName())
                 : List.of("default.png");
+    }
+
+    // 대표 이미지 1개와 옵션을 가져오는 생성자
+    public ItemDTO(Item item, List<ItemImage> images, List<ItemOption> options) {
+        this.id = item.getId();
+        this.name = item.getName();
+        this.description = item.getDescription();
+        this.price = item.getPrice();
+        this.totalScore = item.getTotalScore();
+        this.discountRate = item.getDiscountRate();
+        this.delFlag = item.isDelFlag();
+        this.dueDate = item.getDueDate();
+        this.salesVolume = item.getSalesVolume();
+
+        // 대표 이미지 설정
+        this.uploadFileNames = (images != null && !images.isEmpty())
+                ? List.of(images.get(0).getFileName())
+                : List.of("default.png");
+
+        // 옵션 변환
+        this.options = (options != null && !options.isEmpty())
+                ? options.stream()
+                .map(option -> new ItemOptionDTO(
+                        option.getOptionName(),
+                        option.getOptionValue(),
+                        option.getOptionPrice(),
+                        option.getStockQty()
+                ))
+                .toList()
+                : new ArrayList<>();
     }
 
     // 전체 정보 다 가져오는 생성자
@@ -71,7 +104,8 @@ public class ItemDTO {
         this.totalScore = item.getTotalScore();
         this.discountRate = item.getDiscountRate();
         this.delFlag = item.isDelFlag();
-//        this.categoryId = item.getCategoryId();
+        this.dueDate = item.getDueDate();
+        this.salesVolume = item.getSalesVolume();
 
         // 옵션 변환
         this.options = (options != null && !options.isEmpty())

@@ -49,9 +49,6 @@ public class WishListServiceImpl implements WishListService {
     @Override
     public void deleteItemFromWishList(Long wishListId) {
         WishList wishList = wishListRepository.findById(wishListId).orElseThrow(() -> new RuntimeException("해당 관심등록상품을 찾을 수 없습니다."));
-//        if (wishList == null) {
-//            throw new RuntimeException("해당 itemId를 가진 상품이 관심목록에 존재하지 않습니다.");
-//        }
         wishListRepository.deleteById(wishList.getId());
     }
 
