@@ -4,26 +4,28 @@ import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 
 const SignupStep2 = () => {
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [zipcode, setZipcode] = useState();
-  const [address, setAddress] = useState();
-  const [detailAddress, setDetailAddress] = useState();
-  const [error, setError] = useState();
+  const [name, setName] = useState(); // 이름
+  const [email, setEmail] = useState(); // 이메일
+  const [password, setPassword] = useState(); // 비밀번호
+  const [phone, setPhone] = useState(); // 연락처
+  const [zipcode, setZipcode] = useState(); // 우편번호
+  const [address, setAddress] = useState(); // 기본주소
+  const [detailAddress, setDetailAddress] = useState(); // 상세주소
+  const [error, setError] = useState(); // 에러 메시지
 
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!name || !email || !zipcode || !address || !detailAddress) {
+    if (!name || !email || !password || !phone || !zipcode || !address || !detailAddress) {
       setError("필수 항목을 모두 입력해주세요!");
       return;
     }
 
-    setError();
+    setError(); // 에러 메시지 초기화
     navigate("/SignupComplete");
-  }
+  };
 
   return (
     <>
@@ -55,6 +57,29 @@ const SignupStep2 = () => {
             </div>
 
             <div>
+              <label>비밀번호</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="비밀번호를 입력해주세요"
+              />
+              <p style={{ color: "red"}}>
+                * 비밀번호는 최소 6자 이상, 영문, 숫자, 특수문자를 포함해야 합니다.
+              </p>
+            </div>
+
+            <div>
+              <label>연락처</label>
+              <input
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="연락처를 입력해주세요"
+              />
+            </div>
+
+            <div>
               <label>우편번호</label>
               <input
                 type="text"
@@ -65,12 +90,12 @@ const SignupStep2 = () => {
             </div>
 
             <div>
-              <label>주소</label>
+              <label>기본주소</label>
               <input
                 type="text"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                placeholder="주소"
+                placeholder="기본 주소"
               />
             </div>
 
@@ -84,7 +109,9 @@ const SignupStep2 = () => {
               />
             </div>
 
-            {/* 에러 메시지 코드 입력해야함*/}
+            {error && (
+              <p style={{ color: "red", margin: "8px" }}>{error}</p>
+            )}
 
             <button type="submit">확인</button>
           </form>
@@ -94,6 +121,5 @@ const SignupStep2 = () => {
       <Footer/>
     </>
   )
-};
-
+}
 export default SignupStep2;
