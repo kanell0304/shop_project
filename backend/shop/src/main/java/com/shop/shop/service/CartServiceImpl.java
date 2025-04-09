@@ -25,6 +25,11 @@ public class CartServiceImpl implements CartService{
     public CartDTO registerCart(CartDTO cartDTO) {
         Member member = memberRepository.findById(cartDTO.getMemberId()).orElseThrow(() -> new RuntimeException("해당 회원을 찾을 수 없습니다."));
         Item item = itemRepository.findById(cartDTO.getItem().getId()).orElseThrow(() -> new RuntimeException("해당 상품을 찾을 수 없습니다."));
+        Cart duplicatePrevention  = cartRepository.findByMemberIdAndItemId(member.getId(), item.getId());
+
+        if (duplicatePrevention != null) {
+            throw new RuntimeException("이미 등록된 상품입니다.");
+        }
 
         Cart cart = new Cart();
         cart.changeQty(cartDTO.getQty());
@@ -39,26 +44,22 @@ public class CartServiceImpl implements CartService{
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
 
-        return cartRepository.findByMember(member).stream()
-                .map(cart -> {
-                    Item item = cart.getItem();
+        List<CartDTO> cartList = cartRepository.findAllByMemberId(member.getId());
 
-                    // DTO 변환 - ItemDTO 생성자 활용
-                    ItemDTO itemDTO = new ItemDTO(
-                            item,
-                            item.getImages(),
-                            item.getOptions(),
-                            item.getInfo()
-                    );
+        return cartList;
+    }
 
-                    return new CartDTO(
-                            cart.getCartId(),
-                            member.getId(),
-                            cart.getQty(),
-                            item
-                    );
-                })
-                .toList();
+    // 회원Id와 상품Id를 기준으로 장바구니 데이터 삭제
+    @Override
+    public void deleteCartItem(CartDTO cartDTO) {
+        Member member = memberRepository.findById(cartDTO.getMemberId()).orElseThrow(() -> new RuntimeException("해당 회원을 찾을 수 없습니다."));
+        Cart cartItem = cartRepository.findByMemberIdAndItemId(member.getId(), cartDTO.getItem().getId());
+
+        if (cartItem == null) {
+            throw new RuntimeException("삭제하려는 상품이 장바구니에 존재하지 않습니다.");
+        }
+
+        cartRepository.deleteById(cartItem.getId());
     }
 
 }
