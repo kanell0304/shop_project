@@ -40,10 +40,6 @@ public class ItemDTO {
     @Builder.Default
     private Map<String, String> info = new HashMap<>();
 
-//    @JsonIgnore
-//    @Builder.Default
-//    private List<MultipartFile> files = new ArrayList<>();
-
     @Builder.Default
     private List<String> uploadFileNames = new ArrayList<>();
 

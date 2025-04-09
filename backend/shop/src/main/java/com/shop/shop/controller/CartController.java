@@ -5,10 +5,12 @@ import com.shop.shop.dto.CategoryDTO;
 import com.shop.shop.service.CartService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,18 +20,33 @@ public class CartController {
 
     private final CartService cartService;
 
-    // 카트 등록
-    @PostMapping("/add")
-    public ResponseEntity<CartDTO> registerCart(@RequestBody CartDTO cartDTO) {
-        CartDTO registerCart = cartService.registerCart(cartDTO);
+    // 회원Id를 기준으로 장바구니에 상품 등록
+    @PostMapping("/add/{optionId}")
+    public ResponseEntity<CartDTO> registerCart(
+            @RequestBody CartDTO cartDTO,
+            @PathVariable("optionId") Long optionId) {
+        CartDTO registerCart = cartService.registerCart(cartDTO, optionId);
         return ResponseEntity.ok(registerCart);
     }
 
-    // 회원Id를 기준으로 카트 조회
+    // 회원Id를 기준으로 장바구니 조회
     @GetMapping("/{memberId}")
     public ResponseEntity<List<CartDTO>> getCartByMemberId(@PathVariable("memberId") Long memberId) {
         List<CartDTO> getCartByMemberId = cartService.getCartList(memberId);
         return ResponseEntity.ok(getCartByMemberId);
+    }
+
+    // 회원Id를 기준으로 장바구니 상품 삭제
+    @DeleteMapping("/deleteItem")
+    public ResponseEntity<Map<String, String>> deleteCartItem(@RequestBody CartDTO cartDTO) {
+        try {
+            cartService.deleteCartItem(cartDTO);
+            Map<String, String> response = Map.of("result", "success");
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, String> response = Map.of("result", "fail", "error", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
     }
 
 }

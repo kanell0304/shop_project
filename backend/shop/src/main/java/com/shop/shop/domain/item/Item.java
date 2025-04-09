@@ -100,4 +100,9 @@ public class Item {
         this.salesVolume -= qty;
     }
 
+    // 옵션 목록 삭제
+    public void clearOptions() {
+        this.options.clear();
+    }
+
 }

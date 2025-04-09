@@ -19,27 +19,47 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class CartDTO {
 
-//    @Column(name = "cart_id")
     private Long cartId;
-//    @Column(name = "member_id")
     private Long memberId;
     private int qty;
-//    @Column(name = "item_id")
-    private Item item;
 
-    // Cart -> CartDTO 로 변환하는 메서드
-    public CartDTO (Cart cart) {
+    private Long itemId;
+    private String itemName;
+    private int itemPrice;
+
+    private Long optionId;
+    private String optionName;
+    private String optionValue;
+    private int optionPrice;
+
+    public CartDTO(Cart cart) {
         this.cartId = cart.getId();
         this.memberId = cart.getMember().getId();
         this.qty = cart.getQty();
-        this.item = cart.getItem();
+
+        this.itemId = cart.getItem().getId();
+        this.itemName = cart.getItem().getName();
+        this.itemPrice = cart.getItem().getPrice();
+
+        if (cart.getItemOption() != null) {
+            this.optionId = cart.getItemOption().getId();
+            this.optionName = cart.getItemOption().getOptionName();
+            this.optionValue = cart.getItemOption().getOptionValue();
+            this.optionPrice = cart.getItemOption().getOptionPrice();
+        }
     }
 
-//    // 엔티티를 DTO 로 변환하는 생성자
-//    public CartDTO(Cart cart) {
+//    private Long cartId;
+//    private Long memberId;
+//    private int qty;
+//    private Item item;
+//
+//    // Cart -> CartDTO 로 변환하는 메서드
+//    public CartDTO (Cart cart) {
 //        this.cartId = cart.getId();
-//        this.member = cart.getMember();
-//        this.item = cart.getItem();
+//        this.memberId = cart.getMember().getId();
 //        this.qty = cart.getQty();
+//        this.item = cart.getItem();
 //    }
+
 }
