@@ -2,10 +2,12 @@ package com.shop.shop.service;
 
 import com.shop.shop.domain.cart.Cart;
 import com.shop.shop.domain.item.Item;
+import com.shop.shop.domain.item.ItemOption;
 import com.shop.shop.domain.member.Member;
 import com.shop.shop.dto.CartDTO;
 import com.shop.shop.dto.ItemDTO;
 import com.shop.shop.repository.CartRepository;
+import com.shop.shop.repository.ItemOptionRepository;
 import com.shop.shop.repository.ItemRepository;
 import com.shop.shop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,11 +22,14 @@ public class CartServiceImpl implements CartService{
     private final CartRepository cartRepository;
     private final MemberRepository memberRepository;
     private final ItemRepository itemRepository;
+    private final ItemOptionRepository itemOptionRepository;
 
     // 장바구니 등록하기
-    public CartDTO registerCart(CartDTO cartDTO) {
+    public CartDTO registerCart(CartDTO cartDTO, Long optionId) {
         Member member = memberRepository.findById(cartDTO.getMemberId()).orElseThrow(() -> new RuntimeException("해당 회원을 찾을 수 없습니다."));
-        Item item = itemRepository.findById(cartDTO.getItem().getId()).orElseThrow(() -> new RuntimeException("해당 상품을 찾을 수 없습니다."));
+        Item item = itemRepository.findById(cartDTO.getItemId()).orElseThrow(() -> new RuntimeException("해당 상품을 찾을 수 없습니다."));
+        ItemOption option = itemOptionRepository.findById(optionId).orElseThrow(() -> new IllegalArgumentException("해당 옵션이 존재하지 않습니다."));
+
         Cart duplicatePrevention  = cartRepository.findByMemberIdAndItemId(member.getId(), item.getId());
 
         if (duplicatePrevention != null) {
@@ -32,10 +37,11 @@ public class CartServiceImpl implements CartService{
         }
 
         Cart cart = new Cart();
+        cart.registerCart(member, item, option);
         cart.changeQty(cartDTO.getQty());
-        cart.registerCart(member, item);
-        Cart savedCart = cartRepository.save(cart);
-        return new CartDTO(savedCart);
+
+        cartRepository.save(cart);
+        return new CartDTO(cart);
     }
 
     // 회원Id를 기준으로 장바구니 불러오기
@@ -53,7 +59,7 @@ public class CartServiceImpl implements CartService{
     @Override
     public void deleteCartItem(CartDTO cartDTO) {
         Member member = memberRepository.findById(cartDTO.getMemberId()).orElseThrow(() -> new RuntimeException("해당 회원을 찾을 수 없습니다."));
-        Cart cartItem = cartRepository.findByMemberIdAndItemId(member.getId(), cartDTO.getItem().getId());
+        Cart cartItem = cartRepository.findByMemberIdAndItemId(member.getId(), cartDTO.getItemId());
 
         if (cartItem == null) {
             throw new RuntimeException("삭제하려는 상품이 장바구니에 존재하지 않습니다.");
@@ -61,5 +67,4 @@ public class CartServiceImpl implements CartService{
 
         cartRepository.deleteById(cartItem.getId());
     }
-
 }
