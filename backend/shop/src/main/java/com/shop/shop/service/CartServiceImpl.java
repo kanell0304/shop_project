@@ -27,6 +27,7 @@ public class CartServiceImpl implements CartService{
         Item item = itemRepository.findById(cartDTO.getItem().getId()).orElseThrow(() -> new RuntimeException("해당 상품을 찾을 수 없습니다."));
 
         Cart cart = new Cart();
+        cart.changeQty(cartDTO.getQty());
         cart.registerCart(member, item);
         Cart savedCart = cartRepository.save(cart);
         return new CartDTO(savedCart);

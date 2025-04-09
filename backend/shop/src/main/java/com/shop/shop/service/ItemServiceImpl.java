@@ -16,6 +16,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -58,6 +60,7 @@ public class ItemServiceImpl implements ItemService {
                 .salesVolume(0)
                 .build();
 
+        System.out.println("1파일: " + files);
         // 아이템 저장
         savedItem = itemRepository.save(item);
 
@@ -86,6 +89,7 @@ public class ItemServiceImpl implements ItemService {
         // 이미지 저장
         if (files != null && !files.isEmpty()) {
             List<String> uploadFileNames = fileUtil.saveFiles(files);
+            System.out.println("uploadFileNames: " + uploadFileNames);
             List<ItemImage> images = uploadFileNames.stream()
                     .map(fileName -> ItemImage.builder()
                             .fileName(fileName)
@@ -136,16 +140,51 @@ public class ItemServiceImpl implements ItemService {
 
     // 모든 상품 조회(상품 + 이미지 + 옵션)
     @Override
-    public Page<ItemDTO> getAllItemsWithImageAndOptions(Pageable pageable) {
-        Page<Item> itemPage = itemRepository.findAllWithImagesAndOptions(pageable);
+    public Page<ItemDTO> getAllItemsWithImageAndOptionsAndInfo(Pageable pageable) {
+        Page<Item> itemPage = itemRepository.findAllWithImages(pageable);
 
-        return itemPage.map(item -> {
-            List<ItemImage> images = item.getImages();
-            ItemImage representativeImage = (images != null && !images.isEmpty())
-                    ? images.get(0)
-                    : ItemImage.builder().fileName("default.png").build();
-            return new ItemDTO(item, List.of(representativeImage));
-        });
+        List<Item> items = itemPage.getContent();
+        List<Long> itemIds = items.stream().map(Item::getId).toList();
+
+        // 옵션, 인포 한번에 조회
+        List<ItemOption> options = itemOptionRepository.findByItemIds(itemIds);
+        List<Object[]> rawInfo = itemRepository.findInfoByItemIds(itemIds);
+
+        // 인포 groupBy
+        Map<Long, List<ItemInfo>> infoMap = rawInfo.stream()
+                .collect(Collectors.groupingBy(
+                        row -> (Long) row[0],
+                        Collectors.mapping(
+                                row -> new ItemInfo((String) row[1], (String) row[2]),
+                                Collectors.toList()
+                        )
+                ));
+
+        Map<Long, List<ItemOption>> optionMap = options.stream()
+                .collect(Collectors.groupingBy(
+                        itemOption -> itemOption.getItemId(), // key 추출
+                        Collectors.toList()                   // value 리스트화
+                ));
+
+// DTO 조립
+        List<ItemDTO> itemDTOs = items.stream()
+                .map(item -> new ItemDTO(
+                        item,
+                        item.getImages(),                            // images
+                        optionMap.getOrDefault(item.getId(), List.of()), // options
+                        infoMap.getOrDefault(item.getId(), List.of())    // info
+                ))
+                .toList();
+
+        return new PageImpl<>(itemDTOs, pageable, itemPage.getTotalElements());
+
+//        eturn itemPage.map(item -> {
+//            List<ItemImage> images = item.getImages();
+//            ItemImage representativeImage = (images != null && !images.isEmpty())
+//                    ? images.get(0)
+//                    : ItemImage.builder().fileName("default.png").build();
+//            return new ItemDTO(item, List.of(representativeImage));
+//        });r
     }
 
     // 아이템 정보 수정

@@ -20,6 +20,6 @@ public interface ItemService {
     public ItemDTO updateItem(Long id, ItemDTO itemDTO); // 특정 아이템 수정
     public void deleteItem(Long id); // 특정 아이템 삭제
 
-    public Page<ItemDTO> getAllItemsWithImageAndOptions(Pageable pageable);
+    public Page<ItemDTO> getAllItemsWithImageAndOptionsAndInfo(Pageable pageable);
 
 }

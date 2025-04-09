@@ -2,6 +2,7 @@ package com.shop.shop.repository;
 
 
 import com.shop.shop.domain.item.Item;
+import com.shop.shop.domain.item.ItemOption;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -9,6 +10,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
@@ -18,15 +21,19 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     @Query("SELECT i FROM Item i WHERE i.delFlag = false") // 삭제 된거 제외
     Page<Item> findAllWithImages(Pageable pageable);
 
-    // 아이템 이미지, 옵션을 함께 불러오는 메서드
-    @EntityGraph(attributePaths = {"images", "options"})
-    @Query("SELECT i FROM Item i WHERE i.delFlag = false") // 삭제 된거 제외
-    Page<Item> findAllWithImagesAndOptions(Pageable pageable);
+    // ItemInfo (ElementCollection) 조회
+    @Query("SELECT i.id, ii.infoKey, ii.infoValue FROM Item i JOIN i.info ii WHERE i.id IN :itemIds")
+    List<Object[]> findInfoByItemIds(@Param("itemIds") List<Long> itemIds);
 
-    // 아이템 전체 정보를 모두 불러오는 메서드
-    @EntityGraph(attributePaths = {"images", "options", "info"})
-    @Query("SELECT i FROM Item i WHERE i.delFlag = false")
-    Page<Item> findAllWithImagesAndOptionsAndInfo(Pageable pageable);
+//    // 아이템 이미지, 옵션을 함께 불러오는 메서드
+//    @EntityGraph(attributePaths = {"images", "options"})
+//    @Query("SELECT i FROM Item i WHERE i.delFlag = false") // 삭제 된거 제외
+//    Page<Item> findAllWithImagesAndOptions(Pageable pageable);
+//
+//    // 아이템 전체 정보를 모두 불러오는 메서드
+//    @EntityGraph(attributePaths = {"images", "options", "info"})
+//    @Query("SELECT i FROM Item i WHERE i.delFlag = false")
+//    Page<Item> findAllWithImagesAndOptionsAndInfo(Pageable pageable);
 
     Item findByName(String name);
 

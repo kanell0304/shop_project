@@ -61,14 +61,14 @@ public class ItemController {
         }
     }
 
-    // 페이징 목록 조회(아이템 정보 + 썹네일 이미지 + 옵션)
+    // 페이징 목록 조회(아이템 정보 + 썹네일 이미지 + 옵션 + 인포)
     @GetMapping("/listPage")
-    public ResponseEntity<Page<ItemDTO>> getAllItemsWithImageAndOptions(
+    public ResponseEntity<Page<ItemDTO>> getAllItemsWithImageAndOptionsAndInfo(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ){
         Pageable pageable = PageRequest.of(page, size);
-        return ResponseEntity.ok(itemService.getAllItemsWithImageAndOptions(pageable));
+        return ResponseEntity.ok(itemService.getAllItemsWithImageAndOptionsAndInfo(pageable));
     }
 
     // 특정 아이템의 이미지 리스트 조회 API (별도 서비스 분리 X)
