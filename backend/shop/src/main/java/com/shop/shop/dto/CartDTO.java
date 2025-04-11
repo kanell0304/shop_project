@@ -32,6 +32,8 @@ public class CartDTO {
     private String optionValue;
     private int optionPrice;
 
+    private Long[] deleteId;
+
     public CartDTO(Cart cart) {
         this.cartId = cart.getId();
         this.memberId = cart.getMember().getId();

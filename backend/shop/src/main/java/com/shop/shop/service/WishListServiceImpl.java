@@ -52,4 +52,13 @@ public class WishListServiceImpl implements WishListService {
         wishListRepository.deleteById(wishList.getId());
     }
 
+    // 관심 목록 상품 다중 삭제(선택한 상품 삭제)
+    @Override
+    public void multipleDeleteItemFromWishList(WishListDTO wishListDTO) {
+        for (Long deleteId : wishListDTO.getDeleteId()) {
+            WishList deleteWishListItem = wishListRepository.findById(deleteId).orElseThrow(() -> new RuntimeException("삭제하려는 상품을 찾을 수 없습니다."));
+            wishListRepository.deleteById(deleteWishListItem.getId());
+        }
+    }
+
 }

@@ -1,11 +1,13 @@
 package com.shop.shop.service;
 
 import com.shop.shop.domain.cart.Cart;
+import com.shop.shop.domain.cart.WishList;
 import com.shop.shop.domain.item.Item;
 import com.shop.shop.domain.item.ItemOption;
 import com.shop.shop.domain.member.Member;
 import com.shop.shop.dto.CartDTO;
 import com.shop.shop.dto.ItemDTO;
+import com.shop.shop.dto.WishListDTO;
 import com.shop.shop.repository.CartRepository;
 import com.shop.shop.repository.ItemOptionRepository;
 import com.shop.shop.repository.ItemRepository;
@@ -66,5 +68,14 @@ public class CartServiceImpl implements CartService{
         }
 
         cartRepository.deleteById(cartItem.getId());
+    }
+
+    // 장바구니 목록 상품 다중 삭제(선택한 상품 삭제)
+    @Override
+    public void multipleDeleteItemFromWishList(CartDTO cartDTO) {
+        for (Long deleteId : cartDTO.getDeleteId()) {
+            Cart deleteWishListItem = cartRepository.findById(deleteId).orElseThrow(() -> new RuntimeException("삭제하려는 상품을 찾을 수 없습니다."));
+            cartRepository.deleteById(deleteWishListItem.getId());
+        }
     }
 }

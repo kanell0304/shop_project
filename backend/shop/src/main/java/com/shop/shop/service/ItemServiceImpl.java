@@ -60,7 +60,6 @@ public class ItemServiceImpl implements ItemService {
                 .salesVolume(0)
                 .build();
 
-        System.out.println("1파일: " + files);
         // 아이템 저장
         savedItem = itemRepository.save(item);
 
@@ -86,19 +85,21 @@ public class ItemServiceImpl implements ItemService {
             item.getInfo().addAll(infoList);
         }
 
+        List<ItemImage> images = null;
+
         // 이미지 저장
         if (files != null && !files.isEmpty()) {
             List<String> uploadFileNames = fileUtil.saveFiles(files);
             System.out.println("uploadFileNames: " + uploadFileNames);
-            List<ItemImage> images = uploadFileNames.stream()
+            images = uploadFileNames.stream()
                     .map(fileName -> ItemImage.builder()
                             .fileName(fileName)
                             .itemId(item.getId()) // 연관된 Item ID 설정
                             .build())
                     .toList();
             itemImageRepository.saveAll(images);
+            return new ItemDTO(item, images, item.getOptions(), item.getInfo());
         }
-
         return new ItemDTO(item, item.getImages(), item.getOptions(), item.getInfo());
     }
 

@@ -26,6 +26,8 @@ public class WishListDTO {
     private int itemPrice;
     private String itemImage;
 
+    private Long[] deleteId;
+
     public WishListDTO(WishList wishList) {
         this.wishListId = wishList.getId();
         this.memberId = wishList.getMember().getId();
