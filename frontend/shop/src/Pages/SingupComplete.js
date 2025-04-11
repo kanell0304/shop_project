@@ -2,14 +2,16 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
+import Basic from "../static/basic";
+import Root from "../router/Root";
 
 const SignupComplete = () => {
   const navigate = useNavigate();
 
   const handleShopNow = () => {
-    navigate("/"); // 메인 페이지로 이동
-  };
-/*
+    navigate("/");
+  }
+
   return (
     <>
       <Header/>
@@ -24,9 +26,9 @@ const SignupComplete = () => {
         </div>
       </main>
 
-      <Footer/>
-    </> 
-  )*/
-};
+      <Footer />
+    </>
+  )
+}
 
-export default SignupComplete; 
+export default SignupComplete;
