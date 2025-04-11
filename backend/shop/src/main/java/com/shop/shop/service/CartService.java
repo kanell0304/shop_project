@@ -15,4 +15,7 @@ public interface CartService {
     // 장바구니 목록에서 상품 삭제
     public void deleteCartItem(CartDTO cartDTO);
 
+    // 장바구니 목록 다중 삭제
+    public void multipleDeleteItemFromWishList(CartDTO cartDTO);
+
 }

@@ -49,4 +49,17 @@ public class WishListController {
         }
     }
 
+    // 다중 삭제(선택한 상품 삭제)
+    @DeleteMapping("/multipleDelete")
+    public ResponseEntity<?> multipleDelete(@RequestBody WishListDTO wishListDTO) {
+        try {
+            wishListService.multipleDeleteItemFromWishList(wishListDTO);
+            Map<String, String> response = Map.of("result", "success");
+            return ResponseEntity.ok(response);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("result", "fail", "error", e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("result", "fail", "error", e.getMessage()));
+        }
+    }
 }
