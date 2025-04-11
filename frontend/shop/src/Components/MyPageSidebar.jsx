@@ -8,7 +8,6 @@ const MyPageSidebar = () => {
     const membership = "BRONZE" // 멤버십 현재 등급 ("BRONZE", "SILVER", "GOLD", "PLATINUM")
 
     const menuItems = [
-        {label: "대시보드", href: "/mypage/dashboard"},
         {label: "주문내역", href: "/mypage/orders"},
         {label: "문의내역", href: "/mypage/inquiry"},
         {label: "마일리지", href: "/mypage/mileage"},

@@ -2,18 +2,25 @@ import React from "react";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 
-
 const LoginPage = () => {
   return (
     <>
       <Header/>
 
       <main>
+
+         {/* 왼쪽: 로그인 이미지 */}
+        <div className="login_image">
+          <img src="../images/login/Mask group4.png" alt="로그인 이미지"/>
+        </div>
+
         <div className="login-box">
           
-          {/* 로그인 문구 */}
+          {/* 오른쪽: 로그인 문구 */}
           <h1>SIMPLICITY SPEAKS</h1>
           <p>WHAT YOU WEAR SAYS MORE THAN WORDS</p>
+
+          <p className="login_label">LOGIN YOU ACCOUNT</p>
 
           {/* 로그인 입력 폼 */}
           <form>

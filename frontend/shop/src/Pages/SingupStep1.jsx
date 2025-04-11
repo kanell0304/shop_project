@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 
-
 const SignupStep1 = () => {
   const [AllAgree, setAllAgree] = useState(false);
   const [Terms, setTerms] = useState(false);

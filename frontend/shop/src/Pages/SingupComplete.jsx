@@ -2,8 +2,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
-import Basic from "../static/basic";
-import Root from "../router/Root";
 
 const SignupComplete = () => {
   const navigate = useNavigate();
@@ -26,7 +24,7 @@ const SignupComplete = () => {
         </div>
       </main>
 
-      <Footer />
+      <Footer/>
     </>
   )
 }
