@@ -4,16 +4,20 @@ import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 
 const SignupStep2 = () => {
-  const [name, setName] = useState(); // 이름
-  const [email, setEmail] = useState(); // 이메일
-  const [password, setPassword] = useState(); // 비밀번호
-  const [phone, setPhone] = useState(); // 연락처
-  const [zipcode, setZipcode] = useState(); // 우편번호
-  const [address, setAddress] = useState(); // 기본주소
-  const [detailAddress, setDetailAddress] = useState(); // 상세주소
-  const [error, setError] = useState(); // 에러 메시지
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [zipcode, setZipcode] = useState("");
+  const [address, setAddress] = useState("");
+  const [detailAddress, setDetailAddress] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
+
+  const isValidPassword = (pw) => {
+    return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&]).{6,}$/.test(pw);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,13 +27,18 @@ const SignupStep2 = () => {
       return;
     }
 
-    setError(); // 에러 메시지 초기화
-    navigate("/SignupComplete");
+    if (!isValidPassword(password)) {
+      setError("비밀번호는 최소 6자 이상, 영문/숫자/특수문자를 포함해야 합니다.");
+      return;
+    }
+
+    setError("");
+    navigate("/signup/complete"); 
   };
 
   return (
     <>
-      <Header />
+      <Header/>
 
       <main>
         <div className="signup-box">
@@ -64,7 +73,7 @@ const SignupStep2 = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="비밀번호를 입력해주세요"
               />
-              <p style={{ color: "red"}}>
+              <p style={{ color: "red", fontSize: "0.9em" }}>
                 * 비밀번호는 최소 6자 이상, 영문, 숫자, 특수문자를 포함해야 합니다.
               </p>
             </div>
@@ -97,6 +106,9 @@ const SignupStep2 = () => {
                 onChange={(e) => setAddress(e.target.value)}
                 placeholder="기본 주소"
               />
+            <button type="button" onClick={handleFindAddress}>
+                  주소찾기
+            </button>
             </div>
 
             <div>
@@ -110,7 +122,7 @@ const SignupStep2 = () => {
             </div>
 
             {error && (
-              <p style={{ color: "red", margin: "8px" }}>{error}</p>
+              <p style={{ color: "red", marginTop: "12px" }}>{error}</p>
             )}
 
             <button type="submit">확인</button>
@@ -122,4 +134,5 @@ const SignupStep2 = () => {
     </>
   )
 }
+
 export default SignupStep2;

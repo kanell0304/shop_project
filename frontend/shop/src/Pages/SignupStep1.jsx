@@ -4,6 +4,7 @@ import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 
 const SignupStep1 = () => {
+
   const [AllAgree, setAllAgree] = useState(false);
   const [Terms, setTerms] = useState(false);
   const [Agreement, setAgreement] = useState(false);
@@ -28,7 +29,7 @@ const SignupStep1 = () => {
       return;
     }
     setError();
-    navigate("/Pages/SingupStep2");
+    navigate("/signup/step2");
   }
 
   return (
@@ -102,7 +103,10 @@ const SignupStep1 = () => {
               </label>
             </div>
 
-            {/* 에러 메시지 코드 입력해야함*/}
+            {/* 에러 메시지 출력 */}
+            {error && (
+              <p style={{ color: "red", marginTop: "12px" }}>{error}</p>
+            )}
 
             <button type="submit">다음</button>
           </form>
