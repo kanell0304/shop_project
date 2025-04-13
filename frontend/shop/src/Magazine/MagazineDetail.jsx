@@ -12,7 +12,7 @@ const MagazineDetail = () => {
         <section className="content">
           <div className="image-section">
             <img
-              src="/images/magazine6.jpg"
+              src="images/magazine/magazinedetail.png"
               alt="이서연 인터뷰 이미지"
             />
           </div>
