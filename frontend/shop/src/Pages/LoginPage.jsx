@@ -43,7 +43,7 @@ const LoginPage = () => {
 
           {/* 오른쪽 로그인 박스 */}
           <div className="login-box">
-            <h1>SIMPLICITY SPEAKS</h1>
+            <h1>SIMPLICITY<br/>SPEAKS</h1>
             <p>WHAT YOU WEAR SAYS MORE THAN WORDS</p>
 
             <p className="login-label">LOGIN YOUR ACCOUNT</p>
