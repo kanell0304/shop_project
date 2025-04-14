@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import MyPageSidebar from "../Components/MyPageSidebar";
+import Root from "../router/Root";
 
 const Order = () => {
   const orderList = [

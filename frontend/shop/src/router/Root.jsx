@@ -7,6 +7,7 @@ import SignupStep2 from "../Pages/SignupStep2";
 import SignupComplete from "../Pages/SignupComplete";
 import Profile from "../MyPage/Profile";
 import Wishlist from "../MyPage/Wishlist";
+import Order from "../MyPage/Order";
 import MagazinePage from "../Magazine/MagazinePage";
 import MagazineDetail from "../Magazine/MagazineDetail"
 
@@ -20,8 +21,10 @@ const Root = () => {
         <Route path="/signup/complete" element={<SignupComplete/>}/>
         <Route path="/mypage/profile" element={<Profile/>}/>
         <Route path="/mypage/wishlist" element={<Wishlist/>}/>
+        <Route path="/mypage/order" element={<Order/>}/>
         <Route path="/magazine" element={<MagazinePage/>}/>
         <Route path="/magazine/detail" element={<MagazineDetail/>}/>
+        
       </Routes>
   )
 }
