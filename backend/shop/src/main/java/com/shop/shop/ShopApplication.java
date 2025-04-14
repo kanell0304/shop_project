@@ -13,4 +13,3 @@ public class ShopApplication {
 		}
 	}
 }
-// 테스트

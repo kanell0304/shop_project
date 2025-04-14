@@ -10,7 +10,7 @@ public interface OrderService {
 
     public List<OrderDTO> findAllByMemberEmail(String email);
 
-    public OrderDTO findByDeliveryId(Long deliveryId);
+//    public OrderDTO findByDeliveryId(Long deliveryId);
 
     public List<OrderDTO> findByDuringPeriod(LocalDateTime orderDate1, LocalDateTime orderDate2);
 

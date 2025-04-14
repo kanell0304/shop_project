@@ -1,6 +1,7 @@
 package com.shop.shop.domain.delivery;
 
 import com.shop.shop.domain.member.Address;
+import com.shop.shop.domain.order.Order;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,8 +26,10 @@ public class Delivery {
     @Column(nullable = false)
     private int transportNumber;
 
-    @Lob
-    private String deliveryRequest;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "order_id")
+    private Order order;
+
 
     public void changeAddress(Address address) {
         this.address = address;
@@ -38,10 +41,6 @@ public class Delivery {
 
     public void changeTransportNumber (int transportNumber) {
         this.transportNumber = transportNumber;
-    }
-
-    public void changeDeliveryRequest (String deliveryRequest) {
-        this.deliveryRequest = deliveryRequest;
     }
 
 }

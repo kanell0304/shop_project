@@ -17,9 +17,9 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query("SELECT o FROM Order o WHERE o.member.id = :memberId AND o.delFlag = false")
     public List<OrderDTO> findAllByMemberId(@Param("memberId") Long memberId);
 
-    // 배달 Id를 기준으로 주문 내역 조회
-    @Query("SELECT o FROM Order o WHERE o.delivery.id = :deliveryId AND o.delFlag = false")
-    public OrderDTO findByDeliveryId(@Param("deliveryId") Long deliveryId);
+//    // 배달 Id를 기준으로 주문 내역 조회
+//    @Query("SELECT o FROM Order o WHERE o.delivery.id = :deliveryId AND o.delFlag = false")
+//    public OrderDTO findByDeliveryId(@Param("deliveryId") Long deliveryId);
 
     // 특정 기간동안의 주문내역 조회
     @Query("SELECT o FROM Order o WHERE o.orderDate BETWEEN :orderDate1 AND :orderDate2")

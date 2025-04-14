@@ -1,11 +1,6 @@
 package com.shop.shop.repository;
 
 import com.shop.shop.domain.cart.WishList;
-import com.shop.shop.domain.item.Item;
-import com.shop.shop.dto.WishListDTO;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
