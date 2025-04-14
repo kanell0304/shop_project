@@ -31,19 +31,19 @@ const LoginPage = () => {
   return (
     <>
 
-      <div className="login-main">
-        <div className="login-container">
+      <div className="loginMain">
+        <div className="loginContainer">
           {/* 왼쪽 이미지 영역 */}
-          <div className="login-image">
+          <div className="loginImage">
             <img src="/images/login/Mask group4.png" alt="로그인 이미지" />
           </div>
 
           {/* 오른쪽 로그인 박스 */}
-          <div className="login-box">
+          <div className="loginBox">
             <h2>SIMPLICITY<br/>SPEAKS</h2>
             <p>WHAT YOU WEAR SAYS MORE THAN WORDS</p>
 
-            <p className="login-label">LOGIN YOUR ACCOUNT</p>
+            <p className="loginLabel">LOGIN YOUR ACCOUNT</p>
 
             <form onSubmit={handleLogin}>
               <div>
@@ -67,13 +67,13 @@ const LoginPage = () => {
               {error && <p className="error-message">{error}</p>}
 
               <div>
-                <button type="submit">LOGIN</button>
+                <button type="submit" className="loginBtn">LOGIN</button>
               </div>
 
               <div className="login-or">OR</div>
 
               <div>
-                <button type="button">KAKAO LOGIN</button>
+                <button type="button" className="kakaoBtn">KAKAO LOGIN</button>
               </div>
             </form>
 
