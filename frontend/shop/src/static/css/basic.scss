@@ -1,5 +1,9 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-gov.min.css");
 
+
+$headerHeight : 80px;
+$innerPadding : 40px;
+
 :root {
   --font-main: 'Pretendard GOV', sans-serif;
 
@@ -21,15 +25,123 @@
   --text-small : 13px;
 }
 
+a{color: inherit;}
 .blind{display:none;}
-html,body {
+html,body,#root{
   font-family: var(--font-main);
   color: var(--charcoal-grey);
   background-color: white;
   font-size: var(--text-base);
+  color: var(--charcoal-grey);
+  height:100%;
   h1{font-size: var(--h1);}
   h2{font-size: var(--h2);}
   h3{font-size: var(--h3);}
   h4{font-size: var(--h4);}
   h5{font-size: var(--h5);}
 }
+#root{
+  display:flex;
+  flex-direction:column;
+  min-height:100%;
+}
+
+.innerWrap{
+  padding: 0 $innerPadding;
+}
+
+.container{
+  padding-top: $headerHeight;
+}
+
+/**헤더*/
+.header{
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  background:#fff;
+  z-index: 100;
+
+  .innerWrap{
+    display: flex;
+    align-items: center;
+    height:$headerHeight;
+
+    ul{
+      display:flex;
+      align-items: center;
+      gap:0 24px;
+    }
+
+    .logo a{
+      display: block;
+      svg{
+        width:127px;
+        display: block;
+      }
+    }
+
+    .gnb{
+      margin:0 auto 0 32px;
+    }
+
+    .utillMenu{
+      margin-left: 42px;
+    }
+  }
+}
+
+/**푸터*/
+.footer{
+  margin-top: auto;
+  .f_content_top{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    .logo svg{
+      width:366px;
+    }
+    .f_siteMap{
+      .f_cartegory{
+        display: flex;
+        gap: 0 40px;
+        >li:first-of-type{
+          margin-right: -22px;
+        }
+        >li>a{
+          font-size: var(--h5);
+          font-weight: bold;
+        }
+        .f_subCartegory{
+          padding-top: 10px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
+    }
+  }
+
+  .f_content_botton{
+    margin-top: auto;
+    .csBtn,
+    .infoDetail{
+      display: flex;
+      align-items: center;
+    }
+
+    .infoDetail{
+      font-size:var(--text-small);
+      color: var(--ash-white);
+      span{
+        font-size: inherit;
+        color: inherit;
+        display: block;
+        white-space: nowrap;
+        gap: 3px 12px;
+      }
+    }
+  }
+}
+
