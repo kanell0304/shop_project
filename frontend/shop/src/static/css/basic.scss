@@ -1,0 +1,35 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-gov.min.css");
+
+:root {
+  --font-main: 'Pretendard GOV', sans-serif;
+
+  --deep-onyx: #121212;
+  --charcoal-grey: #282B2B;
+  --ash-white: #EAEAEA;
+  --placeholder: #A2A2A2;
+  --pointer: #3A506B;
+
+  --slate-blue: #3A506B;
+  --muted-sand: #C6B7A6;
+
+  --h1: 48px;
+  --h2: 36px;
+  --h3: 28px;
+  --h4: 22px;
+  --h5: 18px;
+  --text-base: 16px;
+  --text-small : 13px;
+}
+
+.blind{display:none;}
+html,body {
+  font-family: var(--font-main);
+  color: var(--charcoal-grey);
+  background-color: white;
+  font-size: var(--text-base);
+  h1{font-size: var(--h1);}
+  h2{font-size: var(--h2);}
+  h3{font-size: var(--h3);}
+  h4{font-size: var(--h4);}
+  h5{font-size: var(--h5);}
+}
