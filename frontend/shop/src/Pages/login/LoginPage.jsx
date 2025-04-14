@@ -30,9 +30,8 @@ const LoginPage = () => {
 
   return (
     <>
-      <Header />
 
-      <main className="login-main">
+      <div className="login-main">
         <div className="login-container">
           {/* 왼쪽 이미지 영역 */}
           <div className="login-image">
@@ -41,7 +40,7 @@ const LoginPage = () => {
 
           {/* 오른쪽 로그인 박스 */}
           <div className="login-box">
-            <h1>SIMPLICITY<br/>SPEAKS</h1>
+            <h2>SIMPLICITY<br/>SPEAKS</h2>
             <p>WHAT YOU WEAR SAYS MORE THAN WORDS</p>
 
             <p className="login-label">LOGIN YOUR ACCOUNT</p>
@@ -91,9 +90,8 @@ const LoginPage = () => {
             </div>
           </div>
         </div>
-      </main>
+      </div>
 
-      <Footer/>
     </>
   )
 }
