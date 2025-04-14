@@ -1,9 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
-import MyPageSidebar from "../Components/MyPageSidebar";
-import Root from "../router/Root";
+import MyPageSidebar from "../../components/MyPageSidebar";
 
 const Order = () => {
   const orderList = [
