@@ -3,9 +3,15 @@ import { Link } from 'react-router-dom';
 
 const MyPageSidebar = () => {
     
-    // 고객 등급에 따라 달라짐 
     const userName = "홍길동";
-    const membership = "BRONZE" // 멤버십 현재 등급 ("BRONZE", "SILVER", "GOLD", "PLATINUM")
+    const membership = "BRONZE" // 현재 등급
+
+    const membershipLevels = {
+      BRONZE: "브론즈",
+      SILVER: "실버",
+      GOLD: "골드",
+      PLATINUM: "플레티넘"
+    };
 
     const menuItems = [
         {label: "주문내역", href: "/mypage/orders"},
@@ -16,11 +22,11 @@ const MyPageSidebar = () => {
     ]
 
     return (
-        <aside>
+        <aside className="sidebar">
         <h2>MYPAGE</h2>
-        <p>{membership}</p>
+        <p>{membershipLevels[membership]}등급</p>
         <p>{userName} 고객님 반갑습니다.</p>
-        <nav>
+        <nav className="siderbarMenu">
           <ul>
             {menuItems.map((item) => (
               <li key={item.href}>

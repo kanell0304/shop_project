@@ -35,7 +35,7 @@ const LoginPage = () => {
         <div className="loginContainer">
           {/* 왼쪽 이미지 영역 */}
           <div className="loginImage">
-            <img src="/images/login/Mask group4.png" alt="로그인 이미지" />
+            <img src="/images/login/Mask_group4.png" alt="로그인 이미지" />
           </div>
 
           {/* 오른쪽 로그인 박스 */}

@@ -1,7 +1,5 @@
 import React from "react";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import MyPageSidebar from "../../components/MyPageSidebar";
+import MyPageSidebar from "../components/MyPageSidebar";
 
 const Wishlist = () => {
   const items = [

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import MyPageSidebar from "../../components/MyPageSidebar";
+import MyPageSidebar from "../components/MyPageSidebar";
 
 const Order = () => {
   const orderList = [
