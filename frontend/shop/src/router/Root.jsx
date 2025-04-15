@@ -2,14 +2,14 @@ import React from "react";
 import {Routes, Route } from "react-router-dom";
 import IndexPage from "../Pages/IndexPage";
 import LoginPage from "../Pages/login/LoginPage";
-import SignupStep1 from "../pages/login/SignupStep1";
-import SignupStep2 from "../pages/login/SignupStep2";
-import SignupComplete from "../pages/login/SignupComplete";
-import Profile from "../pages/myPage/Profile";
+import SignupStep1 from "../Pages/login/SignupStep1";
+import SignupStep2 from "../Pages/login/SignupStep2";
+import SignupComplete from "../Pages/login/SignupComplete";
+import Profile from "../Pages/myPage/Profile";
 import Wishlist from "../Pages/myPage/Wishlist";
-import Order from "../pages/myPage/Order";
-import MagazinePage from "../pages/magazine/MagazinePage";
-import MagazineDetail from "../pages/magazine/MagazineDetail"
+import Order from "../Pages/myPage/Order";
+import MagazinePage from "../Pages/magazine/MagazinePage";
+import MagazineDetail from "../Pages/magazine/MagazineDetail"
 
 const Root = () => {
   return (

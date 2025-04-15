@@ -34,7 +34,6 @@ const Profile = () => {
     <>
       <Header/>
 
-      <div style={{ display: "flex" }}>
         <MyPageSidebar/>
 
         <div>
@@ -135,7 +134,6 @@ const Profile = () => {
             <button type="submit">변경사항 저장</button>
           </form>
         </div>
-      </div>
 
       <Footer/>
     </>
