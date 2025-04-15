@@ -50,6 +50,7 @@ public class CustomSecurityConfig {
                     .requestMatchers("/api/cart/**").permitAll()
                     .requestMatchers("/api/wish/**").permitAll()
                     .requestMatchers("/api/orders/**").permitAll()
+                    .requestMatchers("/api/mileage/**").permitAll()
                     .requestMatchers("/api/public/**").permitAll()
                     .requestMatchers("/api/deliveries/**").permitAll()
                     .requestMatchers("/api/admin/**").hasAnyRole("MANAGER","ADMIN") // 여러개

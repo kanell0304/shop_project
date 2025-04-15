@@ -24,7 +24,7 @@ public class Mileage {
     private LocalDateTime mileageDate;
 
     @Enumerated(EnumType.STRING)
-    private MileageStatus status;
+    private MileageStatus mileageStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
