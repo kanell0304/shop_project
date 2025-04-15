@@ -1,7 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
 
 const SignupComplete = () => {
   const navigate = useNavigate();
@@ -12,7 +10,6 @@ const SignupComplete = () => {
 
   return (
     <>
-      <Header/>
 
       <main>
         <div className="signup-complete-box">
@@ -24,7 +21,6 @@ const SignupComplete = () => {
         </div>
       </main>
 
-      <Footer/>
     </>
   )
 }

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
 
 const SignupStep1 = () => {
 
@@ -34,7 +32,6 @@ const SignupStep1 = () => {
 
   return (
     <>
-      <Header/>
 
       <main>
         <div className="signup-box">
@@ -113,7 +110,6 @@ const SignupStep1 = () => {
         </div>
       </main>
 
-      <Footer/>
     </>
   )
 }
