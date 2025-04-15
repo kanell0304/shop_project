@@ -1,58 +1,49 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import MyPageSidebar from "../../components/MyPageSidebar";
+import MyPageSidebar from '../../Components/MyPageSidebar';
 
 const Order = () => {
   const orderList = [
     {
-      order_id: "A001",          // 주문 번호
-      order_date: "2025.04.13",  // 주문 일자
-      point: "65",                // 적립 포인트(P)
-      order_price: "65,000",      // 주문 금액 (원)
-      paymentMethod: "카드",      // 결제 방법
-      order_status: "배송완료",   // 주문 상태 (예: 배송완료, 결제완료 등)
-      itemImage: "/images/item1.jpg", // 상품 이미지 URL
-      itemName: "기본 블레이저",  // 상품명
+      order_id: "A001",
+      order_date: "2025.04.13",
+      point: "65",
+      order_price: "65000",
+      paymentMethod: "카드",
+      order_status: "배송완료",
+      itemImage: "/images/item1.jpg",
+      itemName: "기본 블레이저",
     },
   ];
 
   return (
     <>
-      <Header />
-      <div style={{ display: "flex" }}>
-        <MyPageSidebar />
+      <div className="mypageContainer">
+        <MyPageSidebar/>
 
-        <div className="orders-page">
+        <div className="ordersPage">
           <h2>주문내역</h2>
 
-          <div className="search-filter-box">
-            <div className="filter-row">
+          <div className="searchFilterBox">
+            <div className="filterRow">
               <input
                 type="text"
                 placeholder="검색어를 입력해주세요."
-                className="search-input"
+                className="searchInput"
               />
-              <button className="search-button">검색</button>
+              <button className="searchButton">검색</button>
             </div>
 
-            <div className="filter-row">
-              <input
-                type="date"
-                placeholder="조회기간 시작일"
-                className="date-input"
-              />
+            <div className="filterRow">
+              <input type="date" className="dateInput" />
               <span> ~ </span>
-              <input
-                type="date"
-                placeholder="조회기간 종료일"
-                className="date-input"
-              />
+              <input type="date" className="dateInput" />
             </div>
           </div>
 
           {orderList.map((order, index) => (
-            <div className="order-item" key={order.order_id || index}>
-              <table className="order-table">
+            <div className="orderItem" key={order.order_id || index}>
+              <table className="orderTable">
                 <thead>
                   <tr>
                     <th>일자</th>
@@ -67,42 +58,41 @@ const Order = () => {
                     <td>{order.order_date}</td>
                     <td>{order.order_id}</td>
                     <td>+{order.point}P</td>
-                    <td>{order.order_price?.toLocaleString() || 0}원</td>
+                    <td>{Number(order.order_price).toLocaleString()}원</td>
                     <td>
-                      <div>{`(${order.paymentMethod})`}</div>
+                      <div>({order.paymentMethod})</div>
                       <div>{order.order_status}</div>
                     </td>
                   </tr>
                 </tbody>
               </table>
 
-              <div className="order-detail-box">
+              <div className="orderDetailBox">
                 <img
-                  src={order.itemImage || "/images/"}
+                  src={order.itemImage}
                   alt="제품"
-                  className="product-image"
+                  className="productImage"
                 />
-                <div className="order-info">
-                  <Link to={`/orders/${order.order_id}`} className="">
+                <div className="orderInfo">
+                  <Link to={`/orders/${order.order_id}`}>
                     주문상세보기
                   </Link>
-                  <div className="product-name">{order.itemName}</div>
+                  <div className="productName">{order.itemName}</div>
                 </div>
               </div>
             </div>
           ))}
 
           <div className="pagination">
-            <span className="page current">1</span>
-            <span className="page">2</span>
-            <span className="page">3</span>
-            <span className="page">4</span>
-            <span className="page">5</span>
-            <span className="page next">NEXT</span>
+            <Link to="#" className="pageLink">1</Link>
+            <Link to="#" className="pageLink">2</Link>
+            <Link to="#" className="pageLink">3</Link>
+            <Link to="#" className="pageLink">4</Link>
+            <Link to="#" className="pageLink">5</Link>
+            <Link to="#" className="pageLink">NEXT</Link>
           </div>
         </div>
       </div>
-      <Footer/>
     </>
   )
 }

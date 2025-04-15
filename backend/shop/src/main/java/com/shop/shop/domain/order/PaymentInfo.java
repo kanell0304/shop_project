@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "Payment_Info")
 public class PaymentInfo {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "payment_info_id")
     private Long id;
 

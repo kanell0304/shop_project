@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
 
 const SignupStep1 = () => {
 
@@ -24,17 +22,17 @@ const SignupStep1 = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("폼 제출");
     if (!Terms || !Agreement || !Over14) {
       setError("필수 항목을 확인해주세요!");
       return;
     }
-    setError();
+    setError("");
     navigate("/signup/step2");
   }
 
   return (
     <>
-      <Header/>
 
       <main>
         <div className="signup-box">
@@ -113,7 +111,6 @@ const SignupStep1 = () => {
         </div>
       </main>
 
-      <Footer/>
     </>
   )
 }

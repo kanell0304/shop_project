@@ -15,7 +15,8 @@ import java.util.List;
 @Builder
 public class Item {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
     private Long id;
 
@@ -58,17 +59,17 @@ public class Item {
     }
 
     // 인포 추가
-    public  void addInfo(ItemInfo info){
+    public void addInfo(ItemInfo info) {
         this.info.add(info);
     }
 
     // 옵션 추가
-    public  void addOption(ItemOption option){
+    public void addOption(ItemOption option) {
         this.options.add(option);
     }
 
     // 이미지 파일명 추가
-    public void addImageString(String fileName){
+    public void addImageString(String fileName) {
         ItemImage itemImage = ItemImage.builder()
                 .fileName(fileName)
                 .build();

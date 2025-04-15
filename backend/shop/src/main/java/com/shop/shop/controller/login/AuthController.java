@@ -85,23 +85,23 @@ public class AuthController {
             @RequestHeader("Authorization") String authHeader,
             @RequestParam String refreshToken) {
 
-        if(refreshToken == null) {
+        if (refreshToken == null) {
             throw new CustomJWTException("NULL_REFRESH");
         }
 
-        if(authHeader == null || authHeader.length() < 7) {
+        if (authHeader == null || authHeader.length() < 7) {
             throw new CustomJWTException("INVALID_STRING");
         }
 
         String accessToken = authHeader.substring(7);
 
-        if(!checkExpiredToken(accessToken)) {
+        if (!checkExpiredToken(accessToken)) {
             return Map.of("accessToken", accessToken, "refreshToken", refreshToken);
         }
 
         Map<String, Object> claims = jwtUtil.validateToken(refreshToken);
         String newAccessToken = jwtUtil.generateToken(claims, 10);
-        String newRefreshToken = checkTime((Integer)claims.get("exp"))
+        String newRefreshToken = checkTime((Integer) claims.get("exp"))
                 ? jwtUtil.generateToken(claims, 60 * 24)
                 : refreshToken;
 
@@ -111,8 +111,8 @@ public class AuthController {
     private boolean checkExpiredToken(String token) {
         try {
             jwtUtil.validateToken(token);
-        } catch(CustomJWTException ex) {
-            if(ex.getMessage().equals("Expired")){
+        } catch (CustomJWTException ex) {
+            if (ex.getMessage().equals("Expired")) {
                 return true;
             }
         }

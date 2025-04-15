@@ -20,7 +20,8 @@ import java.util.List;
 @Builder
 public class ReviewList {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_list_id")
     private Long id;
 
@@ -55,7 +56,7 @@ public class ReviewList {
     }
 
     // 이미지 파일명 추가
-    public void addImageString(String fileName){
+    public void addImageString(String fileName) {
         ReviewImage reviewImage = ReviewImage.builder()
                 .fileName(fileName)
                 .build();
@@ -67,15 +68,15 @@ public class ReviewList {
         this.images.clear();
     }
 
-    public void changeTitle (String title) {
+    public void changeTitle(String title) {
         this.title = title;
     }
 
-    public void changeContent (String content) {
+    public void changeContent(String content) {
         this.content = content;
     }
 
-    public void changeScore (int score) {
+    public void changeScore(int score) {
         this.score = score;
     }
 

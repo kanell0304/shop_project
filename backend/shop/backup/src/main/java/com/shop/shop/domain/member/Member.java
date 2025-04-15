@@ -17,7 +17,8 @@ import java.util.List;
 //@Builder
 public class Member {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Long id;
 
@@ -52,23 +53,23 @@ public class Member {
 //        memberShipList.clear();
 //    }
 
-    public void changePassword(String password){
+    public void changePassword(String password) {
         this.password = password;
     }
 
-    public void changePhoneNumber (String phoneNumber) {
+    public void changePhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public void changeStockMileage (int stockMileage) {
+    public void changeStockMileage(int stockMileage) {
         this.stockMileage = stockMileage;
     }
 
-    public void changeWtrSns (boolean wtrSns) {
+    public void changeWtrSns(boolean wtrSns) {
         this.wtrSns = wtrSns;
     }
 
-    public void changeDelFlag (boolean delFlag) {
+    public void changeDelFlag(boolean delFlag) {
         this.delFlag = delFlag;
     }
 

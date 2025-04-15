@@ -1,15 +1,17 @@
 import React from "react";
 import {Routes, Route } from "react-router-dom";
 import IndexPage from "../Pages/IndexPage";
-import LoginPage from "../pages/login/LoginPage";
-import SignupStep1 from "../pages/login/SignupStep1";
+import LoginPage from "../Pages/login/LoginPage";
+import SignupStep1 from "../Pages/login/SignupStep1";
 import SignupStep2 from "../pages/login/SignupStep2";
 import SignupComplete from "../pages/login/SignupComplete";
-import Profile from "../pages/myPage/Profile";
+import Profile from "../Pages/myPage/Profile";
 import Wishlist from "../Pages/myPage/Wishlist";
-import Order from "../pages/myPage/Order";
-import MagazinePage from "../pages/magazine/MagazinePage";
-import MagazineDetail from "../pages/magazine/MagazineDetail"
+import Order from "../Pages/myPage/Order";
+import Mileage from "../Pages/myPage/Mileage";
+import MagazinePage from "../Pages/magazine/MagazinePage";
+import MagazineDetail from "../Pages/magazine/MagazineDetail"
+import ItemListPage from "../Pages/shop/ItemListPage";
 
 const Root = () => {
   return (
@@ -22,6 +24,8 @@ const Root = () => {
         <Route path="/mypage/profile" element={<Profile/>}/>
         <Route path="/mypage/wishlist" element={<Wishlist/>}/>
         <Route path="/mypage/order" element={<Order/>}/>
+        <Route path="/mypage/mileage" element={<Mileage/>}/>
+        <Route path="/shop" element={<ItemListPage/>}/>
         <Route path="/magazine" element={<MagazinePage/>}/>
         <Route path="/magazine/detail" element={<MagazineDetail/>}/>
         

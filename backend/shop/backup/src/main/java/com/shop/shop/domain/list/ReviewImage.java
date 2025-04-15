@@ -10,7 +10,8 @@ import lombok.*;
 @Builder
 public class ReviewImage {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_image_id")
     private Long id;
 

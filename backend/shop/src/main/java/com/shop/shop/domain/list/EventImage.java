@@ -10,7 +10,8 @@ import lombok.*;
 @Builder
 public class EventImage {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "event_image_id")
     private Long id;
 

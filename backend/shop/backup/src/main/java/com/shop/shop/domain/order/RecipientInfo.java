@@ -13,7 +13,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "Recipient_Info")
 public class RecipientInfo {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "recipient_id")
     private Long id;
 

@@ -34,7 +34,7 @@ public class MemberController {
         return ResponseEntity.ok(memberService.getAllMembers());
     }
 
-//     특정 회원 조회 (ID 기준)
+    //     특정 회원 조회 (ID 기준)
 //     /api/members/login 접속하게 되면 아래의 메서드에 매핑이 될 수 있다. --> 에러
 //     /api/members/id/3 == 이렇게 처리
     @GetMapping("/id/{id}")

@@ -37,7 +37,7 @@ public class MemberDTO {
         Map<String, Object> dataMap = new HashMap<>();
 
         dataMap.put("email", email);
-        dataMap.put("password",password);
+        dataMap.put("password", password);
         dataMap.put("memberName", memberName);
 //        dataMap.put("social", social);
         dataMap.put("memberShip", memberShip);

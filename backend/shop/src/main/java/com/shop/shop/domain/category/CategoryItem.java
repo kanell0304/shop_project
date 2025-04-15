@@ -10,7 +10,8 @@ import lombok.Getter;
 @Getter
 public class CategoryItem {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_item_id")
     private Long id;
 

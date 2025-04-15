@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -11,7 +12,7 @@ const LoginPage = () => {
     return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&]).{6,}$/.test(pw);
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     if (!email || !password) {
@@ -24,77 +25,100 @@ const LoginPage = () => {
       return;
     }
 
-    setError("");
-    navigate("/"); // 로그인 성공 시 메인 페이지로 이동
-  }
+    try {
+      const response = await axios.post("/api/member/login", {
+        email,
+        password,
+      });
+
+      const { accessToken, refreshToken } = response.data;
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+      setError("");
+      navigate("/");
+    } catch (err) {
+      if (err.response && err.response.status === 401) {
+        setError("이메일 또는 비밀번호가 올바르지 않습니다.");
+      } else {
+        setError("로그인 중 문제가 발생했습니다. 다시 시도해주세요.");
+      }
+    }
+  };
+
+  const handleKakaoLogin = async () => {
+    try {
+      const response = await axios.get("/api/oauth/kakao");
+      const { accessToken } = response.data;
+      localStorage.setItem("accessToken", accessToken);
+      navigate("/");
+    } catch (err) {
+      setError("카카오 로그인에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
 
   return (
-    <>
-      <Header />
+    <div className="loginBox">
+      <div className="text">
+        <h2>SIMPLICITY<br />SPEAKS</h2>
+        <p>WHAT YOU WEAR SAYS MORE THAN WORDS</p>
+      </div>
 
-      <main className="login-main">
-        <div className="login-container">
-          {/* 왼쪽 이미지 영역 */}
-          <div className="login-image">
-            <img src="/images/login/Mask group4.png" alt="로그인 이미지" />
+      <form onSubmit={handleLogin}>
+        <p className="loginLabel">LOGIN YOUR ACCOUNT</p>
+
+        <div>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="E-MAIL ADDRESS"
+          />
+        </div>
+
+        <div>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="PASSWORD"
+          />
+        </div>
+
+        {error && <p className="errorMessage">{error}</p>}
+
+        <div className="Find">
+          <div>
+            <button type="submit" className="loginBtn">
+              LOGIN
+            </button>
           </div>
 
-          {/* 오른쪽 로그인 박스 */}
-          <div className="login-box">
-            <h1>SIMPLICITY<br/>SPEAKS</h1>
-            <p>WHAT YOU WEAR SAYS MORE THAN WORDS</p>
+          <div className="login-or">OR</div>
 
-            <p className="login-label">LOGIN YOUR ACCOUNT</p>
-
-            <form onSubmit={handleLogin}>
-              <div>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="E-MAIL ADDRESS"
-                />
-              </div>
-
-              <div>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="PASSWORD"
-                />
-              </div>
-
-              {error && <p className="error-message">{error}</p>}
-
-              <div>
-                <button type="submit">LOGIN</button>
-              </div>
-
-              <div className="login-or">OR</div>
-
-              <div>
-                <button type="button">KAKAO LOGIN</button>
-              </div>
-            </form>
-
-            <div className="login-links">
-              <div>
-                <Link to="/signup/step1">CREATE ACCOUNT</Link>
-              </div>
-              <div>
-                FORGOT YOUR <Link to="/Find-email">E-MAIL?</Link>
-              </div>
-              <div>
-                FORGOT YOUR <Link to="/Reset-password">PASSWORD?</Link>
-              </div>
-            </div>
+          <div>
+            <button
+              type="button"
+              className="kakaoBtn"
+              onClick={handleKakaoLogin}
+            >
+              KAKAO LOGIN
+            </button>
           </div>
         </div>
-      </main>
+      </form>
 
-      <Footer/>
-    </>
+      <div className="loginLinks">
+        <div>z``
+          <Link to="/signup/step1">CREATE ACCOUNT</Link>
+        </div>
+        <div>
+          FORGOT YOUR <Link to="/Find-email">E-MAIL?</Link>
+        </div>
+        <div>
+          FORGOT YOUR <Link to="/Reset-password">PASSWORD?</Link>
+        </div>
+      </div>
+    </div>
   )
 }
 

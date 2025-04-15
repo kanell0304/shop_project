@@ -16,7 +16,8 @@ import java.util.List;
 @Table(name = "Wish_List")
 public class WishList {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "wish_list_id")
     private Long id;
 

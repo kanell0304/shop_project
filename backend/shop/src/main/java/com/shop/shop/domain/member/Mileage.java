@@ -16,7 +16,8 @@ import java.time.LocalDateTime;
 @Builder
 public class Mileage {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mileage_id")
     private Long id;
 

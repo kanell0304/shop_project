@@ -41,7 +41,7 @@ public class ItemController {
     public ResponseEntity<Page<ItemDTO>> getAllItems(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
-    ){
+    ) {
         Pageable pageable = PageRequest.of(page, size);
         return ResponseEntity.ok(itemService.getAllItems(pageable));
     }
@@ -55,9 +55,9 @@ public class ItemController {
         } catch (IllegalArgumentException e) {
             // 404 error
             Long itemId = itemService.getOne(id).getId();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("result","fail","error",e.getMessage()));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("result", "fail", "error", e.getMessage()));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("result","fail","error",e.getMessage()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("result", "fail", "error", e.getMessage()));
         }
     }
 
@@ -66,7 +66,7 @@ public class ItemController {
     public ResponseEntity<Page<ItemDTO>> getAllItemsWithImageAndOptionsAndInfo(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
-    ){
+    ) {
         Pageable pageable = PageRequest.of(page, size);
         return ResponseEntity.ok(itemService.getAllItemsWithImageAndOptionsAndInfo(pageable));
     }
@@ -76,13 +76,13 @@ public class ItemController {
     public ResponseEntity<?> getItemImages(@PathVariable String fileName) {
         try {
             ResponseEntity<Resource> imageResponse = itemService.getImageUrlByFileName(fileName);
-            if(imageResponse == null || !imageResponse.hasBody()){
+            if (imageResponse == null || !imageResponse.hasBody()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body(Map.of("result","fail","error","해당 파일을 찾을 수 없습니다."));
+                        .body(Map.of("result", "fail", "error", "해당 파일을 찾을 수 없습니다."));
             }
             return imageResponse;
-        }catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("result","fail","error",e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("result", "fail", "error", e.getMessage()));
         }
 
     }

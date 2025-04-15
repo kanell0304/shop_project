@@ -6,7 +6,7 @@ import MainPage from "../Pages/main/MainPage"
 const IndexPage = () => {
     return(
         <BasicLayout>
-          {/* <MainPage></MainPage> */}
+          <MainPage></MainPage>
         </BasicLayout>
     )
 }

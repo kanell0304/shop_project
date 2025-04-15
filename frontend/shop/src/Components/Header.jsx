@@ -14,9 +14,9 @@ const Header = () => {
   return (
     <header className='header'>
       <div className='innerWrap'>
-          <h1>
-            <Link to="/" className="logo">
-              <Logo className="logo" />
+          <h1 className='logo'>
+            <Link to="/">
+              <Logo/>
               <strong className='blind'>NØRD</strong>
             </Link>
           </h1>

@@ -16,7 +16,8 @@ import java.util.List;
 @AllArgsConstructor
 public class Cart {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cart_id")
     private Long id;
 

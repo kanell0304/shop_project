@@ -1,18 +1,16 @@
 import React from "react";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+import magD from "../../static/images/magazine/magazinedetail.png";
 
 const MagazineDetail = () => {
   return (
     <>
-      <Header/>
 
     {/* 왼쪽 */}
     <main className="magazineDetail">
         <section className="content">
-          <div className="image-section">
+          <div className="imageSection">
             <img
-              src="images/magazine/magazinedetail.png"
+              src={magD}
               alt="이서연 인터뷰 이미지"
             />
           </div>
@@ -59,11 +57,12 @@ const MagazineDetail = () => {
         </section>
 
         <div className="navigation">
-          PREV | LIST | NEXT
+         <span>PREV</span> | 
+         <span>LIST</span> | 
+         <span>NEXT</span>
         </div>
       </main>
 
-      <Footer/>
     </>
   )
 }

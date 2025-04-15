@@ -29,7 +29,7 @@ public class MemberDetails implements UserDetails {
     private final MemberShip memberShip;
     private final List<GrantedAuthority> authorities;
 
-    public MemberDetails(Member member){
+    public MemberDetails(Member member) {
         this.email = member.getEmail();
         this.password = member.getPassword();
         this.memberName = member.getMemberName();
@@ -46,7 +46,7 @@ public class MemberDetails implements UserDetails {
                 .collect(Collectors.toList());
     }
 
-    public MemberDetails(MemberDTO memberDTO){
+    public MemberDetails(MemberDTO memberDTO) {
         this.email = memberDTO.getEmail();
         this.password = memberDTO.getPassword();
         this.memberName = memberDTO.getMemberName();
@@ -63,7 +63,7 @@ public class MemberDetails implements UserDetails {
                 .collect(Collectors.toList());
     }
 
-////    public MemberDetails(String email, String password, String memberName, String phoneNumber, Address address, int stockMileage, LocalDateTime joinDate, boolean wtrSns, boolean social, boolean delFlag, MemberShip memberShip, List<GrantedAuthority> authorities) {
+    /// /    public MemberDetails(String email, String password, String memberName, String phoneNumber, Address address, int stockMileage, LocalDateTime joinDate, boolean wtrSns, boolean social, boolean delFlag, MemberShip memberShip, List<GrantedAuthority> authorities) {
 //    public MemberDetails(Member member) {
 //        this.email = member.getEmail();
 //        this.password = password;
@@ -78,7 +78,6 @@ public class MemberDetails implements UserDetails {
 //        this.memberShip = memberShip;
 //        this.authorities = authorities;
 //    }
-
     public MemberDTO toMemberDTO() {
         return new MemberDTO(
                 this.email,

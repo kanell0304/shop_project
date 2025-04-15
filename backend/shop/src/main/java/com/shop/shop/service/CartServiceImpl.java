@@ -19,7 +19,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class CartServiceImpl implements CartService{
+public class CartServiceImpl implements CartService {
 
     private final CartRepository cartRepository;
     private final MemberRepository memberRepository;
@@ -32,7 +32,7 @@ public class CartServiceImpl implements CartService{
         Item item = itemRepository.findById(cartDTO.getItemId()).orElseThrow(() -> new RuntimeException("해당 상품을 찾을 수 없습니다."));
         ItemOption option = itemOptionRepository.findById(optionId).orElseThrow(() -> new IllegalArgumentException("해당 옵션이 존재하지 않습니다."));
 
-        Cart duplicatePrevention  = cartRepository.findByMemberIdAndItemId(member.getId(), item.getId());
+        Cart duplicatePrevention = cartRepository.findByMemberIdAndItemId(member.getId(), item.getId());
 
         if (duplicatePrevention != null) {
             throw new RuntimeException("이미 등록된 상품입니다.");

@@ -12,11 +12,10 @@ const Footer = () => {
             <strong className='blind'>NØRD</strong>
           </h2>
           <nav className="f_siteMap">
-            <ul>
               <ul className="f_cartegory">
-                <li>
+              <li>
                   <Link to="/shop">SHOP</Link>
-                  <ul>
+                  <ul className="f_subCartegory">
                     <li><Link to="/">OUTWEAR</Link></li>
                     <li><Link to="/">TOP</Link></li>
                     <li><Link to="/">KNITWEAR</Link></li>
@@ -27,7 +26,6 @@ const Footer = () => {
                 <li><Link to="/magazine">MAGAZINE</Link></li>
                 <li><Link to="/event">EVENT</Link></li>
               </ul>
-            </ul>
           </nav>
         </div>
         <div className="f_content_botton">

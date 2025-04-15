@@ -13,23 +13,23 @@ import java.io.PrintWriter;
 import java.util.Map;
 
 @Log4j2
-public class APILoginFailHandler implements AuthenticationFailureHandler{
+public class APILoginFailHandler implements AuthenticationFailureHandler {
 
-  @Override
-  public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
-      AuthenticationException exception) throws IOException, ServletException {
+    @Override
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
+                                        AuthenticationException exception) throws IOException, ServletException {
 
-    log.info("Login fail....." + exception);
+        log.info("Login fail....." + exception);
 
-    Gson gson = new Gson();
+        Gson gson = new Gson();
 
-    String jsonStr = gson.toJson(Map.of("error", "ERROR_LOGIN"));
+        String jsonStr = gson.toJson(Map.of("error", "ERROR_LOGIN"));
 
-    response.setContentType("application/json");
-    PrintWriter printWriter = response.getWriter();
-    printWriter.println(jsonStr);
-    printWriter.close();
+        response.setContentType("application/json");
+        PrintWriter printWriter = response.getWriter();
+        printWriter.println(jsonStr);
+        printWriter.close();
 
-  }
+    }
 
 }

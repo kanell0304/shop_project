@@ -29,63 +29,62 @@ import java.util.Arrays;
 @EnableMethodSecurity
 public class CustomSecurityConfig {
 
-  @Bean
-  public PasswordEncoder passwordEncoder(){
-    return new BCryptPasswordEncoder();
-  }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
-
-  @Bean
-  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    
-    log.info("---------------------security config---------------------------");
-
-    http
-            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/api/member/**").permitAll() // 로그인 요청 완전 허용
-                    .requestMatchers("/api/items/**").permitAll()
-                    .requestMatchers("/api/category/**").permitAll()
-                    .requestMatchers("/api/cart/**").permitAll()
-                    .requestMatchers("/api/wish/**").permitAll()
-                    .requestMatchers("/api/orders/**").permitAll()
-                    .requestMatchers("/api/mileage/**").permitAll()
-                    .requestMatchers("/api/public/**").permitAll()
-                    .requestMatchers("/api/deliveries/**").permitAll()
-                    .requestMatchers("/api/admin/**").hasAnyRole("MANAGER","ADMIN") // 여러개
-                    .anyRequest().authenticated()
-            )
-            .addFilterBefore(new JWTCheckFilter(), UsernamePasswordAuthenticationFilter.class)
-            .anonymous(anonymous -> anonymous.disable())
-            .csrf(csrf -> csrf.disable())
-            .httpBasic(httpBasic -> httpBasic.disable())
-            .formLogin(form -> form.disable())
-
-            .exceptionHandling(exception -> exception.accessDeniedHandler(new CustomAccessDeniedHandler()));
-
-    return http.build();
-  }
-
-  @Bean
-  public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-    return authenticationConfiguration.getAuthenticationManager();
-  }
 
     @Bean
-  public CorsConfigurationSource corsConfigurationSource() {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-    CorsConfiguration configuration = new CorsConfiguration();
+        log.info("---------------------security config---------------------------");
 
-    configuration.setAllowedOriginPatterns(Arrays.asList("*"));
-    configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE"));
-    configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
-    configuration.setAllowCredentials(true);
+        http
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/member/**").permitAll() // 로그인 요청 완전 허용
+                        .requestMatchers("/api/items/**").permitAll()
+                        .requestMatchers("/api/category/**").permitAll()
+                        .requestMatchers("/api/cart/**").permitAll()
+                        .requestMatchers("/api/wish/**").permitAll()
+                        .requestMatchers("/api/orders/**").permitAll()
+                        .requestMatchers("/api/public/**").permitAll()
+                        .requestMatchers("/api/deliveries/**").permitAll()
+                        .requestMatchers("/api/admin/**").hasAnyRole("MANAGER", "ADMIN") // 여러개
+                        .anyRequest().authenticated()
+                )
+                .addFilterBefore(new JWTCheckFilter(), UsernamePasswordAuthenticationFilter.class)
+                .anonymous(anonymous -> anonymous.disable())
+                .csrf(csrf -> csrf.disable())
+                .httpBasic(httpBasic -> httpBasic.disable())
+                .formLogin(form -> form.disable())
 
-    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    source.registerCorsConfiguration("/**", configuration);
+                .exceptionHandling(exception -> exception.accessDeniedHandler(new CustomAccessDeniedHandler()));
 
-    return source;
-  }
-  
+        return http.build();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+
+        return source;
+    }
+
 }

@@ -50,15 +50,15 @@ public class QnAList {
     @JoinColumn(name = "item_id")
     private Item item;
 
-    public void changeTitle (String title) {
+    public void changeTitle(String title) {
         this.title = title;
     }
 
-    public void changeContent (String content) {
+    public void changeContent(String content) {
         this.content = content;
     }
 
-    public void changeAnswer (boolean answer) {
+    public void changeAnswer(boolean answer) {
         this.answer = answer;
     }
 

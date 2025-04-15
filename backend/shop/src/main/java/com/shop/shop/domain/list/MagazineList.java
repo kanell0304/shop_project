@@ -17,7 +17,8 @@ import java.util.List;
 @Builder
 public class MagazineList {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "magazine_list_id")
     private Long id;
 
@@ -45,7 +46,7 @@ public class MagazineList {
     }
 
     // 이미지 파일명 추가
-    public void addImageString(String fileName){
+    public void addImageString(String fileName) {
         MagazineImage magazineImage = MagazineImage.builder()
                 .fileName(fileName)
                 .build();
@@ -57,15 +58,15 @@ public class MagazineList {
         this.images.clear();
     }
 
-    public void changeTitle (String title) {
+    public void changeTitle(String title) {
         this.title = title;
     }
 
-    public void changeContent (String content) {
+    public void changeContent(String content) {
         this.content = content;
     }
 
-    public void changeViewCount (int viewCount) {
+    public void changeViewCount(int viewCount) {
         this.viewCount = viewCount;
     }
 

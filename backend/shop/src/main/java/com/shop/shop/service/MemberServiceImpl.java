@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Log4j2
-public class MemberServiceImpl implements MemberService{
+public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
@@ -93,7 +93,7 @@ public class MemberServiceImpl implements MemberService{
     private String makeTempPassword() {
         StringBuffer buffer = new StringBuffer();
         for (int i = 0; i < 10; i++) {
-            buffer.append((char)((int)(Math.random()*55) + 65));
+            buffer.append((char) ((int) (Math.random() * 55) + 65));
             // 아스키 코드표 : 65~119 사이의 문자가 랜덤으로 10자리 생성 -> 임시비밀번호
         }
         return buffer.toString();
@@ -128,7 +128,7 @@ public class MemberServiceImpl implements MemberService{
     private Member makeSocialMember(String email) {
         String tempPassword = makeTempPassword();
         log.info("tempPassword : " + tempPassword);
-        int randomId = (int) (Math.random()*1000 + 1);
+        int randomId = (int) (Math.random() * 1000 + 1);
         String memberName = "소셜회원#" + randomId;
 
         Member member = Member.builder()
