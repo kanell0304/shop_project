@@ -1,6 +1,5 @@
 import React from "react";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+import { Link } from "react-router-dom";
 
 const ItemListPage = () => {
   const items = [
@@ -31,74 +30,70 @@ const ItemListPage = () => {
   ];
 
   const handleAddCart = (id) => {
-    console.log("장바구니 추가:", items.item_id);
-  }
+    console.log("장바구니 추가:", id);
+  };
 
   const handleAddWishlist = (id) => {
-    console.log("관심상품 추가:", items.item_id);
-  }
+    console.log("관심상품 추가:", id);
+  };
 
   return (
-    <>
-      <Header/>
-
-      <div className="ItemList">
-        {/* 상품 리스트 */}
-        <div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
-          {items.map((item) => (
-            <div key={item.item_id} className="item-box">
-              <img src={item.image} alt={item.name}/>
-              <div className="buttons">
-                <button onClick={() => handleAddWishlist(item.item_id)}>WISH</button>
-                <button onClick={() => handleAddCart(item.item_id)}>CART</button>
-              </div>
-              <div>{item.name}</div>
-              <div>{item.salePrice}</div>
-              <div>{item.originalPrice}</div>
-              <div>{item.discount}</div>
+    <div className="itemListContainer">
+      <div className="itemListSection">
+        {items.map((item) => (
+          <div key={item.item_id} className="itemCard">
+            <div className="itemImageWrapper">
+              <img src={item.image} alt={item.name} className="itemImage" />
             </div>
-          ))}
-        </div>
-
-        {/* 오른쪽 사이드바 */}
-        <div>
-          <div>
-            <input type="text" placeholder="SEARCH TEXT"/>
-            <button>SEARCH</button>
-          </div>
-
-          <div className="category">
-            <h3>SHOP</h3>
-            <ul>
-              <li>OUTWEAR</li>
-              <li>TOP</li>
-              <li>KNITWEAR</li>
-              <li>BOTTOM</li>
-              <li>ACC</li>
-            </ul>
-          </div>
-
-          <div className="pagination">
-            <div>TOTAL 30</div>
-            <div>
-              <button>NEWEST</button>
-              <button>PRICE HIGH</button>
-              <button>PRICE LOW</button>
+            <div className="itemButtonGroup">
+              <button onClick={() => handleAddWishlist(item.item_id)}>WISH</button>
+              <button onClick={() => handleAddCart(item.item_id)}>CART</button>
             </div>
-            <div>
-              <button>1</button>
-              <button>2</button>
-              <button>3</button>
-              <button>4</button>
-              <button>5</button>
-              <button>NEXT</button>
+            <div className="itemInfo">
+              <div className="itemName">{item.name}</div>
+              <div className="itemSalePrice">{item.salePrice}</div>
+              <div className="itemOriginalPrice">{item.originalPrice}</div>
+              <div className="itemDiscount">{item.discount}</div>
             </div>
           </div>
-        </div>
+        ))}
       </div>
 
-      <Footer/>
-    </>
+      <aside className="itemSidebar">
+        <div className="searchBox">
+          <input type="text" placeholder="SEARCH TEXT" />
+          <button>SEARCH</button>
+        </div>
+
+        <div className="categoryBox">
+          <h3 className="categoryTitle">SHOP</h3>
+          <ul className="categoryList">
+            <li>OUTWEAR</li>
+            <li>TOP</li>
+            <li>KNITWEAR</li>
+            <li>BOTTOM</li>
+            <li>ACC</li>
+          </ul>
+        </div>
+
+        <div className="paginationSection">
+          <div className="totalCount">TOTAL 30</div>
+          <div className="sortButtons">
+            <button>NEWEST</button>
+            <button>PRICE HIGH</button>
+            <button>PRICE LOW</button>
+          </div>
+          <div className="pageLinks">
+            <Link to="?page=1">1</Link>
+            <Link to="?page=2">2</Link>
+            <Link to="?page=3">3</Link>
+            <Link to="?page=4">4</Link>
+            <Link to="?page=5">5</Link>
+            <Link to="?page=next">NEXT</Link>
+          </div>
+        </div>
+      </aside>
+    </div>
   )
 }
 

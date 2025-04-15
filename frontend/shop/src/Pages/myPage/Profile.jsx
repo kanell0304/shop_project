@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import MyPageSidebar from "../components/MyPageSidebar";
+import MyPageSidebar from '../../Components/MyPageSidebar';
 
 const Profile = () => {
   const [formData, setFormData] = useState({
@@ -18,70 +18,87 @@ const Profile = () => {
     setFormData((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
-    }))
-  }
+    }));
+  };
 
   const handleWithDraw = () => {
     console.log("회원 탈퇴 요청");
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("제출된 데이터:", formData);
-  }
+  };
 
   return (
     <>
-      <Header/>
-
+      <div className="profileContainer">
         <MyPageSidebar/>
 
-        <div>
-          <h2>개인정보</h2>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label>아이디(이메일)</label>
-              <input type="email" name="email" value={formData.email} readOnly />
+        <div className="profileFormContainer">
+          <h2 className="profileTitle">개인정보</h2>
+
+          <form onSubmit={handleSubmit} className="profileForm">
+            <div className="formGroup">
+              <label className="formLabel">아이디(이메일)</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                readOnly
+                className="formInput"
+              />
             </div>
 
-            <div>
-              <label>비밀번호</label>
+            <div className="formGroup">
+              <label className="formLabel">비밀번호</label>
               <input
                 type="password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="비밀번호를 입력해주세요."
+                className="formInput"
               />
             </div>
 
-            <div>
-              <label>이름</label>
-              <input type="text" name="name" value={formData.name} readOnly />
+            <div className="formGroup">
+              <label className="formLabel">이름</label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                readOnly
+                className="formInput"
+              />
             </div>
 
-            <div>
-              <label>연락처</label>
+            <div className="formGroup">
+              <label className="formLabel">연락처</label>
               <input
                 type="text"
                 name="phoneNum"
                 value={formData.phoneNum}
                 onChange={handleChange}
                 placeholder="010-0000-0000"
+                className="formInput"
               />
             </div>
 
-            <div>
-              <label>주소</label>
-              <div>
+            <div className="formGroup">
+              <label className="formLabel">주소</label>
+              <div className="addressBox">
                 <input
                   type="text"
                   name="zip_code"
                   value={formData.zip_code}
                   onChange={handleChange}
                   placeholder="우편번호"
+                  className="zipCodeInput"
                 />
-                <button type="button">주소 검색</button>
+                <button type="button" className="searchAddressButton">
+                  주소 검색
+                </button>
               </div>
               <input
                 type="text"
@@ -89,6 +106,7 @@ const Profile = () => {
                 value={formData.address}
                 onChange={handleChange}
                 placeholder="주소"
+                className="formInput"
               />
               <input
                 type="text"
@@ -96,10 +114,11 @@ const Profile = () => {
                 value={formData.detailAddress}
                 onChange={handleChange}
                 placeholder="상세주소"
+                className="formInput"
               />
             </div>
 
-            <div>
+            <div className="checkboxGroup">
               <label>
                 <input
                   type="checkbox"
@@ -111,7 +130,7 @@ const Profile = () => {
               </label>
             </div>
 
-            <div>
+            <div className="withdrawNotice">
               <p><strong>회원 탈퇴 시 다음 사항을 확인해주세요.</strong></p>
               <ul>
                 <li>회원 탈퇴 시 1개월 동안 같은 이메일로는 가입이 불가합니다.</li>
@@ -125,17 +144,17 @@ const Profile = () => {
               </ul>
             </div>
 
-            <div>
-              <button type="button" onClick={handleWithDraw}>
+            <div className="buttonGroup">
+              <button type="button" onClick={handleWithDraw} className="withdrawButton">
                 회원 탈퇴
               </button>
+              <button type="submit" className="submitButton">
+                변경사항 저장
+              </button>
             </div>
-
-            <button type="submit">변경사항 저장</button>
           </form>
         </div>
-
-      <Footer/>
+      </div>
     </>
   )
 }

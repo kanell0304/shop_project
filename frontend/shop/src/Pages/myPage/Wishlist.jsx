@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import MyPageSidebar from "../components/MyPageSidebar";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import MyPageSidebar from '../../Components/MyPageSidebar';
+
 
 const Wishlist = () => {
   const wishlistItems = [
@@ -34,8 +33,6 @@ const Wishlist = () => {
 
   return (
     <>
-      <Header/>
-
       <div className="mypageContainer">
         <MyPageSidebar/>
 
@@ -111,8 +108,6 @@ const Wishlist = () => {
           </div>
         </div>
       </div>
-
-      <Footer/>
     </>
   )
 }

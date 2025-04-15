@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import MyPageSidebar from "../components/MyPageSidebar";
+import MyPageSidebar from '../../Components/MyPageSidebar';
 
 const Order = () => {
   const orderList = [
@@ -20,7 +18,6 @@ const Order = () => {
 
   return (
     <>
-      <Header/>
       <div className="mypageContainer">
         <MyPageSidebar/>
 
@@ -96,7 +93,6 @@ const Order = () => {
           </div>
         </div>
       </div>
-      <Footer/>
     </>
   )
 }

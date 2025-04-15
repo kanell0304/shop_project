@@ -8,8 +8,10 @@ import SignupComplete from "../Pages/login/SignupComplete";
 import Profile from "../Pages/myPage/Profile";
 import Wishlist from "../Pages/myPage/Wishlist";
 import Order from "../Pages/myPage/Order";
+import Mileage from "../Pages/myPage/Mileage";
 import MagazinePage from "../Pages/magazine/MagazinePage";
 import MagazineDetail from "../Pages/magazine/MagazineDetail"
+import ItemListPage from "../Pages/shop/ItemListPage";
 
 const Root = () => {
   return (
@@ -22,6 +24,8 @@ const Root = () => {
         <Route path="/mypage/profile" element={<Profile/>}/>
         <Route path="/mypage/wishlist" element={<Wishlist/>}/>
         <Route path="/mypage/order" element={<Order/>}/>
+        <Route path="/mypage/mileage" element={<Mileage/>}/>
+        <Route path="/shop/itemlist" element={<ItemListPage/>}/>
         <Route path="/magazine" element={<MagazinePage/>}/>
         <Route path="/magazine/detail" element={<MagazineDetail/>}/>
         
