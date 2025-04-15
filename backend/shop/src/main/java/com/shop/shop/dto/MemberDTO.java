@@ -39,7 +39,7 @@ public class MemberDTO extends User {
         super(
                 email,
                 password,
-                roleNames.stream().map(str -> new SimpleGrantedAuthority("ROLE_"+str)).collect(Collectors.toList()));
+                roleNames.stream().map(str -> new SimpleGrantedAuthority("ROLE_" + str)).collect(Collectors.toList()));
 
         this.email = email;
         this.password = password;
@@ -60,7 +60,7 @@ public class MemberDTO extends User {
         Map<String, Object> dataMap = new HashMap<>();
 
         dataMap.put("email", email);
-        dataMap.put("password",password);
+        dataMap.put("password", password);
         dataMap.put("memberName", memberName);
         dataMap.put("social", social);
         dataMap.put("roleNames", roleNames);

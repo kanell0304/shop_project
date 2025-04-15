@@ -22,11 +22,11 @@ const SignupStep1 = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("폼 제출");
     if (!Terms || !Agreement || !Over14) {
       setError("필수 항목을 확인해주세요!");
       return;
     }
-    console.log("이동 준비됨", { Terms, Agreement, Over14 });
     setError("");
     navigate("/signup/step2");
   }

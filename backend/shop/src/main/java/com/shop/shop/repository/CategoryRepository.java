@@ -13,7 +13,7 @@ import java.util.List;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-    
+
     // 모든 부모 카테고리 조회
     @EntityGraph(attributePaths = {"child"})
     @Query("SELECT c FROM Category c WHERE c.parent IS NULL AND c.viewStatus = false")

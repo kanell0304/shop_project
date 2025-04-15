@@ -20,41 +20,41 @@ import java.util.stream.Collectors;
 @Service
 @Log4j2
 @RequiredArgsConstructor
-public class CustomUserDetailsService implements UserDetailsService{
+public class CustomUserDetailsService implements UserDetailsService {
 
-  private final MemberRepository memberRepository;
-  private final PasswordEncoder passwordEncoder;
+    private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
 
-  @Override
-  public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-    log.info("----------------loadUserByUsername-----------------------------");
+        log.info("----------------loadUserByUsername-----------------------------");
 
-      Member member = memberRepository.getWithRoles(email);
+        Member member = memberRepository.getWithRoles(email);
 
-      log.info("회원정보를 찾았습니다.");
+        log.info("회원정보를 찾았습니다.");
 
-      MemberDTO memberDTO = new MemberDTO(
-              member.getEmail(),
-              member.getPassword(),
-              member.getMemberName(),
-              member.getPhoneNumber(),
-              member.getAddress(),
-              member.getStockMileage(),
-              member.getJoinDate(),
-              member.isWtrSns(),
-              member.isSocial(),
-              member.isDelFlag(),
-              member.getMemberShip(),
-              member.getMemberRoleList().stream()
-                      .map(memberRole -> memberRole.name())
-                      .collect(Collectors.toList())
-      );
+        MemberDTO memberDTO = new MemberDTO(
+                member.getEmail(),
+                member.getPassword(),
+                member.getMemberName(),
+                member.getPhoneNumber(),
+                member.getAddress(),
+                member.getStockMileage(),
+                member.getJoinDate(),
+                member.isWtrSns(),
+                member.isSocial(),
+                member.isDelFlag(),
+                member.getMemberShip(),
+                member.getMemberRoleList().stream()
+                        .map(memberRole -> memberRole.name())
+                        .collect(Collectors.toList())
+        );
 
-      log.info(memberDTO);
+        log.info(memberDTO);
 
-      return new MemberDetails(memberDTO);
+        return new MemberDetails(memberDTO);
 
-  }
+    }
 
 }

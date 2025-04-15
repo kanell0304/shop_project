@@ -13,5 +13,4 @@ public interface CategoryItemService {
     CategoryItemDTO registerCategoryItem(Item item, Long categoryId);
 
 
-
 }

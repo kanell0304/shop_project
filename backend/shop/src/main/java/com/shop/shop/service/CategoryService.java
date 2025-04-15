@@ -11,10 +11,13 @@ import java.util.List;
 public interface CategoryService {
 
     CategoryDTO registerCategory(CategoryDTO categoryDTO);
+
     CategoryDTO editCategory(CategoryDTO categoryDTO);
+
     void deleteCategory(Long id);
 
     public Page<List<Category>> getAllCategory(Pageable pageable);
+
     public Page<Category> getAllItemsFromCategory(Pageable pageable, Long categoryId);
 
 }

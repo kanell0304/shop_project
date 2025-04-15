@@ -18,7 +18,8 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     // item 기본정보 + 이미지 목록 (옵션x)
     @EntityGraph(attributePaths = {"images"})
-    @Query("SELECT i FROM Item i WHERE i.delFlag = false") // 삭제 된거 제외
+    @Query("SELECT i FROM Item i WHERE i.delFlag = false")
+    // 삭제 된거 제외
     Page<Item> findAllWithImages(Pageable pageable);
 
     // ItemInfo (ElementCollection) 조회

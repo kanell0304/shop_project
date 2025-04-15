@@ -47,7 +47,7 @@ public class WishListDTO {
                 .orElse(null);
     }
 
-    public void changeItemImage (String itemImage) {
+    public void changeItemImage(String itemImage) {
         this.itemImage = itemImage;
     }
 

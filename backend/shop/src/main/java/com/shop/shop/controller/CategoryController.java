@@ -100,7 +100,7 @@ public class CategoryController {
     public ResponseEntity<Map<String, String>> registerCategoryItem(
             @PathVariable("itemId") Long itemId,
             @PathVariable("categoryId") Long categoryId
-            ) {
+    ) {
         try {
             Item item = itemRepository.findById(itemId).orElseThrow(() -> new RuntimeException("해당 상품이 존재하지 않습니다."));
             CategoryItemDTO categoryItemDTO = categoryItemService.registerCategoryItem(item, categoryId); // 카테고리에 해당 아이템 등록

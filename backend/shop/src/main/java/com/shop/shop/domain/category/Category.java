@@ -15,7 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 public class Category {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
     private Long id;
     private String categoryName; // 카테고리 이름
@@ -38,7 +39,7 @@ public class Category {
     @Column(name = "view_status")
     private boolean viewStatus;
 
-    public void addChild(Category newChild){
+    public void addChild(Category newChild) {
         this.child.add(newChild); // 하위 카테고리 리스트에 새로운 자식 카테고리 추가
         newChild.changeParent(this); // 변경된 this(=category) 로 다시 설정
     }

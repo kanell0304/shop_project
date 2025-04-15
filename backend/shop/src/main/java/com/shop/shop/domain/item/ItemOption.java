@@ -43,14 +43,14 @@ public class ItemOption {
     }
 
     // 재고 증가
-    public void addStock(int qty){
+    public void addStock(int qty) {
         this.stockQty += qty;
     }
 
     // 재고 삭제
     public void removeStock(int qty) {
         int remainingStock = this.stockQty - qty;
-        if(remainingStock < 0){
+        if (remainingStock < 0) {
             throw new NotEnoughStockException("need more stock");
         }
         this.stockQty = remainingStock;

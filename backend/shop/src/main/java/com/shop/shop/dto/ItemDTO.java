@@ -94,7 +94,7 @@ public class ItemDTO {
     // 전체 정보 다 가져오는 생성자
     public ItemDTO(Item item, List<ItemImage> images, List<ItemOption> options, List<ItemInfo> infoList) {
         this.id = item.getId();
-        this.name= item.getName();
+        this.name = item.getName();
         this.description = item.getDescription();
         this.price = item.getPrice();
         this.totalScore = item.getTotalScore();

@@ -25,7 +25,7 @@ public class SocialController {
         Map<String, Object> claims = memberDTO.getClaims(); // map 형식 변환
 
         String jwtAccessToken = JWTUtil.generateToken(claims, 10);
-        String jwtRefreshToken = JWTUtil.generateToken(claims, 60*24);
+        String jwtRefreshToken = JWTUtil.generateToken(claims, 60 * 24);
 
         // 현재 내 서버에서 accessToken, refreshToken 발급 받아서 추가
         claims.put("accessToken", jwtAccessToken);

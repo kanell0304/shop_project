@@ -17,7 +17,8 @@ import java.time.LocalDateTime;
 @Builder
 public class ReviewList {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_list_id")
     private Long id;
 
@@ -38,15 +39,15 @@ public class ReviewList {
     @JoinColumn(name = "item_id")
     private Item item;
 
-    public void changeTitle (String title) {
+    public void changeTitle(String title) {
         this.title = title;
     }
 
-    public void changeContent (String content) {
+    public void changeContent(String content) {
         this.content = content;
     }
 
-    public void changeScore (int score) {
+    public void changeScore(int score) {
         this.score = score;
     }
 

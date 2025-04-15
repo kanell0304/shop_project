@@ -18,6 +18,12 @@ const SignupStep2 = () => {
     return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&]).{6,}$/.test(pw);
   };
 
+  const handleFindAddress = () => {
+    console.log("주소 찾기 버튼 클릭");
+    setZipcode("12345");
+    setAddress("서울시 강남구");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 

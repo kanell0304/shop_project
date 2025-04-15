@@ -12,22 +12,22 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 
-public class CustomAccessDeniedHandler implements AccessDeniedHandler{
+public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
-  @Override
-  public void handle(HttpServletRequest request, HttpServletResponse response,
-      AccessDeniedException accessDeniedException) throws IOException, ServletException {
+    @Override
+    public void handle(HttpServletRequest request, HttpServletResponse response,
+                       AccessDeniedException accessDeniedException) throws IOException, ServletException {
 
-    Gson gson = new Gson();
+        Gson gson = new Gson();
 
-    String jsonStr = gson.toJson(Map.of("error", "ERROR_ACCESSDENIED"));
+        String jsonStr = gson.toJson(Map.of("error", "ERROR_ACCESSDENIED"));
 
-    response.setContentType("application/json");
-    response.setStatus(HttpStatus.FORBIDDEN.value());
-    PrintWriter printWriter = response.getWriter();
-    printWriter.println(jsonStr);
-    printWriter.close();
+        response.setContentType("application/json");
+        response.setStatus(HttpStatus.FORBIDDEN.value());
+        PrintWriter printWriter = response.getWriter();
+        printWriter.println(jsonStr);
+        printWriter.close();
 
-  }
+    }
 
 }

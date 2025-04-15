@@ -13,7 +13,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Delivery {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "delivery_id")
     private Long id;
 
@@ -35,11 +36,11 @@ public class Delivery {
         this.address = address;
     }
 
-    public void changeStatus (DeliveryStatus status) {
+    public void changeStatus(DeliveryStatus status) {
         this.status = status;
     }
 
-    public void changeTransportNumber (int transportNumber) {
+    public void changeTransportNumber(int transportNumber) {
         this.transportNumber = transportNumber;
     }
 

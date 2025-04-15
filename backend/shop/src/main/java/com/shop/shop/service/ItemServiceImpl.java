@@ -133,9 +133,9 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public ResponseEntity<Resource> getImageUrlByFileName(String fileName) {
         Optional<ItemImage> image = itemImageRepository.findByFileName(fileName);
-                if (image.isEmpty()) {
-                    return null;
-                }
+        if (image.isEmpty()) {
+            return null;
+        }
         return fileUtil.getFile(fileName);
     }
 

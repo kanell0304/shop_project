@@ -11,8 +11,9 @@ import lombok.*;
 @Table(name = "Item_Image")
 public class ItemImage {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="item_image_id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "item_image_id")
     private Long id;
     private String fileName;
 
