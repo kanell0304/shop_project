@@ -1,35 +1,48 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import MyPageSidebar from '../../Components/MyPageSidebar';
 
-const Mileage = () => {
+const mileageRate = {
+  BRONZE: 1,
+  SILVER: 2,
+  GOLD: 3,
+  PLATINUM: 5,
+};
+
+const Mileage = ({ user }) => {
+  const { userName, membership } = user;
 
   const mileageData = [
-    { 
-     date: '2025.04.08', 
-     orderNumber: '000000', 
-     description: '블루 스웨트 집업 외 1', 
-     change: '+50P', 
-     current: '560P', 
-     img: '/img/product.png'
+    {
+      date: '2025.04.08',
+      orderNumber: '000000',
+      description: '블루 스웨트 집업 외 1',
+      change: '+50P',
+      current: '560P',
+      img: '',
     },
   ];
 
   return (
     <div className="mileagePage">
+      <MyPageSidebar userName={userName} membership={membership} />
+
       <div className="title">마일리지</div>
 
       <div className="membershipInfo">
-        <div className="membershipLevel">BRONZE</div>
-        <p>현재 고객님은 구매금액의 0.1% 적립 혜택을 받으시고 계십니다.</p>
+        <div className="membershipLevel">{membership}</div>
+        <p>
+          현재 고객님은 <strong>{mileageRate[membership]}%</strong> 마일리지 적립 혜택을
+          받으시고 계십니다.
+        </p>
       </div>
 
       <div className="searchFilter">
-       <input type="date" className="dateInput" placeholder="조회 기간 시작일"/>
-       <span className="dateDivider">~</span>
-       <input type="date" className="dateInput" placeholder="조회 기간 종료일"/>
-       <button className="searchButton">검색</button>
+        <input type="date" className="dateInput" />
+        <span className="dateDivider">~</span>
+        <input type="date" className="dateInput" />
+        <button className="searchButton">검색</button>
       </div>
-
 
       <table className="mileageTable">
         <thead>
@@ -45,7 +58,7 @@ const Mileage = () => {
             <tr key={index}>
               <td className="mileageDate">{item.date}</td>
               <td className="mileageOrder">
-                <img src={item.img} alt="상품 이미지" className="orderImage"/>
+                <img src={item.img} alt="상품 이미지" className="orderImage" />
                 <div className="orderInfo">
                   <div>주문번호 : {item.orderNumber}</div>
                   <div>{item.description}</div>

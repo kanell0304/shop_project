@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom';
 
 const MyPageSidebar = ({ userName, membership }) => {
-  const membershipLevels = {
+  const membershipGrade = {
     BRONZE: "브론즈",
     SILVER: "실버",
     GOLD: "골드",
@@ -20,7 +20,7 @@ const MyPageSidebar = ({ userName, membership }) => {
   return (
     <aside className="sidebar">
       <h2>MYPAGE</h2>
-      <p>{membershipLevels[membership]}등급</p>
+      <p>{membershipGrade[membership]}등급</p>
       <p>{userName} 고객님 반갑습니다.</p>
       <nav className="siderbarMenu">
         <ul>

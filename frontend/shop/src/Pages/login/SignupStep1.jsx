@@ -26,7 +26,8 @@ const SignupStep1 = () => {
       setError("필수 항목을 확인해주세요!");
       return;
     }
-    setError();
+    console.log("이동 준비됨", { Terms, Agreement, Over14 });
+    setError("");
     navigate("/signup/step2");
   }
 
