@@ -60,7 +60,7 @@ const LoginPage = () => {
   };
 
   return (
-    <BasicLayout>
+  <BasicLayout>
   <div className="loginContainer">
     {/* 왼쪽 이미지 박스 */}
     <div className="imageBox">
@@ -98,28 +98,14 @@ const LoginPage = () => {
 
         {error && <p className="errorMessage">{error}</p>}
 
-        <div className="Find">
-          <div>
-            <button type="submit" className="loginBtn">
-              LOGIN
-            </button>
-          </div>
-
+        <div className="loginLinks">
+          <button type="button" className="bigBtn bold">LOGIN</button>
           <div className="login-or">OR</div>
-
-          <div>
-            <button
-              type="button"
-              className="kakaoBtn"
-              onClick={handleKakaoLogin}
-            >
-              KAKAO LOGIN
-            </button>
-          </div>
+          <button type="button" className="bigBtn bold kakao" onClick={handleKakaoLogin}>KAKAO LOGIN</button>
         </div>
       </form>
 
-      <div className="loginLinks">
+      <div className="findLinks">
         <div>
           <Link to="/signup/step1">CREATE ACCOUNT</Link>
         </div>
@@ -132,7 +118,7 @@ const LoginPage = () => {
       </div>
       </div>
     </div>
-  </div>  
+  </div>
   </BasicLayout>
   )
 }
