@@ -1,0 +1,132 @@
+@use "basic";
+@use "common";
+
+.loginContainer {
+  display: flex;
+  width: 1920px;
+  height: 100vh;
+  font-family: var(--font-main);
+}
+
+.imageBox {
+  width: 960px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.imageBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.loginBox {
+  width: 960px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.setting {
+  width: 420px;
+  height: 484px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.text h2 {
+  font-size: var(--h2);
+  font-weight: 800;
+  margin-bottom: 6px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-align: left;
+}
+
+.text p {
+  font-size: var(--text-small);
+  color: var(--charcoal-grey);
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.loginLabel {
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  height: 39px;
+  padding: 8px;
+  margin-bottom: 10px;
+  font-size: var(--text-base);
+  border: 1px solid var(--ash-white);
+  color: var(--charcoal-grey);
+  box-sizing: border-box;
+}
+
+.loginBtn {
+  width: 100%;
+  height: 39px;
+  background-color: var(--deep-onyx);
+  color: var(--ash-white);
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.loginBtn:hover {
+  background-color: var(--charcoal-grey);
+}
+
+.login-or {
+  font-size: var(--h5);
+  color: var(--charcoal-grey);
+  font-weight: bold;
+  text-align: center;
+  margin: 5px 0;
+}
+
+.kakaoBtn {
+  width: 100%;
+  height: 39px;
+  background-color: #FEE500;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  color: #3a1d1d;
+}
+
+.kakaoBtn:hover {
+  background-color: #ffdd00;
+}
+
+.errorMessage {
+  color: red;
+  font-size: var(--text-small);
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.loginLinks {
+  margin-top: 20px;
+  font-size: var(--text-small);
+  color: var(--placeholder);
+  text-align: left;
+  width: 100%; 
+}
+
+.loginLinks > div {
+  margin-bottom: 8px;
+}
+
+.loginLinks a {
+  color: var(--slate-blue);
+  text-decoration: underline;
+}
