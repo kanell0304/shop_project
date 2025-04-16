@@ -59,7 +59,10 @@ const SignupForm = ({ onBack, snsAgree }) => {
   const validateForm = () => {
 
     const { email, password, memberName, phoneNumber } = form;
-    if(!findMember) alert("아이디 중복을 확인해주세요.")
+    if(!findMember) {
+      alert("아이디 중복을 확인해주세요.");
+      return false
+    };
 
     if (!email || !password || !memberName || !phoneNumber) {
       alert("필수 항목을 모두 입력해 주세요.");

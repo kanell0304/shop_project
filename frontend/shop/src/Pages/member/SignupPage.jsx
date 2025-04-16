@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import TermsAgreement from '../../Components/member/TermsAgreement';
 import SignupForm from '../../Components/member/SignupForm';
+import BasicLayout from './../../layout/BasicLayout';
 
 const SignupPage = () => {
   const [step, setStep] = useState(1);
@@ -12,10 +13,12 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="signupWrap">
-      {step === 1 && <TermsAgreement onNext={handleNextStep} />}
-      {step === 2 && <SignupForm onBack={() => setStep(1)} snsAgree={snsAgree} />}
-    </div>
+    <BasicLayout>
+      <div className="signupWrap">
+        {step === 1 && <TermsAgreement onNext={handleNextStep} />}
+        {step === 2 && <SignupForm onBack={() => setStep(1)} snsAgree={snsAgree} />}
+      </div>
+    </BasicLayout>
   );
 };
 
