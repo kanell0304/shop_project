@@ -8,13 +8,11 @@ import "../../static/css/login.scss";
 
 
 const LoginPage = () => {
-  const navigate = useNavigate();
-
   return (
   <BasicLayout>
     <div className="loginContainer">
       <div className="imageBox">
-        <img src={LoginImage} alt="로그인 이미지"/>
+        <img src={LoginImage} alt="로그인 이미지" width={960} height={1080}/>
       </div>
 
       <div className="loginBox">
@@ -28,7 +26,7 @@ const LoginPage = () => {
 
         <div className="findLinks">
           <div>
-            <Link to="/signup/step1">CREATE ACCOUNT</Link>
+            <Link to="/member/signup">CREATE ACCOUNT</Link>
           </div>
           <div>
             FORGOT YOUR <Link to="/findEmail">E-MAIL?</Link>

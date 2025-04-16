@@ -13,6 +13,7 @@ $innerPadding : 40px;
   --placeholder: #A2A2A2;
   --slate-blue: #3A506B;
   --muted-sand: #C6B7A6;
+  --Pointer:#FF564C;
 
   --h1: 48px;
   --h2: 36px;
@@ -24,13 +25,13 @@ $innerPadding : 40px;
 }
 
 a{color: inherit;}
-.blind{display:none;}
+label{display: flex;align-items: center;gap: 0 4px;cursor: pointer;}
 html,body,#root{
   font-family: var(--font-main);
   color: var(--charcoal-grey);
   background-color: white;
   font-size: var(--text-base);
-  height:100%;
+  min-height:100%;
   h1{font-size: var(--h1);}
   h2{font-size: var(--h2);letter-spacing:-0.02em;}
   h3{font-size: var(--h3);}
@@ -38,45 +39,22 @@ html,body,#root{
   h5{font-size: var(--h5);}
 }
 
-
 /** 인풋 기본 디자인*/
-input{
-  width: 100%;
-  font-family: inherit;
-  font-size: var(--text-base);
-  color: var(--charcoal-grey);
-  border: solid var(--charcoal-grey) 1px;
-  border-radius: 3px;
-  box-sizing: border-box;
-  padding: 6px 8px;
-  &::placeholder{
-    color: var(--placeholder);
-    font-weight: 300;
-  }
-  &:focus{
-    outline-color: var(--slate-blue);
-    box-shadow: 0 0 3px var(--slate-blue);
-  }
+input[type=text],
+input[type=email],
+input[type=password]{
+  width: 100%;font-family: inherit;font-size: var(--text-base);color: var(--charcoal-grey);border: solid var(--charcoal-grey) 1px;border-radius: 3px;box-sizing: border-box;padding: 6px 8px;
+  &::placeholder{color: var(--placeholder);font-weight: 300;}
+  &:focus{outline-color: var(--slate-blue);box-shadow: 0 0 3px var(--slate-blue);}
 }
 
 
 /**버튼 디자인 모음*/
 button,a.btn{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: var(--text-base);
-  color: var(--ash-white);
-  background: var(--charcoal-grey);
-  border: none;
-  border-radius: 3px;
-
+  display: flex;justify-content: center;align-items: center;font-size: var(--text-base);color: var(--ash-white);background: var(--charcoal-grey);border: none;border-radius: 3px;
   /**큰 버튼 기본*/
   &.bigBtn{
-    min-width: 96px;
-    font-size: 16px;
-    padding: 10px 20px;
-    color: var(--ash-white);
+    min-width: 96px;font-size: 16px;padding: 10px 20px;color: var(--ash-white);
     /**볼드 처리*/
     &.bold{
       font-weight: bold;
@@ -85,49 +63,34 @@ button,a.btn{
 
 }
 
-
-
-
-
 #root{
-  display:flex;
-  flex-direction:column;
-  min-height:100%;
+  display:flex;flex-direction:column;min-height:100%;
 }
+.blind{display:none;}
 
 .innerWrap{
   padding: 0 $innerPadding;
 }
 
 .container{
-  padding-top: $headerHeight;
+  padding-top: $headerHeight;min-height: 100%;
 }
+
+.point{color: var(--Pointer);}
+
 
 /**헤더*/
 .header{
-  position: fixed;
-  top:0;
-  left:0;
-  width:100%;
-  background:#fff;
-  z-index: 100;
-
+  position: fixed;top:0;left:0;width:100%;background:#fff;z-index: 100;
   .innerWrap{
-    display: flex;
-    align-items: center;
-    height:$headerHeight;
-
+    display: flex;align-items: center;height:$headerHeight;
     ul{
-      display:flex;
-      align-items: center;
-      gap:0 24px;
+      display:flex;align-items: center;gap:0 24px;
     }
-
     .logo a{
       display: block;
       svg{
-        width:127px;
-        display: block;
+        width:127px;display: block;
       }
     }
 
@@ -143,64 +106,42 @@ button,a.btn{
 
 /**푸터*/
 .footer{
-  margin-top: auto;
-  padding: 40px 0;
+  margin-top: auto;padding: 40px 0;
   .f_content_top{
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+    display: flex;align-items: flex-start;justify-content: space-between;
     .logo svg{
       width:366px;
     }
-    .f_siteMap{
-      .f_cartegory{
-        display: flex;
-        gap: 0 40px;
+    .f_siteMap .f_cartegory{
+        display: flex;gap: 0 40px;
         >li:first-of-type{
           margin-right: -22px;
         }
         >li>a{
-          font-size: var(--h5);
-          font-weight: bold;
+          font-size: var(--h5);font-weight: bold;
         }
         .f_subCartegory{
-          padding-top: 10px;
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
+          padding-top: 10px;display: flex;flex-direction: column;gap: 10px;
         }
       }
-    }
   }
 
   .f_content_botton{
     margin-top: auto;
     .csBtn,
     .infoDetail{
-      display: flex;
-      align-items: center;
+      display: flex;align-items: center;
     }
 
     .csBtn{
-      display: flex;
-      gap: 0 12px;
+      display: flex;gap: 0 12px;
     }
 
     .infoDetail{
-      margin-top: 14px;
-      max-width: 772px;
-      flex-wrap: wrap;
-      font-size:var(--text-small);
-      color: var(--placeholder);
-      gap: 3px 12px;
+      margin-top: 14px;max-width: 772px;flex-wrap: wrap;font-size:var(--text-small);color: var(--placeholder);gap: 3px 12px;
       span{
-        font-size: inherit;
-        color: inherit;
-        display: block;
-        white-space: nowrap;
-        
+        font-size: inherit;color: inherit;display: block;white-space: nowrap;
       }
     }
   }
 }
-
