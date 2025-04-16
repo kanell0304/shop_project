@@ -79,5 +79,4 @@ public class Member {
     public void changeSocial(boolean social) {
         this.social = social;
     }
-
 }

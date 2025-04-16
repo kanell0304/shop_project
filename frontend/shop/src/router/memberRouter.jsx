@@ -1,10 +1,10 @@
 import { Suspense, lazy } from "react";
 const Loading = <div>Loading....</div>
-const Login =  lazy(() => import("../Pages/login/LoginPage"))
+const Login =  lazy(() => import("../Pages/member/LoginPage"))
 
 // const LogoutPage = lazy(() => import("../Pages/member/LogoutPage"))
 
-const KakaoRedirectPage = lazy(() => import("../Pages/login/KakaoRedirevtPage"))
+const KakaoRedirectPage = lazy(() => import("../Pages/member/KakaoRedirevtPage"))
 //const MemberModify = lazy(() => import("../pages/member/ModifyPage"))
 
 const memberRouter = () => {
@@ -18,10 +18,6 @@ const memberRouter = () => {
         path:"kakao",
         element : <Suspense fallback={Loading}><KakaoRedirectPage/></Suspense>
     }
-    // {
-    //   path:"logout",
-    //   element: <Suspense fallback={Loading}><LogoutPage/></Suspense>
-    // },
 
     // {
     //   path:"modify",

@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 @Getter
 public class MemberDetails implements UserDetails {
 
+    private final Long id;
     private final String email;
     private final String password;
     private final String memberName;
@@ -30,6 +31,7 @@ public class MemberDetails implements UserDetails {
     private final List<GrantedAuthority> authorities;
 
     public MemberDetails(Member member) {
+        this.id = member.getId();
         this.email = member.getEmail();
         this.password = member.getPassword();
         this.memberName = member.getMemberName();
@@ -47,6 +49,7 @@ public class MemberDetails implements UserDetails {
     }
 
     public MemberDetails(MemberDTO memberDTO) {
+        this.id = memberDTO.getId();
         this.email = memberDTO.getEmail();
         this.password = memberDTO.getPassword();
         this.memberName = memberDTO.getMemberName();
@@ -80,6 +83,7 @@ public class MemberDetails implements UserDetails {
 //    }
     public MemberDTO toMemberDTO() {
         return new MemberDTO(
+                this.id,
                 this.email,
                 this.password,
                 this.memberName,

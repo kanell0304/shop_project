@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from "react-redux";
 import Logo from '../static/svg/logo.svg?react';
+import LogoutComponent from './member/LogoutComponent';
 
 const Header = () => {
   const navigate = useNavigate();
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  const loginState = useSelector(state => state.loginSlice)
+  const isLoggedIn = loginState && loginState.email !== '';
 
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
@@ -29,16 +32,24 @@ const Header = () => {
           </nav>
 
           <div className="utillMenu">
+          
+          {isLoggedIn ? (
+            //로그인 됬을 때
             <ul>
               <li><Link to="/search">SEARCH</Link></li>
-              {isLoggedIn && <Link to="/mypage">MYPAGE</Link>}
               <li><Link to="/cart">CART</Link></li>
-              {isLoggedIn ? (
-                <li><a href="#" onClick={handleLogout}>LOGOUT</a></li>
-              ) : (
-                <li><Link to="/member/login">LOGIN</Link></li>
-              )}
+              <li><Link to="/mypage">MYPAGE</Link></li>
+              <li><LogoutComponent></LogoutComponent></li>
             </ul>
+            ):(
+              //로그인 안됬을 때
+            <ul>
+                <li><Link to="/search">SEARCH</Link></li>
+                <li><Link to="/member/login">CART</Link></li>
+                <li><Link to="/member/login">MYPAGE</Link></li>
+                <li><Link to="/member/login">LOGIN</Link></li>
+            </ul>
+            )}
           </div>
       </div>
     </header>

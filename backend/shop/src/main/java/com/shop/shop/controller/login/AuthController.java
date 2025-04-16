@@ -58,6 +58,7 @@ public class AuthController {
             MemberDTO memberDTO1 = memberDetails.toMemberDTO();
 
             Map<String, Object> claims = new HashMap<>();
+            claims.put("memberId", memberDTO1.getId());
             claims.put("memberName", memberDTO1.getMemberName());
             claims.put("social", memberDTO1.isSocial());
             claims.put("roleNames", memberDTO1.getRoleNames());

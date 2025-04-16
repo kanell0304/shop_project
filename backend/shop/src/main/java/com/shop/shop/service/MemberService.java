@@ -20,6 +20,7 @@ public interface MemberService {
     // Member 엔티티를 MemberDTO 로 바꾸는 메서드
     default MemberDTO entityToDTO(Member member) {
         MemberDTO dto = new MemberDTO(
+                member.getId(),
                 member.getEmail(),
                 member.getPassword(),
                 member.getMemberName(),

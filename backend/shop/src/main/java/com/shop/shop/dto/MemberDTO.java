@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 //@NoArgsConstructor
 //@AllArgsConstructor
 public class MemberDTO extends User {
-
+    private Long id;
     private String email;
     private String password;
     private String memberName;
@@ -35,12 +35,12 @@ public class MemberDTO extends User {
 
     private List<String> roleNames = new ArrayList<>();
 
-    public MemberDTO(String email, String password, String memberName, String phoneNumber, Address address, int stockMileage, LocalDateTime joinDate, boolean wtrSns, boolean social, boolean delFlag, MemberShip memberShip, List<String> roleNames) {
+    public MemberDTO(Long id,String email, String password, String memberName, String phoneNumber, Address address, int stockMileage, LocalDateTime joinDate, boolean wtrSns, boolean social, boolean delFlag, MemberShip memberShip, List<String> roleNames) {
         super(
                 email,
                 password,
                 roleNames.stream().map(str -> new SimpleGrantedAuthority("ROLE_" + str)).collect(Collectors.toList()));
-
+        this.id = id;
         this.email = email;
         this.password = password;
         this.memberName = memberName;
@@ -58,7 +58,7 @@ public class MemberDTO extends User {
     public Map<String, Object> getClaims() {
 
         Map<String, Object> dataMap = new HashMap<>();
-
+        dataMap.put("id", id);
         dataMap.put("email", email);
         dataMap.put("password", password);
         dataMap.put("memberName", memberName);

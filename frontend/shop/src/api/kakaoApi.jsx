@@ -1,7 +1,7 @@
 import axios from "axios";
 const API_SERVER_HOST = import.meta.env.VITE_API_SERVER_HOST;
 const rest_api_key = import.meta.env.VITE_REST_API_KEY;
-const redirect_uri =`${API_SERVER_HOST}/member/kakao` // 인증처리 경로
+const redirect_uri =`http://localhost:5173/member/kakao` // 인증처리 경로
 const auth_code_path = `https://kauth.kakao.com/oauth/authorize`; // 인가 코드를 받기 위한 경로
 const access_token_url = `https://kauth.kakao.com/oauth/token`; // 토큰 추가
 

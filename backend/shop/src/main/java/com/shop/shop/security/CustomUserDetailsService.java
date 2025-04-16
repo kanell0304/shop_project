@@ -35,6 +35,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         log.info("회원정보를 찾았습니다.");
 
         MemberDTO memberDTO = new MemberDTO(
+                member.getId(),
                 member.getEmail(),
                 member.getPassword(),
                 member.getMemberName(),
