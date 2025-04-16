@@ -1,4 +1,6 @@
 package com.shop.shop.service;
+import org.springframework.stereotype.Service;
 
-public interface OrderItemService {
-}
+//@Service
+//public interface OrderItemService {
+//}

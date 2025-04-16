@@ -30,7 +30,8 @@ const useCustomLogin = ( ) => {
 
   const doLogin = async (loginParam) => { //----------로그인 함수 
     const action  = await dispatch(loginPostAsync(loginParam));
-    return action.payload
+    console.log(action)
+    return action.payload;
   }
 
   const doLogout = () => { //---------------로그아웃 함수 

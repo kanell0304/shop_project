@@ -8,9 +8,9 @@ import './static/css/basic.scss'
 import Root from './router/Root';
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  //<StrictMode>
     <Provider store={store}>
         <Root />
     </Provider>
-  </StrictMode>
+  //</StrictMode>
 )

@@ -12,7 +12,6 @@ const LoginComponent = () => {
   const [loginParam, setLoginParam] = useState({...initState});
   
 
-
   /**서버 로그인 및 이동 */
   const {doLogin, moveToPath} = useCustomLogin()
   
@@ -31,17 +30,16 @@ const LoginComponent = () => {
   }
 
   const handleClickLogin = (e) => {
-    if (!loginParam.email || !loginParam.pw) {
-      setError("이메일과 비밀번호를 모두 입력해주세요.");
-      return;
-    }
+    // if (!loginParam.email || !loginParam.pw) {
+    //   setError("이메일과 비밀번호를 모두 입력해주세요.");
+    //   return;
+    // }
 
-    if (!isValidPassword(!loginParam.pw)) {
-      //setError("비밀번호는 최소 6자 이상, 영문/숫자/특수문자를 포함해야 합니다.");
-      return;
-    }
+    // if (!isValidPassword(!loginParam.pw)) {
+    //   //setError("비밀번호는 최소 6자 이상, 영문/숫자/특수문자를 포함해야 합니다.");
+    //   return;
+    // }
 
-    
     doLogin(loginParam) // loginSlice의 비동기 호출
     .then(data => {
       console.log(data)

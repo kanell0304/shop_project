@@ -1,9 +1,9 @@
-import { Cookies } from "react-cookie"
+import { Cookies } from "react-cookie";
 
 const cookies = new Cookies();
 
 /**쿠키세팅 */
-export const setCookie = (namem, value, days) =>{
+export const setCookie = (name, value, days) =>{
     const expires = new Date();
     expires.setUTCDate(expires.getUTCDate() + days ); // 보관기한
     return cookies.set(name, value, {path:'/', expires:expires});

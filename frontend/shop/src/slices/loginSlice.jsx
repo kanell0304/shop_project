@@ -23,7 +23,7 @@ const loadMemberCookie = () => {  //쿠키에서 로그인 정보 로딩
 
 const loginSlice = createSlice({
     name: 'LoginSlice',
-    initialState: loadMemberCookie()|| initState, //쿠키가 없다면 초깃값사용 
+    initialState: loadMemberCookie()|| initState, //쿠키가 없다면 초기값사용 
     reducers: {
         login: (state, action) => {
         console.log("login.....")
