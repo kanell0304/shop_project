@@ -1,0 +1,61 @@
+.signupBox {
+    width: 420px;
+    height: 754px;
+    background-color: var(--ash-white);
+    padding: 40px 32px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 24px;
+    box-sizing: border-box;
+  }
+  
+  .signupBox h2 {
+    margin-bottom: 16px;
+  }
+  
+  .signupBox form > div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .signupBox label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--text-base);
+    cursor: pointer;
+  }
+  
+  .signupBox label strong {
+    color: red;
+    font-weight: bold;
+    margin-right: 4px;
+    font-size: var(--text-base);
+  }
+  
+  .signupBox textarea {
+    height: 100px;
+    resize: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background-color: var(--ash-white);
+    box-sizing: border-box;
+    border: 1px solid var(--charcoal-grey);
+    font-size: var(--text-small);
+    color: var(--charcoal-grey);
+  }
+  
+  .signupBox p {
+    color: red;
+    font-size: var(--text-small);
+    margin-top: 4px;
+  }
+  
+  .signupBox button {
+    margin-top: auto;
+  }
+  

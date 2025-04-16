@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../../static/css/signup.scss";
 
 const SignupStep1 = () => {
 
@@ -34,9 +35,8 @@ const SignupStep1 = () => {
   return (
     <>
 
-      <main>
-        <div className="signup-box">
-          <h1>회원가입 <span>(1/2)</span></h1>
+        <div className="signupBox">
+          <h2>회원가입 <span>(1/2)</span></h2>
 
           <form onSubmit={handleSubmit}>
             {/* 전체 동의 */}
@@ -97,7 +97,7 @@ const SignupStep1 = () => {
                   checked={SMS}
                   onChange={(e) => setSMS(e.target.checked)}
                 />
-                <strong>[선택]</strong> SMS 수신 동의
+                SMS 수신 동의[선택]
               </label>
             </div>
 
@@ -109,7 +109,6 @@ const SignupStep1 = () => {
             <button type="submit">다음</button>
           </form>
         </div>
-      </main>
 
     </>
   )
