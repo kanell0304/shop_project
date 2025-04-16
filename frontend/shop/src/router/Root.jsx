@@ -4,20 +4,34 @@ import memberRouter from "./memberRouter";
 
 const Loading = <div>Loading....</div>;
 const Main = lazy(() => import("../Pages/main/MainPage"));
+const Guide = lazy(() => import("../Pages/footer/GuidePage"));
+const Privacy = lazy(() => import("../Pages/footer/PrivacyPolicyPage"));
+const Terms =  lazy(() => import("../Pages/footer/TermsPage"));
 
 // 🔸 이건 라우터 설정만 담은 객체
 const rootRouter = createBrowserRouter([
   {
-    path: "",
-    element: <Suspense><Main/></Suspense>
+    path: "/",
+    element: <Suspense fallback={Loading}><Main/></Suspense>
+  },
+  {
+    path: "guide",
+    element: <Suspense fallback={Loading}><Guide/></Suspense>
+  },
+  {
+    path: "privacy",
+    element: <Suspense fallback={Loading}><Privacy/></Suspense>
+  },
+  {
+    path: "terms",
+    element: <Suspense fallback={Loading}><Terms/></Suspense>
   },
   {
     path: "member",
     children: memberRouter()
-  }
+  },
 ]);
 
-// 🔸 이게 React 컴포넌트
 const Root = () => {
   return <RouterProvider router={rootRouter} />;
 };
