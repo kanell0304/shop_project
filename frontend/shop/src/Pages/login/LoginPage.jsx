@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import LoginImage from "../../static/images/login/Mask_group4.png";
+import BasicLayout from "../../layout/BasicLayout";
+import "../../static/css/login.scss";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -57,9 +60,18 @@ const LoginPage = () => {
   };
 
   return (
+  <BasicLayout>
+  <div className="loginContainer">
+    {/* 왼쪽 이미지 박스 */}
+    <div className="imageBox">
+      <img src={LoginImage} alt="로그인 이미지"/>
+    </div>
+
+    {/* 오른쪽 로그인 박스 */}
     <div className="loginBox">
+      <div className="setting">
       <div className="text">
-        <h2>SIMPLICITY<br />SPEAKS</h2>
+        <h2>SIMPLICITY<br/>SPEAKS</h2>
         <p>WHAT YOU WEAR SAYS MORE THAN WORDS</p>
       </div>
 
@@ -86,39 +98,28 @@ const LoginPage = () => {
 
         {error && <p className="errorMessage">{error}</p>}
 
-        <div className="Find">
-          <div>
-            <button type="submit" className="loginBtn">
-              LOGIN
-            </button>
-          </div>
-
+        <div className="loginLinks">
+          <button type="button" className="bigBtn bold">LOGIN</button>
           <div className="login-or">OR</div>
-
-          <div>
-            <button
-              type="button"
-              className="kakaoBtn"
-              onClick={handleKakaoLogin}
-            >
-              KAKAO LOGIN
-            </button>
-          </div>
+          <button type="button" className="bigBtn bold kakao" onClick={handleKakaoLogin}>KAKAO LOGIN</button>
         </div>
       </form>
 
-      <div className="loginLinks">
-        <div>z``
+      <div className="findLinks">
+        <div>
           <Link to="/signup/step1">CREATE ACCOUNT</Link>
         </div>
         <div>
-          FORGOT YOUR <Link to="/Find-email">E-MAIL?</Link>
+          FORGOT YOUR <Link to="/findEmail">E-MAIL?</Link>
         </div>
         <div>
-          FORGOT YOUR <Link to="/Reset-password">PASSWORD?</Link>
+          FORGOT YOUR <Link to="/resetPW">PASSWORD?</Link>
         </div>
       </div>
+      </div>
     </div>
+  </div>
+  </BasicLayout>
   )
 }
 

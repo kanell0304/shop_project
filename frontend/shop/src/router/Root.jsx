@@ -12,6 +12,9 @@ import Mileage from "../Pages/myPage/Mileage";
 import MagazinePage from "../Pages/magazine/MagazinePage";
 import MagazineDetail from "../Pages/magazine/MagazineDetail"
 import ItemListPage from "../Pages/shop/ItemListPage";
+import GuidePage from "../Pages/footer/GuidePage";
+import TermsPage from "../Pages/footer/TermsPage";
+import PrivacyPolicyPage from "../Pages/footer/PrivacyPolicyPage";
 
 const Root = () => {
   return (
@@ -28,7 +31,9 @@ const Root = () => {
         <Route path="/shop" element={<ItemListPage/>}/>
         <Route path="/magazine" element={<MagazinePage/>}/>
         <Route path="/magazine/detail" element={<MagazineDetail/>}/>
-        
+        <Route path="/terms" element={<TermsPage/>}/>
+        <Route path="/guide" element={<GuidePage/>}/>
+        <Route path="/privacyPolicy" element={<PrivacyPolicyPage/>}/>
       </Routes>
   )
 }

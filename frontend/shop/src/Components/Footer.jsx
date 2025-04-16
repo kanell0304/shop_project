@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Logo from '../static/svg/logo.svg?react';
 
+
 const Footer = () => {
   return (
     <footer className="footer">
@@ -30,9 +31,9 @@ const Footer = () => {
         </div>
         <div className="f_content_botton">
           <ul className="csBtn">
-            <li><Link to="#">이용약관</Link></li>
-            <li><Link to="#">이용안내</Link></li>
-            <li><Link to="#">개인정보처리방침</Link></li>
+            <li><Link to="/terms">이용약관</Link></li>
+            <li><Link to="/guide">이용안내</Link></li>
+            <li><Link to="/privacyPolicy">개인정보처리방침</Link></li>
           </ul>
           <div className="infoDetail">
             <span>© NØRD </span>

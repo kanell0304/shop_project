@@ -11,8 +11,6 @@ $innerPadding : 40px;
   --charcoal-grey: #282B2B;
   --ash-white: #EAEAEA;
   --placeholder: #A2A2A2;
-  --pointer: #3A506B;
-
   --slate-blue: #3A506B;
   --muted-sand: #C6B7A6;
 
@@ -32,7 +30,6 @@ html,body,#root{
   color: var(--charcoal-grey);
   background-color: white;
   font-size: var(--text-base);
-  color: var(--charcoal-grey);
   height:100%;
   h1{font-size: var(--h1);}
   h2{font-size: var(--h2);letter-spacing:-0.02em;}
@@ -40,6 +37,58 @@ html,body,#root{
   h4{font-size: var(--h4);}
   h5{font-size: var(--h5);}
 }
+
+
+/** 인풋 기본 디자인*/
+input{
+  width: 100%;
+  font-family: inherit;
+  font-size: var(--text-base);
+  color: var(--charcoal-grey);
+  border: solid var(--charcoal-grey) 1px;
+  border-radius: 3px;
+  box-sizing: border-box;
+  padding: 6px 8px;
+  &::placeholder{
+    color: var(--placeholder);
+    font-weight: 300;
+  }
+  &:focus{
+    outline-color: var(--slate-blue);
+    box-shadow: 0 0 3px var(--slate-blue);
+  }
+}
+
+
+/**버튼 디자인 모음*/
+button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--text-base);
+  color: var(--ash-white);
+  background: var(--charcoal-grey);
+  border: none;
+  border-radius: 3px;
+
+  /**큰 버튼 기본*/
+  &.bigBtn{
+    min-width: 96px;
+    font-size: 16px;
+    padding: 10px 20px;
+    color: var(--ash-white);
+    /**볼드 처리*/
+    &.bold{
+      font-weight: bold;
+    }
+  }
+
+}
+
+
+
+
+
 #root{
   display:flex;
   flex-direction:column;
