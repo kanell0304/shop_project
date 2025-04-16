@@ -46,6 +46,10 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "delivery_id")
+    private Delivery delivery;
+
     @Column(nullable = false)
     private String recipientName;
     @Column(nullable = false)
@@ -57,5 +61,25 @@ public class Order {
     private String recipient_default_address;
     @Column(nullable = false)
     private String recipient_detailed_address;
+
+    public void changeRecipient_zip_code(String recipient_zip_code) {
+        this.recipient_zip_code = recipient_zip_code;
+    }
+
+    public void changeRecipient_default_address(String recipient_default_address) {
+        this.recipient_default_address = recipient_default_address;
+    }
+
+    public void changeRecipient_detailed_address(String recipient_detailed_address) {
+        this.recipient_detailed_address = recipient_detailed_address;
+    }
+
+    public void changeOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public void changeDelFlag(boolean delFlag) {
+        this.delFlag = delFlag;
+    }
 
 }

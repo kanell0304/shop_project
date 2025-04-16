@@ -18,30 +18,11 @@ public class Delivery {
     @Column(name = "delivery_id")
     private Long id;
 
-    @Embedded
-    private Address address;
-
     @Enumerated(EnumType.STRING)
     private DeliveryStatus status;
 
-    @Column(nullable = false)
-    private int transportNumber;
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "order_id")
-    private Order order;
-
-
-    public void changeAddress(Address address) {
-        this.address = address;
-    }
-
     public void changeStatus(DeliveryStatus status) {
         this.status = status;
-    }
-
-    public void changeTransportNumber(int transportNumber) {
-        this.transportNumber = transportNumber;
     }
 
 }

@@ -8,6 +8,8 @@ import com.shop.shop.repository.ItemRepository;
 import com.shop.shop.repository.MemberRepository;
 import com.shop.shop.repository.WishListRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,6 +46,16 @@ public class WishListServiceImpl implements WishListService {
                 .map(WishListDTO::new)
                 .toList();
     }
+
+//    // 관심 목록 MemberID를 기준으로 가져오기(페이징)
+//    @Override
+//    public Page<List<WishListDTO>> getWishListByMemberId(Pageable pageable, Long memberId) {
+//        Page<List<WishList>> wishLists = wishListRepository.findWithItemImagesByMemberId(pageable, memberId);
+//
+//        return wishLists.stream()
+//                .map(WishListDTO::new)
+//                .toList();
+//    }
 
     // 관심 목록에서 WishListID를 기준으로 삭제
     @Override

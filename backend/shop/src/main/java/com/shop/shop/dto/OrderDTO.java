@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class OrderDTO {
 
     private Long id;
-    private Member member;
+    private Long memberId;
     private LocalDateTime orderDate;
     private int totalAmount;
     private OrderStatus orderStatus;
@@ -34,11 +34,15 @@ public class OrderDTO {
     private String recipient_default_address;
     private String recipient_detailed_address;
 
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+
+    private Delivery delivery;
 
     // Order 를 OrderDTO 로 변환
     public OrderDTO(Order order) {
         this.id = order.getId();
-        this.member = order.getMember();
+        this.memberId = order.getMember().getId();
         this.orderDate = order.getOrderDate();
         this.totalAmount = order.getTotalAmount();
         this.orderStatus = order.getOrderStatus();
@@ -52,6 +56,7 @@ public class OrderDTO {
         this.recipient_zip_code = order.getRecipient_zip_code();
         this.recipient_default_address = order.getRecipient_default_address();
         this.recipient_detailed_address = order.getRecipient_detailed_address();
+        this.delivery = order.getDelivery();
     }
 
 }
