@@ -45,7 +45,7 @@
     }
 }
 
-form{
+.form{
   margin-bottom: 13px;
 
   .loginLabel {
@@ -85,66 +85,3 @@ form{
     text-decoration: underline;
   }
 }
-
-
-
-// .loginBtn {
-//   width: 100%;
-//   height: 39px;
-//   background-color: var(--deep-onyx);
-//   color: var(--ash-white);
-//   font-weight: bold;
-//   border: none;
-//   cursor: pointer;
-// }
-
-// .loginBtn:hover {
-//   background-color: var(--charcoal-grey);
-// }
-
-// .login-or {
-//   font-size: var(--h5);
-//   color: var(--charcoal-grey);
-//   font-weight: bold;
-//   text-align: center;
-//   margin: 5px 0;
-// }
-
-// .kakaoBtn {
-//   width: 100%;
-//   height: 39px;
-//   background-color: #FEE500;
-//   border: none;
-//   font-weight: bold;
-//   cursor: pointer;
-//   color: #3a1d1d;
-// }
-
-// .kakaoBtn:hover {
-//   background-color: #ffdd00;
-// }
-
-// .errorMessage {
-//   color: red;
-//   font-size: var(--text-small);
-//   margin-bottom: 10px;
-//   text-align: left;
-// }
-
-// .loginLinks {
-//   margin-top: 20px;
-//   font-size: var(--text-small);
-//   color: var(--placeholder);
-//   text-align: left;
-//   width: 100%; 
-// }
-
-// .loginLinks > div {
-//   margin-bottom: 8px;
-// }
-
-// .loginLinks a {
-//   color: var(--slate-blue);
-//   text-decoration: underline;
-// }
-

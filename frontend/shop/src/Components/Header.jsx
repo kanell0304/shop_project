@@ -36,7 +36,7 @@ const Header = () => {
               {isLoggedIn ? (
                 <li><a href="#" onClick={handleLogout}>LOGOUT</a></li>
               ) : (
-                <li><Link to="/login">LOGIN</Link></li>
+                <li><Link to="/member/login">LOGIN</Link></li>
               )}
             </ul>
           </div>

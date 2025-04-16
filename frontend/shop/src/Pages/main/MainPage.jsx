@@ -1,5 +1,6 @@
 import React from "react";
-import {Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import BasicLayout from "../../layout/BasicLayout";
 import visual from "../../static/images/mainpage/Mask_group1.png"
 import banner from "../../static/images/mainpage/Mask_group2.png"
 import itemImage_1 from "../../static/images/mainpage/Product_1.png"
@@ -12,12 +13,9 @@ import "../../static/css/main.scss"
 
 
 
-
-
 const MainPage = () => {
   return (
-    <>
-
+    <BasicLayout>
         {/* 배너 이미지 파일 */}
         <div className="visual">
           <div>
@@ -71,8 +69,7 @@ const MainPage = () => {
 
           </div>
         </section>
-
-    </>
+      </BasicLayout>
   )
 }
 
