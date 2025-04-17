@@ -4,6 +4,7 @@ import com.shop.shop.domain.member.Address;
 import com.shop.shop.domain.order.Order;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Delivery {
 
     @Id

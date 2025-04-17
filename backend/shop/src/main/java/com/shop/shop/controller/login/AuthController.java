@@ -55,13 +55,13 @@ public class AuthController {
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             // 📌 `MemberDetails`에서 `MemberDTO` 변환
-            MemberDTO memberDTO1 = memberDetails.toMemberDTO();
+            MemberDTO memberClaims = memberDetails.toMemberDTO();
 
             Map<String, Object> claims = new HashMap<>();
-            claims.put("memberId", memberDTO1.getId());
-            claims.put("memberName", memberDTO1.getMemberName());
-            claims.put("social", memberDTO1.isSocial());
-            claims.put("roleNames", memberDTO1.getRoleNames());
+            claims.put("memberId", memberClaims.getId());
+            claims.put("memberName", memberClaims.getMemberName());
+            claims.put("social", memberClaims.isSocial());
+            claims.put("roleNames", memberClaims.getRoleNames());
 
             Map<String, Object> responseMap = new HashMap<>(claims);
             responseMap.put("accessToken", jwtUtil.generateToken(claims, 10));

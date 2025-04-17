@@ -1,6 +1,7 @@
 package com.shop.shop.dto;
 
 import com.shop.shop.domain.delivery.Delivery;
+import com.shop.shop.domain.delivery.DeliveryStatus;
 import com.shop.shop.domain.member.Member;
 import com.shop.shop.domain.order.Order;
 import com.shop.shop.domain.order.OrderStatus;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -37,7 +39,11 @@ public class OrderDTO {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
-    private Delivery delivery;
+    private DeliveryStatus deliveryStatus;
+
+    private List<OrderItemDTO> orderItems;
+
+    private Long cartId;
 
     // Order 를 OrderDTO 로 변환
     public OrderDTO(Order order) {
@@ -56,7 +62,7 @@ public class OrderDTO {
         this.recipient_zip_code = order.getRecipient_zip_code();
         this.recipient_default_address = order.getRecipient_default_address();
         this.recipient_detailed_address = order.getRecipient_detailed_address();
-        this.delivery = order.getDelivery();
+        this.deliveryStatus = order.getDelivery().getStatus();
     }
 
 }

@@ -19,6 +19,7 @@ public class DeliveryServiceImpl implements DeliveryService {
     public DeliveryDTO editStatus(DeliveryDTO deliveryDTO) {
         Delivery delivery = deliveryRepository.findById(deliveryDTO.getId()).orElseThrow(() -> new RuntimeException("해당 배송정보를 찾을 수 없습니다."));
         delivery.changeStatus(deliveryDTO.getDeliveryStatus());
-        return new DeliveryDTO(delivery);
+        Delivery changedDelivery = deliveryRepository.save(delivery);
+        return new DeliveryDTO(changedDelivery);
     }
 }

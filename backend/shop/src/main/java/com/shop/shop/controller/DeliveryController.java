@@ -16,7 +16,7 @@ public class DeliveryController {
     private final DeliveryService deliveryService;
 
     // 배송상태 수정
-    @GetMapping("/editStatus")
+    @PutMapping("/editStatus")
     public ResponseEntity<DeliveryDTO> editDeliveryStatus(@RequestBody DeliveryDTO deliveryDTO) {
         DeliveryDTO editDelivery = deliveryService.editStatus(deliveryDTO);
         if (editDelivery == null) {
