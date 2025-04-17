@@ -14,14 +14,26 @@ const SignupForm = ({ onBack, snsAgree }) => {
 
   /** 사용자 입력 정보 */
   const [form, setForm] = useState({
-    email: 'gmdtn89@naver.com',
-    password: 'user@1234',
-    memberName: '최흥수',
-    phoneNumber: '01040434240',
+    // email: 'gmdtn89@naver.com',
+    // password: 'user@1234',
+    // memberName: '최흥수',
+    // phoneNumber: '01040434240',
+    // address: {
+    //   zip_code: '07792',
+    //   default_address: '서울 강서구 강서로 429',
+    //   detailed_address: '218호호'
+    // },
+    // wtrSns: snsAgree,
+    // social: false,
+    // roleNames: ["USER"]
+    email: '',
+    password: '',
+    memberName: '',
+    phoneNumber: '',
     address: {
-      zip_code: '07792',
-      default_address: '서울 강서구 강서로 429',
-      detailed_address: '218호호'
+      zip_code: '',
+      default_address: '',
+      detailed_address: ''
     },
     wtrSns: snsAgree,
     social: false,
@@ -145,23 +157,23 @@ const SignupForm = ({ onBack, snsAgree }) => {
       <h2>회원가입 <span>(2/2)</span></h2>
 
       <div className='inputWrap'>
-        <div class="inputTitle"><span className='point'>[필수]</span>아이디</div>
-        <div class="inputBox"><input name="email" value={form.email} onChange={handleChange} placeholder="이메일 입력" type="email" /><button type="button" onClick={userEmailSearch}>중복확인</button></div>
+        <div className="inputTitle"><span className='point'>[필수]</span>아이디</div>
+        <div className="inputBox"><input name="email" value={form.email} onChange={handleChange} placeholder="이메일 입력" type="email" /><button type="button" onClick={userEmailSearch}>중복확인</button></div>
       </div>
       <div className='inputWrap'>
-        <div class="inputTitle"><span className='point'>[필수]</span>비밀번호</div>
-        <div class="inputBox"><input name="password" value={form.password} onChange={handleChange} placeholder="비밀번호" type="password" /></div>
+        <div className="inputTitle"><span className='point'>[필수]</span>비밀번호</div>
+        <div className="inputBox"><input name="password" value={form.password} onChange={handleChange} placeholder="비밀번호" type="password" /></div>
       </div>
       <div className='inputWrap'>
-        <div class="inputTitle"><span className='point'>[필수]</span>이름</div>
-        <div class="inputBox"><input name="memberName" value={form.memberName} onChange={handleChange} placeholder="이름" type="text" /></div>
+        <div className="inputTitle"><span className='point'>[필수]</span>이름</div>
+        <div className="inputBox"><input name="memberName" value={form.memberName} onChange={handleChange} placeholder="이름" type="text" /></div>
       </div>
       <div className='inputWrap'>
-        <div class="inputTitle"><span className='point'>[필수]</span>연락처</div>
-        <div class="inputBox"><input name="phoneNumber" value={form.phoneNumber} onChange={handleChange} placeholder="숫자만 입력" type="text" /></div>
+        <div className="inputTitle"><span className='point'>[필수]</span>연락처</div>
+        <div className="inputBox"><input name="phoneNumber" value={form.phoneNumber} onChange={handleChange} placeholder="숫자만 입력" type="text" /></div>
       </div>
       <div className='inputWrap address'>
-        <div class="inputTitle">주소</div>
+        <div className="inputTitle">주소</div>
         <AddressSearch onComplete={handleAddressComplete} />
       </div>
 

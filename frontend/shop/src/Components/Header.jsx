@@ -4,12 +4,36 @@ import { useSelector} from "react-redux";
 import Logo from '../static/svg/logo.svg?react';
 import LogoutComponent from './member/LogoutComponent';
 import { getCookie, setCookie, removeCookie } from "../util/cookieUtil";
+import { categoryList } from '../api/categoryApi';
 
 const Header = ({ isMypage }) => {
   const navigate = useNavigate();
   const loginState = useSelector(state => state.loginSlice)
   const isLoggedIn = loginState && loginState.email !== '';
   const [memberInfo, setInfo] = useState(null);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetchCategories();
+  
+    const handleUpdate = () => {
+      fetchCategories(); // 다시 가져오기
+    }
+  
+    window.addEventListener('categoryUpdated', handleUpdate);
+  
+    return () => {
+      window.removeEventListener('categoryUpdated', handleUpdate);
+    }
+  }, []);
+
+  const fetchCategories = () => {
+    categoryList().then(data => {
+      setCategories(data);
+    });
+  };
+  
+
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
 
@@ -39,6 +63,12 @@ const Header = ({ isMypage }) => {
           </h1>
           <nav className="gnb">
             <ul className="cartegory">
+            {categories.length > 0 && categories.map((data) => (
+              <li key={data.id}>
+                  <Link to={`/shop/category/${data.id}`}>{data.categoryName}</Link>
+                </li>
+            ))}
+
               <li><Link to="/shop">SHOP</Link></li>
               <li><Link to="/magazine">MAGAZINE</Link></li>
               <li><Link to="/event">EVENT</Link></li>

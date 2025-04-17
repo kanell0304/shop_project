@@ -3,8 +3,6 @@ import axios from "axios";
 
 const API_SERVER_HOST = import.meta.env.VITE_API_SERVER_HOST;
 const host = `${API_SERVER_HOST}/api/member`;
-console.log(host)
-
 
 /** 로그인 */
 export const loginPost = async (loginParam) => {
@@ -39,7 +37,7 @@ export const memberRegister = async (registerParam) => {
 export const memberEmailSearch = async (email) => {
   console.log('조회하려는 이메일:', email);
   try {
-    const res = await axios.get(`${host}/get/${encodeURIComponent(email)}`);
+    const res = await axios.get(`${host}/getEmail?email=${encodeURIComponent(email)}`);
     return false; // 이미 있음 → 사용 불가
   } catch (error) {
     if (error.response && error.response.status === 404) {

@@ -111,6 +111,7 @@ const CategoryComponent = () => {
       createCategory(form).then(() => {
         setForm({ categoryName: '', parentId: null, viewStatus: false });
         fetchCategories();
+        window.dispatchEvent(new Event('categoryUpdated')); // ✅ 이벤트 발생
       });
     };
   
@@ -130,6 +131,7 @@ const CategoryComponent = () => {
         setEditingId(null);
         setEditingName('');
         fetchCategories();
+        window.dispatchEvent(new Event('categoryUpdated'));
       });
     };
   
@@ -142,6 +144,7 @@ const CategoryComponent = () => {
       categoryDelete(id).then(() => {
         alert('삭제 되었습니다.');
         fetchCategories();
+        window.dispatchEvent(new Event('categoryUpdated'));
       });
     };
   
