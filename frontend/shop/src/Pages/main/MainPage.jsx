@@ -19,7 +19,7 @@ const MainPage = () => {
         {/* 배너 이미지 파일 */}
         <div className="visual">
           <div>
-            <img src={visual} alt="메인 배너"/>
+            <img src={visual} width={1920} height={1041} alt="메인 배너" loading="lazy"/>
           </div>
         </div>
 
@@ -36,7 +36,7 @@ const MainPage = () => {
             </div>
           </div>
           <div className="visual">
-            <img src={banner} alt="서브 배너"/>
+            <img src={banner} alt="서브 배너" loading="lazy"/>
           </div>
         </section>
 
@@ -56,15 +56,15 @@ const MainPage = () => {
           <div className="productItemsWrap">
 
             <div className="productsImage leftContent">
-              <div className="imagWrap"><img src={itemImage_1} alt="아이템1" /></div>
-              <div className="imagWrap"><img src={itemImage_2} alt="아이템2" /></div>
-              <div className="imagWrap"><img src={itemImage_3} alt="아이템3" /></div>
+              <div className="imagWrap"><img src={itemImage_1} alt="아이템1" loading="lazy"/></div>
+              <div className="imagWrap"><img src={itemImage_2} alt="아이템2" loading="lazy"/></div>
+              <div className="imagWrap"><img src={itemImage_3} alt="아이템3" loading="lazy"/></div>
             </div>
 
             <div className="productsImage rightContetn">
-              <div className="imagWrap"><img src={itemImage_4} alt="아이템4" /></div>
-              <div className="imagWrap"><img src={itemImage_5} alt="아이템5" /></div>
-              <div className="imagWrap"><img src={itemImage_6} alt="아이템6" /></div>
+              <div className="imagWrap"><img src={itemImage_4} alt="아이템4" loading="lazy"/></div>
+              <div className="imagWrap"><img src={itemImage_5} alt="아이템5" loading="lazy"/></div>
+              <div className="imagWrap"><img src={itemImage_6} alt="아이템6" loading="lazy"/></div>
             </div>
 
           </div>

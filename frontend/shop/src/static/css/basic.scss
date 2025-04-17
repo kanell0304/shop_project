@@ -83,7 +83,7 @@ button,a.btn{display: flex;justify-content: center;align-items: center;font-size
 /**헤더*/
 .header{
   position: fixed;top:0;left:0;width:100%;background:#fff;z-index: 100;
-  .innerWrap{display: flex;align-items: center;height:$headerHeight;
+  .innerWrap{display: flex;align-items: center;height:$headerHeight;border-bottom:solid 1px transparent;
     ul{display:flex;align-items: center;gap:0 24px;}
     .logo a{display: block;
       svg{width:127px;display: block;}
@@ -94,7 +94,8 @@ button,a.btn{display: flex;justify-content: center;align-items: center;font-size
 }
 
 /**푸터*/
-.footer{margin-top: auto;padding: 40px 0;
+.footer{margin-top: auto;
+  .innerWrap{padding-top:40px;padding-bottom:40px;border-top:solid 1px transparent;}
   .f_content_top{display: flex;align-items: flex-start;justify-content: space-between;
     .logo svg{width:366px;}
     .f_siteMap .f_cartegory{display: flex;gap: 0 40px;

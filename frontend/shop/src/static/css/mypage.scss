@@ -1,0 +1,15 @@
+
+.header .innerWrap,
+.footer .innerWrap{border-color: var(--charcoal-grey);}
+
+.mypageWrap{display: flex;
+
+
+
+    .myContainer{
+        flex: 1;
+        min-height: 800px;
+    }
+}
+
+

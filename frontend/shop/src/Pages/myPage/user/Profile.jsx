@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import MyPageSidebar from '../../Components/MyPageSidebar';
+import MyPageSidebar from '../../../Components/MyPageSidebar';
 
 const Profile = () => {
   const [formData, setFormData] = useState({

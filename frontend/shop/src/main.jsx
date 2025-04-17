@@ -6,11 +6,13 @@ import { createRoot } from 'react-dom/client'
 import './static/css/common.scss'
 import './static/css/basic.scss'
 import Root from './router/Root';
+import AppInit from './components/AppInit'
 
 createRoot(document.getElementById('root')).render(
   //<StrictMode>
     <Provider store={store}>
-        <Root />
+      <AppInit/>
+      <Root />
     </Provider>
   //</StrictMode>
 )
