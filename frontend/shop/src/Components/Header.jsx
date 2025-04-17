@@ -5,7 +5,7 @@ import Logo from '../static/svg/logo.svg?react';
 import LogoutComponent from './member/LogoutComponent';
 import { getCookie, setCookie, removeCookie } from "../util/cookieUtil";
 
-const Header = () => {
+const Header = ({ isMypage }) => {
   const navigate = useNavigate();
   const loginState = useSelector(state => state.loginSlice)
   const isLoggedIn = loginState && loginState.email !== '';
@@ -30,7 +30,7 @@ const Header = () => {
   
   return (
     <header className='header'>
-      <div className='innerWrap'>
+      <div className={`innerWrap ${isMypage ? 'mypage' : ''}`}>
           <h1 className='logo'>
             <Link to="/">
               <Logo/>

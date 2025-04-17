@@ -64,6 +64,10 @@ button,a.btn{display: flex;justify-content: center;align-items: center;font-size
     button{white-space: nowrap;}
   }
 }
+.borderSection{border: solid 1px var(--charcoal-grey);border-radius: 3px;padding: 29px;
+  .inputTitle{font-size: var(--h5);}
+}
+
 
 /** 주소검색 기본 디자인 */
 .addressSearch{
