@@ -1,9 +1,11 @@
 package com.shop.shop.domain.order;
 
+import com.shop.shop.domain.cart.Cart;
 import com.shop.shop.domain.item.Item;
 import com.shop.shop.domain.item.ItemOption;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,10 +14,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "Order_Item")
+@Builder
 public class OrderItem {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_item_id")
     private Long id;
 
@@ -35,9 +37,9 @@ public class OrderItem {
     private Order order;
 
     // 주문상품 생성
-    public static OrderItem createdOrderItem(int orderPrice, int qty, Item item, Order order, ItemOption itemOption) {
+    public static OrderItem createdOrderItem(int qty, Item item, Order order, ItemOption itemOption) {
         OrderItem orderItem = new OrderItem();
-
+        int orderPrice = item.getPrice() * qty;
         orderItem.changeOrderPrice(orderPrice);
         orderItem.changeQty(qty);
         orderItem.changeItem(item);
@@ -47,18 +49,26 @@ public class OrderItem {
         return orderItem;
     }
 
-    // 카트에서 상품 정보를 가져와 생성
-    public static OrderItem cartToOrderItem(int orderPrice, int qty, Item item, Order order, ItemOption itemOption) {
-        OrderItem orderItem = new OrderItem();
+//    public OrderItem(Cart cart, Order order) {
+//        this.orderPrice = cart.getItem().getPrice() * cart.getQty();
+//        this.qty = cart.getQty();
+//        this.item = cart.getItem();
+//        this.itemOption = cart.getItemOption();
+//        this.order = order;
+//    }
 
-        orderItem.changeOrderPrice(orderPrice);
-        orderItem.changeQty(qty);
-        orderItem.changeItem(item);
-        orderItem.changeOrder(order);
-
-        itemOption.removeStock(qty);
-        return orderItem;
-    }
+//    // 카트에서 상품 정보를 가져와 생성
+//    public static OrderItem cartToOrderItem(int orderPrice, int qty, Item item, Order order, ItemOption itemOption) {
+//        OrderItem orderItem = new OrderItem();
+//
+//        orderItem.changeOrderPrice(orderPrice);
+//        orderItem.changeQty(qty);
+//        orderItem.changeItem(item);
+//        orderItem.changeOrder(order);
+//
+//        itemOption.removeStock(qty);
+//        return orderItem;
+//    }
 
     // 주문 취소 - 상품에 주문 취소된 수량만큼 재고 추가
     public void cancel() {

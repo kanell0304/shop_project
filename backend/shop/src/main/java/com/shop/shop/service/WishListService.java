@@ -10,7 +10,7 @@ public interface WishListService {
 
     WishListDTO registerInterest(WishListDTO wishListDTO);
     public List<WishListDTO> getWishListByMemberId(Long memberId);
-//    public Page<List<WishListDTO>> getWishListByMemberId(Pageable pageable, Long memberId);
+    public Page<WishListDTO> getWishListByMemberId(Pageable pageable, Long memberId);
     public void deleteItemFromWishList(Long wishListId);
     public void multipleDeleteItemFromWishList(WishListDTO wishListDTO);
 }

@@ -38,17 +38,17 @@ public class WishListController {
         return ResponseEntity.ok(wishList);
     }
 
-//    // 특정 회원 관심 목록 조회(페이징)
-//    @GetMapping("/page/{memberId}")
-//    public ResponseEntity<Page<List<WishListDTO>>> getWishListByMember(
-//            @PathVariable Long memberId,
-//            @RequestParam(defaultValue = "0") int page,
-//            @RequestParam(defaultValue = "10") int size
-//    ) {
-//        Pageable pageable = PageRequest.of(page, size);
-//        Page<List<WishListDTO>> wishList = wishListService.getWishListByMemberId(pageable, memberId);
-//        return ResponseEntity.ok(wishList);
-//    }
+    // 특정 회원 관심 목록 조회(페이징)
+    @GetMapping("/page/{memberId}")
+    public ResponseEntity<Page<WishListDTO>> getWishListByMember(
+            @PathVariable Long memberId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<WishListDTO> wishList = wishListService.getWishListByMemberId(pageable, memberId);
+        return ResponseEntity.ok(wishList);
+    }
 
     // 관심 상품 삭제
     @DeleteMapping("/{wishListId}")

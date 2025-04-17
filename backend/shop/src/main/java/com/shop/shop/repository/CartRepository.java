@@ -24,7 +24,6 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
     @Query("SELECT c FROM Cart c WHERE c.member.id = :memberId AND c.item.id = :itemId")
     Cart findByMemberIdAndItemId(@Param("memberId") Long memberId, @Param("itemId") Long itemId);
 
-//    // 회원 정보를 기준으로 장바구니 목록 조회
-//    List<CartDTO> findByMember(Member member);
+    List<Cart> findAllById(Long cartId);
 
 }

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -28,22 +29,22 @@ public class MileageServiceImpl implements MileageService {
     @Override
     public List<MileageDTO> findAllByMemberId(Long memberId) {
         Member member = memberRepository.findById(memberId).orElseThrow(() -> new RuntimeException("해당 회원을 찾을 수 없습니다."));
-        List<MileageDTO> mileageList = mileageRepository.findAllByMemberId(member.getId());
+        List<Mileage> mileageList = mileageRepository.findAllByMemberId(member.getId());
         if (mileageList == null || mileageList.isEmpty()) {
             throw new RuntimeException("해당 회원의 마일리지 내역이 존재하지 않습니다.");
         }
-        return mileageList;
+        return mileageList.stream().map(MileageDTO::new).collect(Collectors.toList());
     }
 
     // 회원Id를 기준으로 마일리지 내역 전부 조회(페이징)
     @Override
-    public Page<List<MileageDTO>> findAllByMemberId(Pageable pageable, Long memberId) {
+    public Page<MileageDTO> findAllByMemberId(Pageable pageable, Long memberId) {
         Member member = memberRepository.findById(memberId).orElseThrow(() -> new RuntimeException("해당 회원을 찾을 수 없습니다."));
-        Page<List<MileageDTO>> mileageList = mileageRepository.findAllByMemberId(pageable, member.getId());
+        Page<Mileage> mileageList = mileageRepository.findAllByMemberId(pageable, member.getId());
         if (mileageList == null || mileageList.isEmpty()) {
             throw new RuntimeException("해당 회원의 마일리지 내역이 존재하지 않습니다.");
         }
-        return mileageList;
+        return mileageList.map(MileageDTO::new);
     }
 
     // 회원Email 을 기준으로 마일리지 내역 전부 조회
@@ -53,47 +54,47 @@ public class MileageServiceImpl implements MileageService {
         if (member == null) {
             throw new RuntimeException("해당 회원을 찾을 수 없습니다.");
         }
-        List<MileageDTO> mileageList = mileageRepository.findAllByMemberId(member.getId());
+        List<Mileage> mileageList = mileageRepository.findAllByMemberId(member.getId());
         if (mileageList == null || mileageList.isEmpty()) {
             throw new RuntimeException("해당 회원의 마일리지 내역이 존재하지 않습니다.");
         }
-        return mileageList;
+        return mileageList.stream().map(MileageDTO::new).collect(Collectors.toList());
     }
 
     // 회원Email 을 기준으로 마일리지 내역 전부 조회(페이징)
     @Override
-    public Page<List<MileageDTO>> findAllByMemberEmail(Pageable pageable, String email) {
+    public Page<MileageDTO> findAllByMemberEmail(Pageable pageable, String email) {
         Member member = memberRepository.findByEmail(email);
         if (member == null) {
             throw new RuntimeException("해당 회원을 찾을 수 없습니다.");
         }
-        Page<List<MileageDTO>> mileageList = mileageRepository.findAllByMemberId(pageable, member.getId());
+        Page<Mileage> mileageList = mileageRepository.findAllByMemberId(pageable, member.getId());
         if (mileageList == null || mileageList.isEmpty()) {
             throw new RuntimeException("해당 회원의 마일리지 내역이 존재하지 않습니다.");
         }
-        return mileageList;
+        return mileageList.map(MileageDTO::new);
     }
 
     // 주문Id를 기준으로 마일리지 내역 전부 조회
     @Override
     public List<MileageDTO> findAllByOrderId(Long orderId) {
         Order order = orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("해당 주문을 찾을 수 없습니다."));
-        List<MileageDTO> mileageList = mileageRepository.findAllByOrderId(order.getId());
+        List<Mileage> mileageList = mileageRepository.findAllByOrderId(order.getId());
         if (mileageList == null || mileageList.isEmpty()) {
             throw new RuntimeException("해당 주문의 마일리지 내역이 존재하지 않습니다.");
         }
-        return mileageList;
+        return mileageList.stream().map(MileageDTO::new).collect(Collectors.toList());
     }
 
     // 주문Id를 기준으로 마일리지 내역 전부 조회(페이징)
     @Override
-    public Page<List<MileageDTO>> findAllByOrderId(Pageable pageable, Long orderId) {
+    public Page<MileageDTO> findAllByOrderId(Pageable pageable, Long orderId) {
         Order order = orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("해당 주문을 찾을 수 없습니다."));
-        Page<List<MileageDTO>> mileageList = mileageRepository.findAllByOrderId(pageable, order.getId());
+        Page<Mileage> mileageList = mileageRepository.findAllByOrderId(pageable, order.getId());
         if (mileageList == null || mileageList.isEmpty()) {
             throw new RuntimeException("해당 주문의 마일리지 내역이 존재하지 않습니다.");
         }
-        return mileageList;
+        return mileageList.map(MileageDTO::new);
     }
 
     // 마일리지 내역 생성
@@ -124,40 +125,40 @@ public class MileageServiceImpl implements MileageService {
     // 특정 기간 동안의 마일리지 내역 전부 조회
     @Override
     public List<MileageDTO> findByDuringPeriod(LocalDateTime mileageDate1, LocalDateTime mileageDate2) {
-        List<MileageDTO> mileageList = mileageRepository.findByDuringPeriod(mileageDate1, mileageDate2);
+        List<Mileage> mileageList = mileageRepository.findByDuringPeriod(mileageDate1, mileageDate2);
         if (mileageList == null || mileageList.isEmpty()) {
             throw new RuntimeException("해당 기간의 마일리지 내역이 존재하지 않습니다.");
         }
-        return mileageList;
+        return mileageList.stream().map(MileageDTO::new).collect(Collectors.toList());
     }
 
     // 특정 기간 동안의 마일리지 내역 전부 조회(페이징)
     @Override
-    public Page<List<MileageDTO>> findByDuringPeriod(Pageable pageable, LocalDateTime mileageDate1, LocalDateTime mileageDate2) {
-        Page<List<MileageDTO>> mileageList = mileageRepository.findByDuringPeriod(pageable, mileageDate1, mileageDate2);
+    public Page<MileageDTO> findByDuringPeriod(Pageable pageable, LocalDateTime mileageDate1, LocalDateTime mileageDate2) {
+        Page<Mileage> mileageList = mileageRepository.findByDuringPeriod(pageable, mileageDate1, mileageDate2);
         if (mileageList == null || mileageList.isEmpty()) {
             throw new RuntimeException("해당 기간의 마일리지 내역이 존재하지 않습니다.");
         }
-        return mileageList;
+        return mileageList.map(MileageDTO::new);
     }
 
     // 특정 회원의 특정 기간 동안의 마일리지 내역 전부 조회
     @Override
     public List<MileageDTO> findByDuringPeriodFromMemberId(Long memberId, LocalDateTime mileageDate1, LocalDateTime mileageDate2) {
-        List<MileageDTO> mileageList = mileageRepository.findByDuringPeriodFromMemberId(memberId, mileageDate1, mileageDate2);
+        List<Mileage> mileageList = mileageRepository.findByDuringPeriodFromMemberId(memberId, mileageDate1, mileageDate2);
         if (mileageList == null || mileageList.isEmpty()) {
             throw new RuntimeException("해당 회원 또는 해당 기간의 마일리지 내역이 존재하지 않습니다.");
         }
-        return mileageList;
+        return mileageList.stream().map(MileageDTO::new).collect(Collectors.toList());
     }
 
     // 특정 회원의 특정 기간 동안의 마일리지 내역 전부 조회(페이징)
     @Override
-    public Page<List<MileageDTO>> findByDuringPeriodFromMemberId(Pageable pageable, Long memberId, LocalDateTime mileageDate1, LocalDateTime mileageDate2) {
-        Page<List<MileageDTO>> mileageList = mileageRepository.findByDuringPeriodFromMemberId(pageable, memberId, mileageDate1, mileageDate2);
+    public Page<MileageDTO> findByDuringPeriodFromMemberId(Pageable pageable, Long memberId, LocalDateTime mileageDate1, LocalDateTime mileageDate2) {
+        Page<Mileage> mileageList = mileageRepository.findByDuringPeriodFromMemberId(pageable, memberId, mileageDate1, mileageDate2);
         if (mileageList == null || mileageList.isEmpty()) {
             throw new RuntimeException("해당 회원 또는 해당 기간의 마일리지 내역이 존재하지 않습니다.");
         }
-        return mileageList;
+        return mileageList.map(MileageDTO::new);
     }
 }

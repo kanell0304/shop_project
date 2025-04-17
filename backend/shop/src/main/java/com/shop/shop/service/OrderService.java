@@ -11,13 +11,13 @@ import java.util.List;
 public interface OrderService {
 
     public List<OrderDTO> findAllByMemberId(Long memberId);
-    public Page<List<OrderDTO>> findAllByMemberId(Pageable pageable, Long memberId);
+    public Page<OrderDTO> findAllByMemberId(Pageable pageable, Long memberId);
     public OrderDTO findByDeliveryId(Long deliveryId);
     public OrderDTO createOrder(OrderDTO orderDTO);
     public List<OrderDTO> findByDuringPeriod(LocalDateTime orderDate1, LocalDateTime orderDate2);
-    public Page<List<OrderDTO>> findByDuringPeriod(Pageable pageable, LocalDateTime orderDate1, LocalDateTime orderDate2);
+    public Page<OrderDTO> findByDuringPeriod(Pageable pageable, LocalDateTime orderDate1, LocalDateTime orderDate2);
     public List<OrderDTO> findByDuringPeriodFromMemberId(Long memberId, LocalDateTime orderDate1, LocalDateTime orderDate2);
-    public Page<List<OrderDTO>> findByDuringPeriodFromMemberId(Pageable pageable, Long memberId, LocalDateTime orderDate1, LocalDateTime orderDate2);
+    public Page<OrderDTO> findByDuringPeriodFromMemberId(Pageable pageable, Long memberId, LocalDateTime orderDate1, LocalDateTime orderDate2);
     public OrderDTO editOrder(OrderDTO orderDTO);
     public OrderDTO editOrderStatus(OrderDTO orderDTO);
     public void deleteOrder(Long orderId);

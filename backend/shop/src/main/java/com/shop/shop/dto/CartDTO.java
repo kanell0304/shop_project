@@ -32,6 +32,7 @@ public class CartDTO {
     private String optionValue;
     private int optionPrice;
 
+    // 다중 삭제에 필요한 ItemId를 담아두는 변수
     private Long[] deleteId;
 
     public CartDTO(Cart cart) {
@@ -50,18 +51,5 @@ public class CartDTO {
             this.optionPrice = cart.getItemOption().getOptionPrice();
         }
     }
-
-//    private Long cartId;
-//    private Long memberId;
-//    private int qty;
-//    private Item item;
-//
-//    // Cart -> CartDTO 로 변환하는 메서드
-//    public CartDTO (Cart cart) {
-//        this.cartId = cart.getId();
-//        this.memberId = cart.getMember().getId();
-//        this.qty = cart.getQty();
-//        this.item = cart.getItem();
-//    }
 
 }

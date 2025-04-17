@@ -47,15 +47,13 @@ public class WishListServiceImpl implements WishListService {
                 .toList();
     }
 
-//    // 관심 목록 MemberID를 기준으로 가져오기(페이징)
-//    @Override
-//    public Page<List<WishListDTO>> getWishListByMemberId(Pageable pageable, Long memberId) {
-//        Page<List<WishList>> wishLists = wishListRepository.findWithItemImagesByMemberId(pageable, memberId);
-//
-//        return wishLists.stream()
-//                .map(WishListDTO::new)
-//                .toList();
-//    }
+    // 관심 목록 MemberID를 기준으로 가져오기(페이징)
+    @Override
+    public Page<WishListDTO> getWishListByMemberId(Pageable pageable, Long memberId) {
+        Page<WishList> wishLists = wishListRepository.findByMemberId(pageable, memberId);
+
+        return wishLists.map(WishListDTO::new);
+    }
 
     // 관심 목록에서 WishListID를 기준으로 삭제
     @Override

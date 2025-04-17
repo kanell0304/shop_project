@@ -23,11 +23,9 @@ public interface CategoryItemRepository extends JpaRepository<CategoryItem, Long
     // categoryId 에 속한 모든 데이터 가져오기
     @EntityGraph(attributePaths = {"item"})
     @Query("SELECT ci FROM CategoryItem ci WHERE ci.category.id = :categoryId")
-    // 삭제 된거 제외
     List<CategoryItemDTO> findAllById(@Param("categoryId") Long categoryId);
 
     @Query("SELECT ci FROM CategoryItem ci WHERE ci.category.id = :categoryId")
-        // 삭제 된거 제외
     List<CategoryItem> findAllByCategoryId(@Param("categoryId") Long categoryId);
 
 }
