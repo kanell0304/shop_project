@@ -1,6 +1,7 @@
 import { Suspense, lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import memberRouter from "./memberRouter";
+import adminRouter from "./mypage/adminRouter";
 
 const Loading = <div>Loading....</div>;
 const Main = lazy(() => import("../Pages/main/MainPage"));
@@ -29,6 +30,10 @@ const rootRouter = createBrowserRouter([
   {
     path: "member",
     children: memberRouter()
+  },
+  {
+    path: "admin",
+    children: adminRouter()
   },
 ]);
 

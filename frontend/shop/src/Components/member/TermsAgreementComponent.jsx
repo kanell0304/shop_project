@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import Terms from '../info/terms';
-import PrivacyPolicy from '../../Components/info/PrivacyPolicy';
+import React, { useState } from 'react';
+import Terms from '../info/Terms';
+import PrivacyPolicy from '../info/PrivacyPolicy';
 import '../../static/css/signup.scss';
 
 const TermsAgreement = ({ onNext }) => {
+  /** 체크 상태 확인 */
   const [checked, setChecked] = useState({
     all: false,
     terms: false,
@@ -12,7 +13,7 @@ const TermsAgreement = ({ onNext }) => {
     sns: false
   });
 
-  // 전체 동의 체크 시 모든 항목 변경
+  /** 전체 동의 체크 시 모든 항목 변경 */
   const handleAllChange = () => {
     const next = !checked.all;
     setChecked({
@@ -48,8 +49,7 @@ const TermsAgreement = ({ onNext }) => {
       <h2>회원가입 <span>(1/2)</span></h2>
 
       <label>
-        <input type="checkbox" checked={checked.all} onChange={handleAllChange} />
-        이용약관 전체동의
+        <input type="checkbox" checked={checked.all} onChange={handleAllChange} />이용약관 전체동의
       </label>
 
       <div>

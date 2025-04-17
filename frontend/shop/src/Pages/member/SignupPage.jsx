@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import TermsAgreement from '../../Components/member/TermsAgreement';
-import SignupForm from '../../Components/member/SignupForm';
+import TermsAgreement from '../../components/member/TermsAgreementComponent';
+import SignupForm from '../../components/member/SignupFormComponent';
 import BasicLayout from './../../layout/BasicLayout';
 
 const SignupPage = () => {
@@ -14,7 +14,7 @@ const SignupPage = () => {
 
   return (
     <BasicLayout>
-      <div className="signupWrap">
+      <div className="signupWrap innerWrap">
         {step === 1 && <TermsAgreement onNext={handleNextStep} />}
         {step === 2 && <SignupForm onBack={() => setStep(1)} snsAgree={snsAgree} />}
       </div>
