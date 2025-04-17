@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import AddressSearch from '../AddressSearch';
 import { memberRegister, memberEmailSearch} from '../../api/memberApi';
-import useCustomLogin from './../../hooks/useCustomLogin';
+import useCustomLogin from '../../hooks/useCustomLogin';
 import '../../static/css/signup.scss';
 
 const SignupForm = ({ onBack, snsAgree }) => {
 
+  /** 이메일 중복확인  */
   const [findMember,findSet] = useState(false);
 
-  /**서버 로그인 및 이동 */
+  /** 서버 로그인 및 이동 */
   const {doLogin, moveToPath} = useCustomLogin()
 
+  /** 사용자 입력 정보 */
   const [form, setForm] = useState({
     email: 'gmdtn89@naver.com',
     password: 'user@1234',
@@ -61,7 +63,7 @@ const SignupForm = ({ onBack, snsAgree }) => {
     const { email, password, memberName, phoneNumber } = form;
     if(!findMember) {
       alert("아이디 중복을 확인해주세요.");
-      return false
+      return false;
     };
 
     if (!email || !password || !memberName || !phoneNumber) {
@@ -109,8 +111,7 @@ const SignupForm = ({ onBack, snsAgree }) => {
 
   const handleSubmit = () => {
     if (!validateForm()) return;
-
-    console.log("✅ 회원가입 데이터:", form);
+    console.log("회원가입 데이터:", form);
     // TODO: axios POST 요청으로 회원가입 전송
 
     memberRegister(form)
@@ -119,8 +120,7 @@ const SignupForm = ({ onBack, snsAgree }) => {
       if(data.error) {
         alert("에러")
       }else {
-        alert("가입성공");
-        
+        //alert("가입성공");
         doLogin({
           email :form.email,
           pw : form.password
@@ -129,8 +129,8 @@ const SignupForm = ({ onBack, snsAgree }) => {
           if(data.error) {
             alert("로그인 에러")
           }else {
-            alert("로그인 성공");
-            moveToPath('/');
+            alert("가입이 완료");
+            moveToPath('/member/welcome');
           }
         })
 
@@ -144,30 +144,28 @@ const SignupForm = ({ onBack, snsAgree }) => {
     <div className="formSection signupSection">
       <h2>회원가입 <span>(2/2)</span></h2>
 
-      <div>
-        <div><span className='point'>[필수]</span>아이디</div>
-        <div><input name="email" value={form.email} onChange={handleChange} placeholder="이메일 입력" type="email" /><button type="button" onClick={userEmailSearch}>중복확인</button></div>
+      <div className='inputWrap'>
+        <div class="inputTitle"><span className='point'>[필수]</span>아이디</div>
+        <div class="inputBox"><input name="email" value={form.email} onChange={handleChange} placeholder="이메일 입력" type="email" /><button type="button" onClick={userEmailSearch}>중복확인</button></div>
       </div>
-      <div>
-        <div><span className='point'>[필수]</span>비밀번호</div>
-        <input name="password" value={form.password} onChange={handleChange} placeholder="비밀번호" type="password" />
+      <div className='inputWrap'>
+        <div class="inputTitle"><span className='point'>[필수]</span>비밀번호</div>
+        <div class="inputBox"><input name="password" value={form.password} onChange={handleChange} placeholder="비밀번호" type="password" /></div>
       </div>
-      <div>
-        <div><span className='point'>[필수]</span>이름</div>
-        <input name="memberName" value={form.memberName} onChange={handleChange} placeholder="이름" type="text" />
+      <div className='inputWrap'>
+        <div class="inputTitle"><span className='point'>[필수]</span>이름</div>
+        <div class="inputBox"><input name="memberName" value={form.memberName} onChange={handleChange} placeholder="이름" type="text" /></div>
       </div>
-      <div>
-        <div><span className='point'>[필수]</span>연락처</div>
-        <input name="phoneNumber" value={form.phoneNumber} onChange={handleChange} placeholder="숫자만 입력" type="text" />
+      <div className='inputWrap'>
+        <div class="inputTitle"><span className='point'>[필수]</span>연락처</div>
+        <div class="inputBox"><input name="phoneNumber" value={form.phoneNumber} onChange={handleChange} placeholder="숫자만 입력" type="text" /></div>
       </div>
-      <div>
-        <div>주소</div>
+      <div className='inputWrap address'>
+        <div class="inputTitle">주소</div>
         <AddressSearch onComplete={handleAddressComplete} />
       </div>
 
-      <div className="buttons">
-        <button className='btn bigBtn bold' onClick={handleSubmit}>완료</button>
-      </div>
+      <button className='btn bigBtn bold' onClick={handleSubmit}>완료</button>
     </div>
   );
 };

@@ -1,19 +1,33 @@
-import React from 'react';
+import React,{ useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useSelector} from "react-redux";
 import Logo from '../static/svg/logo.svg?react';
 import LogoutComponent from './member/LogoutComponent';
+import { getCookie, setCookie, removeCookie } from "../util/cookieUtil";
 
 const Header = () => {
   const navigate = useNavigate();
   const loginState = useSelector(state => state.loginSlice)
   const isLoggedIn = loginState && loginState.email !== '';
-
+  const [memberInfo, setInfo] = useState(null);
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
+
+    removeCookie("member");  // 쿠키 삭제
     navigate("/login");
   }
+  useEffect(() => {
+    if (isLoggedIn) {
+      const info = getCookie("member");
+      setInfo(info);
+    } else {
+      setInfo(null);
+    }
+  }, [isLoggedIn]);
+  
+  const mypageLink = memberInfo?.roleNames?.includes("ADMIN") ? "/admin/mypage" : "mypage";
 
+  
   return (
     <header className='header'>
       <div className='innerWrap'>
@@ -38,7 +52,7 @@ const Header = () => {
             <ul>
               <li><Link to="/search">SEARCH</Link></li>
               <li><Link to="/cart">CART</Link></li>
-              <li><Link to="/mypage">MYPAGE</Link></li>
+              <li><Link to={mypageLink}>MYPAGE</Link></li>
               <li><LogoutComponent></LogoutComponent></li>
             </ul>
             ):(
