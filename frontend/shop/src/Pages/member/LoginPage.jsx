@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 import BasicLayout from "../../layout/BasicLayout";
-import LoginComponent from "../../components/member/LoginComponent";
+import LoginComponent from "../../Components/member/LoginComponent";
 import LoginImage from "../../static/images/login/Mask_group4.png";
 import "../../static/css/login.scss";
 
