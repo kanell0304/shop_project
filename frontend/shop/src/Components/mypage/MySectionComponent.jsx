@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 const MySection = () => {
   return (
     <div className="myContainer">
-      <section className="mysSection">
+      <section className="mysSection innerWrap">
         <Outlet />
       </section>
     </div>

@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import Logo from '../static/svg/logo.svg?react';
 
 
-const Footer = () => {
+const Footer = ({ isMypage }) => {
   return (
     <footer className="footer">
-      <div className="innerWrap">
+      <div className={`innerWrap ${isMypage ? 'mypage' : ''}`}>
         <div className="f_content_top">
           <h2 className="logo">
               <Logo className="logo" />

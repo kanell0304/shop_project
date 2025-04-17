@@ -37,7 +37,7 @@ const AdminMainPage =()=>{
 
     return(
         <BasicLayout>
-            <div class="mypageWrap">
+            <div className="mypageWrap">
                 <MyNav/>
                 <MySection/>
             </div>
