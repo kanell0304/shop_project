@@ -1,6 +1,7 @@
 package com.shop.shop.dto;
 
 import com.shop.shop.domain.member.Address;
+import com.shop.shop.domain.member.Member;
 import com.shop.shop.domain.member.MemberShip;
 import lombok.*;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -39,7 +40,7 @@ public class MemberDTO extends User {
         super(
                 email,
                 password,
-                roleNames.stream().map(str -> new SimpleGrantedAuthority("ROLE_" + str)).collect(Collectors.toList()));
+                (roleNames == null ? new ArrayList<>() : roleNames).stream().map(str -> new SimpleGrantedAuthority("ROLE_" + str)).collect(Collectors.toList()));
         this.id = id;
         this.email = email;
         this.password = password;
@@ -52,7 +53,7 @@ public class MemberDTO extends User {
         this.delFlag = delFlag;
         this.social = social;
         this.memberShip = memberShip;
-        this.roleNames = roleNames;
+        this.roleNames = (roleNames != null) ? roleNames : new ArrayList<>();
     }
 
     public Map<String, Object> getClaims() {

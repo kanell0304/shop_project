@@ -6,6 +6,7 @@ import com.shop.shop.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,20 +44,27 @@ public class MemberController {
     }
 
     // 이메일로 조회
-    @GetMapping("/get/{email}")
-    public ResponseEntity<MemberDTO> getMemberByEmail(@PathVariable String email) {
+    @GetMapping("/getEmail")
+    public ResponseEntity<MemberDTO> getMemberByEmail(@RequestParam String email) {
         return ResponseEntity.ok(memberService.getMemberByEmail(email));
     }
 
     // 회원 삭제
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMember(@PathVariable Long id) {
-        memberService.deleteMember(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<?> deleteMember(@PathVariable Long id) {
+        try {
+            memberService.deleteMember(id);
+            Map<String, String> response = Map.of("result", "success");
+            return ResponseEntity.ok(response);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("result", "fail", "error", e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("result", "fail", "error", e.getMessage()));
+        }
     }
 
     // 특정 이름으로 회원 검색
-    @GetMapping("/search")
+    @GetMapping("/searchName")
     public ResponseEntity<List<MemberDTO>> getMembersByName(@RequestParam String name) {
         return ResponseEntity.ok(memberService.getMembersByName(name));
     }
