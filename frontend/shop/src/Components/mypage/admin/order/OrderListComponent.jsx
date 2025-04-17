@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 
 
-const OrderListCompoent =()=>{
+const OrderListComponent =()=>{
     return(
         <div>
             <h2>주문</h2>
@@ -13,4 +13,4 @@ const OrderListCompoent =()=>{
         </div>
     )
 }
-export default OrderListCompoent;
+export default OrderListComponent;
