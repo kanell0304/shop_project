@@ -1,6 +1,8 @@
 package com.shop.shop.domain.order;
 
 import com.shop.shop.domain.delivery.Delivery;
+import com.shop.shop.domain.item.ItemImage;
+import com.shop.shop.domain.item.ItemOption;
 import com.shop.shop.domain.member.Member;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,6 +11,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -62,6 +66,11 @@ public class Order {
     @Column(nullable = false)
     private String recipient_detailed_address;
 
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name = "order_item_id")
+//    @Builder.Default
+//    private List<OrderItem> orderItems = new ArrayList<>();
+
     public void changeRecipient_zip_code(String recipient_zip_code) {
         this.recipient_zip_code = recipient_zip_code;
     }
@@ -81,5 +90,10 @@ public class Order {
     public void changeDelFlag(boolean delFlag) {
         this.delFlag = delFlag;
     }
+
+//    // 옵션 추가
+//    public void addOrderItem(OrderItem orderItem) {
+//        this.orderItems.add(orderItem);
+//    }
 
 }

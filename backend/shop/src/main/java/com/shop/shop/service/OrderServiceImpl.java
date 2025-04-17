@@ -9,6 +9,7 @@ import com.shop.shop.domain.order.OrderItem;
 import com.shop.shop.domain.order.OrderStatus;
 import com.shop.shop.domain.order.PaymentMethod;
 import com.shop.shop.dto.OrderDTO;
+import com.shop.shop.dto.OrderItemDTO;
 import com.shop.shop.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,9 +35,10 @@ public class OrderServiceImpl implements OrderService {
 
     // 주문서 작성(등록)
     @Override
-    public  OrderDTO createOrder(OrderDTO orderDTO) {
-        Member member = memberRepository.findById(orderDTO.getMemberId()).orElseThrow(() -> new RuntimeException("해당 회원을 찾을 수 없습니다."));
-        List<Cart> cartList = cartRepository.findAllById(orderDTO.getCartId());
+    public OrderDTO createOrder(OrderDTO orderDTO) {
+        Member member = memberRepository.findById(orderDTO.getMemberId())
+                .orElseThrow(() -> new RuntimeException("해당 회원을 찾을 수 없습니다."));
+        List<Cart> cartList = cartRepository.findAllCartListByMemberId(orderDTO.getMemberId());
         if (cartList == null || cartList.isEmpty()) {
             throw new RuntimeException("장바구니에 상품이 없습니다.");
         }
@@ -55,7 +58,7 @@ public class OrderServiceImpl implements OrderService {
                 .orderDate(LocalDateTime.now())
                 .totalAmount(orderDTO.getTotalAmount())
                 .orderStatus(
-                        (orderDTO.getPaymentMethod() == PaymentMethod.CARD) ? OrderStatus.PAID : OrderStatus.PENDING // 주문 방식이 CARD 이면 PAID(결제완료) / 주문 방식이 NO_BANKBOOK 이면 PENDING(주문o, 결제x)
+                        (orderDTO.getPaymentMethod() == PaymentMethod.CARD) ? OrderStatus.PAID : OrderStatus.PENDING
                 )
                 .delFlag(false)
                 .payerName(member.getMemberName())
@@ -69,22 +72,24 @@ public class OrderServiceImpl implements OrderService {
                 .recipient_detailed_address(orderDTO.getRecipient_detailed_address())
                 .delivery(delivery)
                 .build();
-        Order savedOrder = orderRepository.save(order);
 
-//        OrderItem orderItem = createdOrderItem(cart.getQty(), cart.getItem(), order, cart.getItemOption());
+        // 먼저 order를 저장한 후, order의 id를 참조하는 orderItem 저장
+        Order savedOrder = orderRepository.save(order); // order의 id가 생성된 후에 orderItem 저장 가능
+
+//        List<OrderItem> orderItemList = new ArrayList<>();
         for (Cart cart : cartList) {
-            OrderItem orderItem = OrderItem.builder()
-                    .orderPrice(cart.getItem().getPrice() * cart.getQty())
-                    .qty(cart.getQty())
-                    .item(cart.getItem())
-                    .itemOption(cart.getItemOption())
-                    .order(order)
-                    .build();
+            OrderItem orderItem = new OrderItem();
+            orderItem.getItemFromCart(cart, savedOrder);
             OrderItem savedOrderItem = orderItemRepository.save(orderItem);
+//            savedOrder.addOrderItem(orderItem);  // OrderItem을 Order에 추가
+//            orderItemList.add(savedOrderItem);
         }
-        return new OrderDTO(savedOrder);
-    }
 
+        // Order와 OrderItem을 함께 저장
+        Order saved1Order = orderRepository.save(savedOrder);  // Order와 연관된 OrderItem들이 함께 저장됩니다.
+
+        return new OrderDTO(saved1Order);
+    }
 
     // 회원 이메일로 주문 모두 조회
     @Override
@@ -95,6 +100,7 @@ public class OrderServiceImpl implements OrderService {
         if (orderList == null || orderList.isEmpty()) {
             throw new RuntimeException("해당 회원의 주문이 존재하지 않습니다.");
         }
+//        List<OrderItem> orderItemList = orderItemRepository.findAllById(orderList.get(0).getId())
 
         return orderList.stream().map(OrderDTO::new).collect(Collectors.toList());
     }

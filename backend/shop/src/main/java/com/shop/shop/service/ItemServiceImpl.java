@@ -179,7 +179,7 @@ public class ItemServiceImpl implements ItemService {
 
         return new PageImpl<>(itemDTOs, pageable, itemPage.getTotalElements());
 
-//        eturn itemPage.map(item -> {
+//        return itemPage.map(item -> {
 //            List<ItemImage> images = item.getImages();
 //            ItemImage representativeImage = (images != null && !images.isEmpty())
 //                    ? images.get(0)

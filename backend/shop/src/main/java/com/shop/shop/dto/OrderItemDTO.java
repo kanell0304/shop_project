@@ -24,7 +24,9 @@ public class OrderItemDTO {
         this.qty = orderItem.getQty();
         this.itemId = orderItem.getItem().getId();
         this.itemOptionId = orderItem.getItemOption().getId();
-        this.orderId = orderItem.getOrder().getId();
+
+        // Order가 Lazy 로딩이 아닌 경우에만 활성화하는 방식
+        this.orderId = (orderItem.getOrder() != null) ? orderItem.getOrder().getId() : null;
     }
 
 }

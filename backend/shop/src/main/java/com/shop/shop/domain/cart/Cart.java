@@ -26,9 +26,11 @@ public class Cart {
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "item_id")
     private Item item;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "item_option_id")
     private ItemOption itemOption; // 선택한 옵션을 저장
 
     private int qty;

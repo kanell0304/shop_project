@@ -32,7 +32,7 @@ public class OrderItem {
     @JoinColumn(name = "item_option_id")
     private ItemOption itemOption;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
 
@@ -40,12 +40,29 @@ public class OrderItem {
     public static OrderItem createdOrderItem(int qty, Item item, Order order, ItemOption itemOption) {
         OrderItem orderItem = new OrderItem();
         int orderPrice = item.getPrice() * qty;
+
         orderItem.changeOrderPrice(orderPrice);
         orderItem.changeQty(qty);
         orderItem.changeItem(item);
+        orderItem.changeItemOption(itemOption);
         orderItem.changeOrder(order);
 
         itemOption.removeStock(qty);
+        return orderItem;
+    }
+
+    // 카트에서 상품을 가져오기
+    public OrderItem getItemFromCart(Cart cart, Order order) {
+        OrderItem orderItem = new OrderItem();
+        int orderPrice = cart.getItem().getPrice() * cart.getQty();
+
+        orderItem.changeOrderPrice(orderPrice);
+        orderItem.changeQty(cart.getQty());
+        orderItem.changeItem(cart.getItem());
+        orderItem.changeItemOption(cart.getItemOption());
+        orderItem.changeOrder(order);
+
+        cart.getItemOption().removeStock(cart.getQty());
         return orderItem;
     }
 
@@ -98,6 +115,11 @@ public class OrderItem {
     // order 값 수정
     public void changeOrder(Order order) {
         this.order = order;
+    }
+
+    // itemOption 수정
+    public void changeItemOption(ItemOption itemOption) {
+        this.itemOption = itemOption;
     }
 
 }
