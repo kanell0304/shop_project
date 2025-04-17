@@ -45,7 +45,7 @@ const MagazineDetail = () => {
         </section>
 
     {/* 오른쪽 */}
-        <div className="text-section">
+        <div className="textSection">
             <div className="volume">.VOL.6</div>
             <h2 className="title">
               디테일이 말하는 공간 -<br/>
@@ -56,7 +56,7 @@ const MagazineDetail = () => {
         </div>
         </section>
 
-        <div className="navigation">
+        <div className="nav">
          <span>PREV</span> | 
          <span>LIST</span> | 
          <span>NEXT</span>

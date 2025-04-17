@@ -1,11 +1,19 @@
-.signupBox {
-    width: 420px;
-    height: 754px;
-    background-color: white;
-    padding: 40px 32px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    border-radius: 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+.itemSidebar {width: 620px; flex: 0 0 620px;padding: 0 40px;
+    .innerSiedbarWrap{
+        // padding-top:120px;
+        position: sticky;
+        top: 120px;
+        right: 0;;
+        height: calc( 100vh - 120px);
+        background-color: var(--ash-white);
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        
+    }
+
+    .paginationSection{
+        margin-top: auto;
+    }
+}
+
