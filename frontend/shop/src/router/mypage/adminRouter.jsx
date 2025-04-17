@@ -3,7 +3,7 @@ const Loading = <div>Loading...."</div>
 const AdminMainPage = lazy(()=> import("../../Pages/myPage/admin/AdminMainPage")) // 어드민 페이지
 const OrderListComponent  = lazy(()=>import("../../components/mypage/admin/order/OrderListCompoent")); // 주문
 const ProductListComponent  = lazy(()=>import("../../components/mypage/admin/product/ProductListComponent")); // 상품
-const CartagoryComponent  = lazy(()=>import("../../components/mypage/admin/cartagory/CartagoryCompoenet")); // 분류(카테고리)
+const CartagoryComponent  = lazy(()=>import("../../Components/mypage/admin/category/CategoryCompoenet")); // 분류(카테고리)
 const BoardListComponent  = lazy(()=>import("../../components/mypage/admin/board/BoardListCompoenet")); // 게시판
 const InquiryListComponent  = lazy(()=>import("../../components/mypage/admin/inquiry/InquiryListCompoenet")); //문의
 
