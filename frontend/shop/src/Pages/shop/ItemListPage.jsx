@@ -1,8 +1,8 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import BasicLayout from "../../layout/BasicLayout";
 import '../../static/css/shop.scss'
 import '../../static/css/siderbar.scss'
+import React, { useState } from "react";
 
 const ItemListPage = () => {
   const items = {
@@ -67,7 +67,8 @@ const ItemListPage = () => {
     empty: false
   }
 
-  
+  const [activeCategory, setActiveCategory] = useState("OUTWEAR");
+
   const handleAddCart = (id) => {
     console.log("장바구니 추가:", id);
   };
@@ -75,6 +76,12 @@ const ItemListPage = () => {
   const handleAddWishlist = (id) => {
     console.log("관심상품 추가:", id);
   };
+
+
+  const handleCategoryClick = (category) => {
+    setActiveCategory(category);
+  };
+
 
   return (
     <BasicLayout>
@@ -101,21 +108,46 @@ const ItemListPage = () => {
 
       <aside className="itemSidebar">
         <div className="innerSiedbarWrap">
+        <h1 className="categoryTitle">SHOP</h1>
           <div className="searchBox">
             <input type="text" placeholder="SEARCH TEXT" />
             <button>SEARCH</button>
           </div>
 
           <div className="categoryBox">
-            <h3 className="categoryTitle">SHOP</h3>
-            <ul className="categoryList">
-              <li>OUTWEAR</li>
-              <li>TOP</li>
-              <li>KNITWEAR</li>
-              <li>BOTTOM</li>
-              <li>ACC</li>
-            </ul>
-          </div>
+              <ul className="categoryList">
+                <li
+                  className={activeCategory === 'OUTWEAR' ? 'active' : ''}
+                  onClick={() => handleCategoryClick('OUTWEAR')}
+                >
+                  OUTWEAR
+                </li>
+                <li
+                  className={activeCategory === 'TOP' ? 'active' : ''}
+                  onClick={() => handleCategoryClick('TOP')}
+                >
+                  TOP
+                </li>
+                <li
+                  className={activeCategory === 'KNITWEAR' ? 'active' : ''}
+                  onClick={() => handleCategoryClick('KNITWEAR')}
+                >
+                  KNITWEAR
+                </li>
+                <li
+                  className={activeCategory === 'BOTTOM' ? 'active' : ''}
+                  onClick={() => handleCategoryClick('BOTTOM')}
+                >
+                  BOTTOM
+                </li>
+                <li
+                  className={activeCategory === 'ACC' ? 'active' : ''}
+                  onClick={() => handleCategoryClick('ACC')}
+                >
+                  ACC
+                </li>
+              </ul>
+            </div>
 
           <div className="paginationSection">
             <div className="totalCount">TOTAL 30</div>
