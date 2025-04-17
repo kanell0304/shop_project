@@ -68,6 +68,9 @@ const ItemListPage = () => {
   }
 
   const [activeCategory, setActiveCategory] = useState("OUTWEAR");
+  const [searchParams] = useSearchParams();
+  const currentPage = searchParams.get('page') ? parseInt(searchParams.get('page'), 10) : 1;
+  const [activeSortButton, setActiveSortButton] = useState('NEWEST'); 
 
   const handleAddCart = (id) => {
     console.log("장바구니 추가:", id);
@@ -82,8 +85,10 @@ const ItemListPage = () => {
     setActiveCategory(category);
   };
 
-  const [searchParams] = useSearchParams();
-  const currentPage = searchParams.get('page') ? parseInt(searchParams.get('page'), 10) : 1;
+  const handleSortButtonClick = (sortType) => {
+    setActiveSortButton(sortType);
+    console.log(`정렬 기준 변경: ${sortType}`);
+  };
 
   return (
     <BasicLayout>
@@ -153,10 +158,30 @@ const ItemListPage = () => {
           <div className="paginationSection">
             <div className="totalCount">TOTAL 30</div>
             <div className="sortButtons">
-              <button className="active">NEWEST</button>
-              <button>PRICE HIGH</button>
-              <button>PRICE LOW</button>
-            </div>
+                {activeSortButton === 'NEWEST' ? (
+                  <button className="active" onClick={() => handleSortButtonClick('NEWEST')}>
+                    <span>NEWEST</span>
+                  </button>
+                ) : (
+                  <button onClick={() => handleSortButtonClick('NEWEST')}>NEWEST</button>
+                )}
+
+                {activeSortButton === 'PRICE HIGH' ? (
+                  <button className="active" onClick={() => handleSortButtonClick('PRICE HIGH')}>
+                    <span>PRICE HIGH</span>
+                  </button>
+                ) : (
+                  <button onClick={() => handleSortButtonClick('PRICE HIGH')}>PRICE HIGH</button>
+                )}
+
+                {activeSortButton === 'PRICE LOW' ? (
+                  <button className="active" onClick={() => handleSortButtonClick('PRICE LOW')}>
+                    <span>PRICE LOW</span>
+                  </button>
+                ) : (
+                  <button onClick={() => handleSortButtonClick('PRICE LOW')}>PRICE LOW</button>
+                )}
+              </div>
             <div className="pageLinks">
                 <Link to="?page=1" className={currentPage === 1 ? 'current' : ''}>1</Link>
                 <Link to="?page=2" className={currentPage === 2 ? 'current' : ''}>2</Link>
@@ -164,10 +189,10 @@ const ItemListPage = () => {
                 <Link to="?page=4" className={currentPage === 4 ? 'current' : ''}>4</Link>
                 <Link to="?page=5" className={currentPage === 5 ? 'current' : ''}>5</Link>
                 <Link to={`?page=${currentPage + 1}`}>NEXT</Link>
-              </div>
+            </div>
           </div>
         </div>
-      </aside>
+        </aside>
     </div>
     </BasicLayout>
   )
