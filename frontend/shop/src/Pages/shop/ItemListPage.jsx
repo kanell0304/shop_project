@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link,useSearchParams } from "react-router-dom";
 import BasicLayout from "../../layout/BasicLayout";
 import '../../static/css/shop.scss'
 import '../../static/css/siderbar.scss'
@@ -82,6 +82,8 @@ const ItemListPage = () => {
     setActiveCategory(category);
   };
 
+  const [searchParams] = useSearchParams();
+  const currentPage = searchParams.get('page') ? parseInt(searchParams.get('page'), 10) : 1;
 
   return (
     <BasicLayout>
@@ -110,8 +112,7 @@ const ItemListPage = () => {
         <div className="innerSiedbarWrap">
         <h1 className="categoryTitle">SHOP</h1>
           <div className="searchBox">
-            <input type="text" placeholder="SEARCH TEXT" />
-            <button>SEARCH</button>
+            <input type="text" placeholder="SEARCH TEXT"/><button>SEARCH</button>
           </div>
 
           <div className="categoryBox">
@@ -152,18 +153,18 @@ const ItemListPage = () => {
           <div className="paginationSection">
             <div className="totalCount">TOTAL 30</div>
             <div className="sortButtons">
-              <button>NEWEST</button>
+              <button className="active">NEWEST</button>
               <button>PRICE HIGH</button>
               <button>PRICE LOW</button>
             </div>
             <div className="pageLinks">
-              <Link to="?page=1">1</Link>
-              <Link to="?page=2">2</Link>
-              <Link to="?page=3">3</Link>
-              <Link to="?page=4">4</Link>
-              <Link to="?page=5">5</Link>
-              <Link to="?page=next">NEXT</Link>
-            </div>
+                <Link to="?page=1" className={currentPage === 1 ? 'current' : ''}>1</Link>
+                <Link to="?page=2" className={currentPage === 2 ? 'current' : ''}>2</Link>
+                <Link to="?page=3" className={currentPage === 3 ? 'current' : ''}>3</Link>
+                <Link to="?page=4" className={currentPage === 4 ? 'current' : ''}>4</Link>
+                <Link to="?page=5" className={currentPage === 5 ? 'current' : ''}>5</Link>
+                <Link to={`?page=${currentPage + 1}`}>NEXT</Link>
+              </div>
           </div>
         </div>
       </aside>
