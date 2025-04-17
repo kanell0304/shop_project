@@ -9,9 +9,9 @@ const ItemListPage = () => {
     content: [
         {
             id: 1,
-            name: "테스트 아이템",
+            name: "블루 스프링 집업",
             description: "이것은 테스트 상품입니다.",
-            price: 26000,
+            price: "26000KR",
             totalScore: 3.5,
             discountRate: 20,
             delFlag: false,
@@ -92,28 +92,30 @@ const ItemListPage = () => {
 
   return (
     <BasicLayout>
-    <div className="itemListContainer">
-      <div className="itemListSection">
-        {/* {items.map((item) => (
-          <div key={item.item_id} className="itemCard">
-            <div className="itemImageWrapper">
-              <img src={item.image} alt={item.name} className="itemImage" />
+      <div className="itemListContainer">
+        <div className="itemListSection">
+          {items.content.map((item) => (
+            <div key={item.id} className="itemCard">
+              <div className="itemImageWrapper">
+                <img src={`/images/${item.uploadFileNames[0] || 'default.png'}`} alt={item.name} className="itemImage" />
+                <div className="itemButtonGroup"> 
+                  <button onClick={() => handleAddWishlist(item.id)}>WISH</button>
+                  <button onClick={() => handleAddCart(item.id)}>CART</button>
+                </div>
+              </div>
+              <div className="itemInfo">
+                <div className="itemName">{item.name}</div>
+                <div className="space">
+                 <div className="itemSalePrice">{item.price * (1 - item.discountRate / 100)}</div>
+                 <div className="itemOriginalPrice">{item.price}</div>
+                 <div className="itemDiscount">{item.discountRate}%</div>
+                </div>
+              </div>
             </div>
-            <div className="itemButtonGroup">
-              <button onClick={() => handleAddWishlist(item.item_id)}>WISH</button>
-              <button onClick={() => handleAddCart(item.item_id)}>CART</button>
-            </div>
-            <div className="itemInfo">
-              <div className="itemName">{item.name}</div>
-              <div className="itemSalePrice">{item.salePrice}</div>
-              <div className="itemOriginalPrice">{item.originalPrice}</div>
-              <div className="itemDiscount">{item.discount}</div>
-            </div>
-          </div>
-        ))} */}
-      </div>
+          ))}
+        </div>
 
-      <aside className="itemSidebar">
+       <aside className="itemSidebar">
         <div className="innerSiedbarWrap">
         <h1 className="categoryTitle">SHOP</h1>
           <div className="searchBox">
@@ -191,7 +193,7 @@ const ItemListPage = () => {
                 <Link to={`?page=${currentPage + 1}`}>NEXT</Link>
             </div>
           </div>
-        </div>
+         </div>
         </aside>
     </div>
     </BasicLayout>
