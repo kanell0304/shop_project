@@ -152,11 +152,9 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void modifyMember(MemberModifyDTO memberModifyDTO) {
         Member result = memberRepository.findByEmail(memberModifyDTO.getEmail());
-//        Member member = result.orElseThrow();
         log.info("SNS 동의 여부 " + memberModifyDTO.isWtrSns());
 
         result.changePassword(passwordEncoder.encode(memberModifyDTO.getPassword()));
-//        result.changePassword(memberModifyDTO.getPassword());
         result.changePhoneNumber(memberModifyDTO.getPhoneNumber());
         result.changeWtrSns(memberModifyDTO.isWtrSns());
         result.getAddress().setZip_code(memberModifyDTO.getZip_code());
@@ -221,12 +219,11 @@ public class MemberServiceImpl implements MemberService {
     // 이메일로 회원 조회
     @Override
     public MemberDTO getMemberByEmail(String email) {
-        if (existsByEmail(email)) {
             Member member = memberRepository.findByEmail(email);
+            if (member == null) {
+                throw new RuntimeException("회원을 찾을 수 없습니다.");
+            }
             return entityToDTO(member);
-        } else {
-            throw new RuntimeException("회원을 찾을 수 없습니다.");
-        }
     }
 
     // 회원 id 를 기준으로 회원 삭제(논리적 삭제)
@@ -273,9 +270,12 @@ public class MemberServiceImpl implements MemberService {
     // 회원을 이름으로 모두 조회
     @Override
     public List<MemberDTO> getMembersByName(String memberName) {
-        return memberRepository.findByMemberName(memberName).stream()
-                .map(member -> modelMapper.map(member, MemberDTO.class))
-                .collect(Collectors.toList());
+        List<Member> memberList = memberRepository.findAllByMemberName(memberName);
+        List<MemberDTO> memberDTO = new ArrayList<>();
+        for (Member searchMemberList : memberList) {
+            memberDTO.add(entityToDTO(searchMemberList));
+        }
+        return memberDTO;
     }
 
     // 특정 회원 존재 여부(id)
