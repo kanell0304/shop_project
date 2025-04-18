@@ -1,13 +1,10 @@
 package com.shop.shop;
 
-import com.shop.shop.domain.member.Address;
-import com.shop.shop.domain.member.Member;
-import com.shop.shop.domain.member.MemberRole;
-import com.shop.shop.domain.member.MemberShip;
-import com.shop.shop.dto.MemberDTO;
-import com.shop.shop.repository.MemberRepository;
-import com.shop.shop.service.MemberService;
-import lombok.extern.log4j.Log4j2;
+import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,11 +13,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
+import com.shop.shop.domain.member.Address;
+import com.shop.shop.domain.member.Member;
+import com.shop.shop.domain.member.MemberShip;
+import com.shop.shop.dto.MemberDTO;
+import com.shop.shop.repository.MemberRepository;
+import com.shop.shop.service.MemberService;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import lombok.extern.log4j.Log4j2;
 
 @SpringBootTest
 @Transactional
