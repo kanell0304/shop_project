@@ -109,7 +109,8 @@ public class MileageServiceImpl implements MileageService {
                 .member(member)
                 .order(order)
                 .build();
-        return new MileageDTO(mileage);
+        Mileage savedMileage = mileageRepository.save(mileage);
+        return new MileageDTO(savedMileage);
     }
 
     // 마일리지 삭제

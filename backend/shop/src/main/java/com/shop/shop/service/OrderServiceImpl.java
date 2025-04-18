@@ -53,7 +53,7 @@ public class OrderServiceImpl implements OrderService {
             delivery.changeStatus(null);
         }
 
-        Order order = Order.builder()
+        Order order = Order.builder() // 주문 기본 상태 생성
                 .member(member)
                 .orderDate(LocalDateTime.now())
                 .totalAmount(orderDTO.getTotalAmount())
