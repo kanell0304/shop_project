@@ -74,7 +74,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
         }
 
         try {
-            //Bearer accestoken...
+            //Bearer accesstoken...
             String accessToken = authHeaderStr.substring(7);
             Map<String, Object> claims = JWTUtil.validateToken(accessToken);
 
