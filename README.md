@@ -4,11 +4,11 @@
 
 ## 🙍🏻‍♂️ 프로젝트 참여인원
 
-+ @ 강지석 :  사이트 정책 및 Frontend, backend
++ 강지석 :  사이트 정책 및 Frontend
 
-+ 이경준 :  DB 설계 Frontend, backend
++ 이경준 :  DB 설계, Backend
 
-+ 최흥수 :  프로젝트 관리 Frontend, backend
++ 최흥수 :  프로젝트 관리 Frontend
 
 ## Git
 
